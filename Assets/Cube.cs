@@ -43,7 +43,7 @@ public class Cube : MonoBehaviour
         if (other.GetComponentInParent<Cube>().energy < energy)
         {
             isTriggerOn = true;
-            Cube otherCube = other.GetComponentInParent<Cube>();
+            Cube otherCube = other.GetComponentInChildren<Cube>();
             AbsorbPowerFrom(otherCube);
 
 
