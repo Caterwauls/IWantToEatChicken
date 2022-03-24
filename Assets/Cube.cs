@@ -40,7 +40,7 @@ public class Cube : MonoBehaviour
 
         // 만약 자기 자신의 cubeCollider일 경우 무시
         if (other.transform.parent == transform) return;
-        if (other.GetComponentInParent<Cube>().energy < energy)
+        if (other.GetComponentInParent<Cube>().energy < 0.7f * energy)
         {
             isTriggerOn = true;
             Cube otherCube = other.GetComponentInParent<Cube>();
@@ -56,13 +56,6 @@ public class Cube : MonoBehaviour
             else
             {           
                 otherCube.UpdateScale();
-            }
-
-
-            if (transform.Find("sphereCollider").gameObject != null)
-            {
-                GameObject sphereCollider = transform.Find("sphereCollider").gameObject;
-                sphereCollider.GetComponent<SphereCollider>().radius = energy * 8f;
             }
 
         }
