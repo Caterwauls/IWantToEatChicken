@@ -9,33 +9,93 @@ using UnityEngine;
 
 public class CubeBehavior : MonoBehaviour
 {
+    
+    public Cube cube;
 
-    public float maxSize = 100f;
-    public Cube Cube;
+    public GameObject enemyGameObject;
+    public float smoothTime = 0.1f;
+
+    private Vector3 lastMovingVelocity;
+    private Vector3 targetPosition;
 
 
-    public void Chase()
+    public void Chase(Cube enemy)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, cube.cubeSpeed * Time.deltaTime);
+    }
+
+    public void Run(Cube enemy)
     {
 
     }
 
-    public void Run()
+    private Vector3 _currentIdleVelocity;
+    private float _currentIdleTime;
+    private float _maxIdleTime;
+
+    public void Idle()
     {
+        _currentIdleTime += Time.deltaTime;
 
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Cube" && other.GetComponent<Cube>().energy < GetComponent<Cube>().energy)
+        if (_currentIdleTime > _maxIdleTime)
         {
-            Chase();
+            // _maxIdleTime 초마다 실행되는 코드.
+            _currentIdleVelocity = Random.onUnitSphere;
+            _currentIdleVelocity.y = 0f;
+            _currentIdleVelocity = _currentIdleVelocity.normalized * cube.cubeSpeed;
+            _currentIdleTime = 0f;
+            _maxIdleTime = Random.Range(0.5f, 1.5f);
         }
-        else if (other.tag == "Cube" && other.GetComponent<Cube>().energy > GetComponent<Cube>().energy)
-        {
-            Run();
-        }
+
+        transform.position += _currentIdleVelocity * Time.deltaTime;
     }
 
+    public Cube FindClosestEnemy()
+    {
+        Cube enemy;
+        float shortDis;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 8f * transform.localScale.x);
+        
+        enemy = null;
+        shortDis = Mathf.Infinity;
 
+        foreach(Collider col in colliders)
+        {
+            Cube cubeOfCol = col.GetComponentInParent<Cube>();
+            if (cubeOfCol == cube) continue;
+            if (cubeOfCol == null) continue;
+            float distance = Vector3.Distance(transform.position, col.transform.position);
+
+            if (distance < shortDis)
+            {
+                enemy = cubeOfCol;
+                shortDis = distance;
+            }
+        }
+
+        return enemy;
+    }
+
+    private void Update()
+    {
+        Cube enemy = FindClosestEnemy();
+        if (enemy == null)
+        {
+            Idle();
+            return;
+        }
+
+        if (enemy.CanEat(cube))
+        {
+            Run(enemy);
+        }
+        else if (cube.CanEat(enemy))
+        {
+            Chase(enemy);
+        }
+        else
+        {
+            Idle();
+        }
+    }
 }
