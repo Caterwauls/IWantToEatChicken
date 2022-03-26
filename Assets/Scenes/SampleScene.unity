@@ -768,7 +768,7 @@ PrefabInstance:
     - target: {fileID: 8727155327899877716, guid: 358c07be30039b247aa8dc01ab03145f,
         type: 3}
       propertyPath: energy
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 358c07be30039b247aa8dc01ab03145f, type: 3}

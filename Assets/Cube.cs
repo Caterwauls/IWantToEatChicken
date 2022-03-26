@@ -9,7 +9,7 @@ public class Cube : MonoBehaviour
 {
 
     public float energy;
-    public float cubeSpeed = 7f;
+    public float cubeSpeed = 8.5f;
     
     
 

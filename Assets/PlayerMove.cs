@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float speed = 10f;
-    public float jumpForce = 300f;
+    public float jumpForce = 600f;
     private BoxCollider boxCollider;
     private Rigidbody playerRigidbody;
     public bool jumpCheck = true;

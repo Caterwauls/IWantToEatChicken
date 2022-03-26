@@ -97,6 +97,11 @@ PrefabInstance:
       propertyPath: cubeSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8513623980359961996, guid: 0f565238b6d0056488d910abd3b56f09,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3342336218325281207, guid: 0f565238b6d0056488d910abd3b56f09, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0f565238b6d0056488d910abd3b56f09, type: 3}
