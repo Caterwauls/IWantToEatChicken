@@ -30,7 +30,7 @@ public class CamFollow : MonoBehaviour
 
 
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (target != null)
         {

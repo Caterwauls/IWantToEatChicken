@@ -10,8 +10,15 @@ public class Cube : MonoBehaviour
 
     public float energy;
     public float cubeSpeed = 8.5f;
-    
-    
+    public float acceleration = 20f;
+
+    private Rigidbody _rb;
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
 
     private void Start()
     {
@@ -34,7 +41,7 @@ public class Cube : MonoBehaviour
 
     public bool CanEat(Cube other)
     {
-        return other.energy < 0.7f * energy;
+        return other.energy < 0.8f * energy;
     }
 
     protected void OnTriggerStay(Collider other)
@@ -64,5 +71,10 @@ public class Cube : MonoBehaviour
         }
     }
     
-
+    public void MoveMyVelocity(Vector3 targetVelocity)
+    {
+        Vector3 newVelocity = Vector3.MoveTowards(_rb.velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+        newVelocity.y = _rb.velocity.y;
+        _rb.velocity = newVelocity;
+    }
 }

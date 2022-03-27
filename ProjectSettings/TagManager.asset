@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Cube
   - CubeCollider
+  - Cube
+  - BanishTrigger
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - 
   - 
   - Cube
-  - BanishCollider
-  - 
-  - 
+  - Ground
+  - Postprocessing
+  - BanishTrigger
   - 
   - 
   - 
@@ -40,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Fire
+    uniqueID: 3804908061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed = 10f;
     public float jumpForce = 600f;
+    public bool jumpCheck = true;
+    public PlayerSkill playerSkill;
+
     private BoxCollider boxCollider;
     private Rigidbody playerRigidbody;
-    public bool jumpCheck = true;
 
-    void Start()
+    private Cube _cube;
+
+
+    private void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
+        _cube = GetComponent<Cube>();
     }
 
     IEnumerator JumpDelay()
@@ -24,27 +29,25 @@ public class PlayerMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        float inputX = Input.GetAxis("Horizontal");
-
-        float inputZ = Input.GetAxis("Vertical");
-
         if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
         {
             jumpCheck = false;
             playerRigidbody.AddForce(Vector3.up * jumpForce);
             StartCoroutine(JumpDelay());
         }
+    }
 
-        float fallSpeed = playerRigidbody.velocity.y;
+    void FixedUpdate()
+    {
+        float inputX = Input.GetAxis("Horizontal");
+        float inputZ = Input.GetAxis("Vertical");
 
         Vector3 velocity = new Vector3(inputX, 0, inputZ);
 
-        velocity *= speed;
-        velocity.y = fallSpeed;
+        velocity *= _cube.cubeSpeed;
 
-        playerRigidbody.velocity = velocity;
+        _cube.MoveMyVelocity(velocity);
     }
 }

@@ -5,47 +5,48 @@ using UnityEngine;
 public class NPCSkill : MonoBehaviour
 {
     public Cube enemy;
-    public bool CoolOn;
     public float BanishCoolTime;
     public float banishPower;
+    public ParticleSystem banishParticle;
+
+    private bool _canUseBanish = true;
+
     private void Start()
     {
         enemy = null;
-        CoolOn = true;
-        banishPower = 6000f;
-        StartCoroutine(BanishTime());
-
     }
 
-    IEnumerator BanishTime()
-    {
-        while (true)
-        {
-            if (CoolOn && enemy != null)
-            {
-                Banish(enemy);
-                CoolOn = false;
-                enemy = null;
-                yield return new WaitForSeconds(BanishCoolTime);
-                CoolOn = true;
 
-            }
-            yield return new WaitForSeconds(0.3f);
-        }
+    // 쿨도 돌았고, 충분히 가까운가?
+    public bool CanBanish(Cube other)
+    {
+        float distance = Vector3.Distance(transform.position, other.transform.position);
+        return _canUseBanish && distance <= 3.5f * transform.localScale.x;
     }
 
-    void Banish(Cube enemy)
+    private IEnumerator CoroutineCooldownTimer()
     {
+        _canUseBanish = false;
+        yield return new WaitForSeconds(BanishCoolTime);
+        _canUseBanish = true;
+    }
+
+    public void Banish(Cube enemy)
+    {
+        StartCoroutine(CoroutineCooldownTimer());
         Vector3 dir = enemy.transform.position - transform.position;
-        enemy.GetComponent<Rigidbody>().AddForce(dir.x * banishPower,dir.y * 1, dir.z * banishPower);
+
+        Rigidbody enemyRb = enemy.GetComponent<Rigidbody>();
+
+        Vector3 newVelocity = dir * banishPower;
+        newVelocity.y = 10f;
+        enemyRb.velocity = newVelocity;
+        
+        ParticleSystem instance = Instantiate(banishParticle, transform.position, transform.rotation);
+        AudioSource explosionAudio = instance.GetComponent<AudioSource>();
+        explosionAudio.Play();
+
+        Destroy(instance.gameObject, instance.main.duration);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (CoolOn)
-        {
-            enemy = other.GetComponent<Cube>();
-        }
-        
-    }
 }

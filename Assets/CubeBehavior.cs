@@ -10,10 +10,12 @@ using UnityEngine;
 public class CubeBehavior : MonoBehaviour
 {
     
-    public Cube cube;
+    public Cube myCube;
     public Rigidbody cubeRigidbody;
     public GameObject enemyGameObject;
+    public NPCSkill npcSkill;
     public float smoothTime = 0.1f;
+    
 
     private Vector3 lastMovingVelocity;
     private Vector3 targetPosition;
@@ -27,13 +29,13 @@ public class CubeBehavior : MonoBehaviour
 
     public void Chase(Cube enemy)
     {
-        transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, cube.cubeSpeed * Time.deltaTime);
+        myCube.MoveMyVelocity((enemy.transform.position - transform.position).normalized * myCube.cubeSpeed);
     }
 
     public void Run(Cube enemy)
     {
-        Vector3 dir = enemy.transform.position - transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, -dir, cube.cubeSpeed * Time.deltaTime);
+        Vector3 runDir = transform.position - enemy.transform.position;
+        myCube.MoveMyVelocity(runDir.normalized * myCube.cubeSpeed);
     }
 
     private Vector3 _currentIdleVelocity;
@@ -42,79 +44,130 @@ public class CubeBehavior : MonoBehaviour
 
     public void Idle()
     {
-        _currentIdleTime += Time.deltaTime;
+        _currentIdleTime += Time.fixedDeltaTime;
 
         if (_currentIdleTime > _maxIdleTime)
         {
             // _maxIdleTime 초마다 실행되는 코드.
             _currentIdleVelocity = Random.onUnitSphere;
             _currentIdleVelocity.y = 0f;
-            _currentIdleVelocity = _currentIdleVelocity.normalized * (cube.cubeSpeed * 1.3f);
+            _currentIdleVelocity = _currentIdleVelocity.normalized * myCube.cubeSpeed;
             _currentIdleTime = 0f;
             _maxIdleTime = Random.Range(0.5f, 1.5f);
 
         }
-
-        cubeRigidbody.velocity = _currentIdleVelocity;
+        myCube.MoveMyVelocity(_currentIdleVelocity);
     }
 
-    public Cube FindClosestEnemy()
+    public List<Cube> FindEnemiesInRange()
     {
-        Cube enemy;
-        float shortDis;
+        List<Cube> enemyCubes = new List<Cube>();
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f * transform.localScale.x);
         
-        enemy = null;
-        shortDis = Mathf.Infinity;
-
         foreach(Collider col in colliders)
-        {
+        {       
             Cube cubeOfCol = col.GetComponentInParent<Cube>();
-            if (cubeOfCol == cube) continue;
+            if (cubeOfCol == myCube) continue;
             if (cubeOfCol == null) continue;
-            float distance = Vector3.Distance(transform.position, col.transform.position);
-
-            if (distance < shortDis)
-            {
-                enemy = cubeOfCol;
-                shortDis = distance;
-            }
+            enemyCubes.Add(cubeOfCol);
         }
 
-        return enemy;
+        return enemyCubes;
     }
+
+    Cube SearchClosestBiggerCube(List<Cube> AllenemiesInRange)
+    {
+        List<Cube> BiggerCubeList = new List<Cube>();
+
+        for(int i = 0; i < AllenemiesInRange.Count; i++)
+        {
+            if (AllenemiesInRange[i] == null) continue;
+
+            if(AllenemiesInRange[i].CanEat(myCube))
+            {
+                BiggerCubeList.Add(AllenemiesInRange[i]);
+            }
+        }
+        Cube ClosestBiggerCube = GetClosetCubeInList(BiggerCubeList);
+
+        return ClosestBiggerCube;
+    }
+
+    Cube SearchClosestSmallerCube(List<Cube> AllenemiesInRange)
+    {
+        List<Cube> SmallerCubeList = new List<Cube>();
+
+        for(int i = 0; i < AllenemiesInRange.Count; i++)
+        {
+            if (AllenemiesInRange[i] == null) continue;
+
+            if (myCube.CanEat(AllenemiesInRange[i]))
+            {
+                SmallerCubeList.Add(AllenemiesInRange[i]);
+            }
+        }
+        Cube ClosestSmallerCube = GetClosetCubeInList(SmallerCubeList);
+
+        return ClosestSmallerCube;
+
+    }
+
+    public Cube GetClosetCubeInList(List<Cube> cubeList)
+    {
+        float shortDis = Mathf.Infinity;
+        float temp = 0;
+        Cube closestCube = null;
+
+        for(int i = 0; i < cubeList.Count; i++)
+        {
+            closestCube = cubeList[0];
+            temp = Vector3.Distance(myCube.transform.position, cubeList[i].transform.position);
+            if(temp < shortDis)
+            {
+                shortDis = temp;
+                closestCube = cubeList[i];
+                
+            }
+
+        }
+
+        return closestCube;
+    }
+
 
     IEnumerator CubeJump()
     {
         while (true)
         {
             float ranTime = Random.Range(3f, 5f);
-            cube.GetComponent<Rigidbody>().AddForce(new Vector3(0, 600f, 0));
             yield return new WaitForSeconds(ranTime);
+            myCube.GetComponent<Rigidbody>().AddForce(new Vector3(0, 600f, 0));
         }
         
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        Cube enemy = FindClosestEnemy();
-        if (enemy == null)
-        {
-            Idle();
-            return;
-        }
+        List<Cube> enemies = FindEnemiesInRange();
+        Cube bigEnemy = SearchClosestBiggerCube(enemies);
+        Cube smallEnemy = SearchClosestSmallerCube(enemies);
 
-        if (enemy.CanEat(cube))
+        if (bigEnemy != null)
         {
-            Run(enemy);
+            Run(bigEnemy);
+            if (npcSkill.CanBanish(bigEnemy))
+            {
+                npcSkill.Banish(bigEnemy);
+            }
         }
-        else if (cube.CanEat(enemy))
+        else if (smallEnemy != null)
         {
-            Chase(enemy);
+            Chase(smallEnemy);
         }
         else
         {
             Idle();
         }
     }
+
 }
