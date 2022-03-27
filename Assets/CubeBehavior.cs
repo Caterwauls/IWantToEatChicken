@@ -139,9 +139,9 @@ public class CubeBehavior : MonoBehaviour
     {
         while (true)
         {
-            float ranTime = Random.Range(3f, 5f);
+            float ranTime = Random.Range(1f, 5f);
             yield return new WaitForSeconds(ranTime);
-            myCube.GetComponent<Rigidbody>().AddForce(new Vector3(0, 600f, 0));
+            myCube.CubeJump();
         }
         
     }

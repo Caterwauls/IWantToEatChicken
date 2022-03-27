@@ -20,11 +20,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d90cf8020477943b74e74961bc9abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 600
   jumpCheck: 1
-  playerSkill: {fileID: 0}
---- !u!114 &6803104021160407537
+--- !u!114 &7621615290760037198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33,9 +30,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3681381660593262850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68586f53bb6000a4394b41226dd78b54, type: 3}
+  m_Script: {fileID: 11500000, guid: 59679bd66d2f83744a58aa61358e4f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canUseTimeStop: 1
+  TimeStopCoolTime: 10
+  stoppingTime: 4
+  enemys: []
 --- !u!1001 &5033103299008742027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,6 +148,11 @@ PrefabInstance:
         type: 3}
       propertyPath: cubeSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7106015727171173496, guid: f90cfd6e3f0fdba4795a509a936542f3,
+        type: 3}
+      propertyPath: acceleration
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8561283334344266633, guid: f90cfd6e3f0fdba4795a509a936542f3,
         type: 3}

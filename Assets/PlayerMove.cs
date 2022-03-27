@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float jumpForce = 600f;
     public bool jumpCheck = true;
-    public PlayerSkill playerSkill;
 
     private BoxCollider boxCollider;
     private Rigidbody playerRigidbody;
-
+    private PlayerSkill playerSkill;
     private Cube _cube;
 
 
@@ -18,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody>();
         _cube = GetComponent<Cube>();
+        playerSkill = GetComponent<PlayerSkill>();
     }
 
     IEnumerator JumpDelay()
@@ -34,8 +33,13 @@ public class PlayerMove : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
         {
             jumpCheck = false;
-            playerRigidbody.AddForce(Vector3.up * jumpForce);
+            _cube.CubeJump();
             StartCoroutine(JumpDelay());
+        }
+        if ((Input.GetKeyDown(KeyCode.F)) && playerSkill._canUseTimeStop)
+        {
+            playerSkill.timeStop();
+
         }
     }
 
@@ -49,5 +53,8 @@ public class PlayerMove : MonoBehaviour
         velocity *= _cube.cubeSpeed;
 
         _cube.MoveMyVelocity(velocity);
+
     }
+
+
 }

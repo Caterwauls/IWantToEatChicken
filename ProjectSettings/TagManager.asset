@@ -6,7 +6,6 @@ TagManager:
   tags:
   - CubeCollider
   - Cube
-  - BanishTrigger
   layers:
   - Default
   - TransparentFX

@@ -4,26 +4,53 @@ using UnityEngine;
 
 public class PlayerSkill : MonoBehaviour
 {
-    public PlayerMove playerMove;
-    public bool CoolOn;
     
-    public float timeStopDeltaTime()
+    public bool _canUseTimeStop = true;
+    public float TimeStopCoolTime = 10f;
+    public float stoppingTime = 2f;
+    public List<Cube> enemys;
+
+
+    private Cube myCube;
+
+    private void Awake()
     {
-        float objectTimeScale = 0.2f;
-        float customDeltaTime = objectTimeScale * Time.deltaTime;
-
-        return customDeltaTime;
-
+        myCube = GetComponent<Cube>();
+        enemys = GameManager.instance.enemyCubes;
     }
-    
-    void timeStop()
+
+    private IEnumerator StoppingTime()
     {
-        if (CoolOn)
+        yield return new WaitForSecondsRealtime (stoppingTime);
+        for (int i = 0; i < enemys.Count; i++)
         {
-            Time.timeScale = 0.2f;
-            Time.fixedDeltaTime = 0.2f * Time.timeScale;
+            enemys[i].GetComponent<Rigidbody>().isKinematic = false;
+            enemys[i].GetComponent<CubeBehavior>().enabled = true;
+            enemys[i].enabled = true;
         }
 
+    }
+
+    private IEnumerator CoroutineCooldownTimer()
+    {
+        _canUseTimeStop = false;
+        yield return new WaitForSecondsRealtime(TimeStopCoolTime);
+        _canUseTimeStop = true;
+        
+    }
+
+    public void timeStop()
+    {
+        
+        StartCoroutine(CoroutineCooldownTimer());
+        for(int i = 0; i < enemys.Count; i++)
+        {
+            enemys[i].GetComponent<Rigidbody>().isKinematic = true;
+            enemys[i].GetComponent<CubeBehavior>().enabled = false;
+            enemys[i].enabled = false;
+        }
+        
+        StartCoroutine(StoppingTime());
     }
     
     

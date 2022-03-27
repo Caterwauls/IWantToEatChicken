@@ -10,19 +10,24 @@ public class Cube : MonoBehaviour
 
     public float energy;
     public float cubeSpeed = 8.5f;
-    public float acceleration = 20f;
+    public float acceleration;
+    
+    
 
     private Rigidbody _rb;
 
     private void Awake()
     {
+        acceleration = 20f;
         _rb = GetComponent<Rigidbody>();
-    }
+        
+}
 
 
     private void Start()
     {
         UpdateScale();
+
     }
 
     private void UpdateScale()
@@ -73,8 +78,14 @@ public class Cube : MonoBehaviour
     
     public void MoveMyVelocity(Vector3 targetVelocity)
     {
-        Vector3 newVelocity = Vector3.MoveTowards(_rb.velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
+
+        Vector3 newVelocity = Vector3.MoveTowards(_rb.velocity, targetVelocity, acceleration * Time.fixedDeltaTime) ;
         newVelocity.y = _rb.velocity.y;
         _rb.velocity = newVelocity;
+    }
+
+    public void CubeJump()
+    {
+        _rb.AddForce(Vector3.up.normalized * 10f, ForceMode.Impulse);
     }
 }
