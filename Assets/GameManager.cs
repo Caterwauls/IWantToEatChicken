@@ -53,30 +53,8 @@ public class GameManager : MonoBehaviour
             else
                 enemyCubes[i].GetComponent<Outline>().enabled = false;
         }
-        //for (int i = 0; i < cubes.Length; i++)
-        //{
-        //    if (cubes[i].GetComponent<PlayerMove>())
-        //    {
-        //        myCube = cubes[i].GetComponent<Cube>();
-        //        continue;
-        //    }
-        //    else
-        //        enemyCubes.Add(cubes[i].GetComponent<Cube>());
-
-        //}
-        //for (int i = 0; i < enemyCubes.Count; i++)
-        //{
-        //    if (myCube.CanEat(enemyCubes[i]) && enemyCubes[i] != null)
-        //    {
-        //        enemyCubes[i].GetComponent<Outline>().enabled = true;
-        //    }
-        //    else if (enemyCubes[i] == null)
-        //    {
-        //        continue;
-        //    }
-
-        //    else
-        //        enemyCubes[i].GetComponent<Outline>().enabled = false;
-        //}
+       
     }
+
+    
 }

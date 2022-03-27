@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public bool jumpCheck = true;
+    public Light particlesLight;
 
     private BoxCollider boxCollider;
-    private Rigidbody playerRigidbody;
+    private Rigidbody playerRigidbody; 
     private PlayerSkill playerSkill;
     private Cube _cube;
 
@@ -17,6 +18,7 @@ public class PlayerMove : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         _cube = GetComponent<Cube>();
         playerSkill = GetComponent<PlayerSkill>();
+        particlesLight = GetComponentInChildren<Light>();
     }
 
     IEnumerator JumpDelay()
