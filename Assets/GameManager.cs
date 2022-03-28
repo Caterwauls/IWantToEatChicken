@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         enemyCubes.Clear();
         NPCSkill[] list = FindObjectsOfType<NPCSkill>();
         Cube myCube = FindObjectOfType<PlayerMove>().GetComponent<Cube>();
+        
 
         for (int i = 0; i < list.Length; i++)
         {
@@ -50,10 +52,16 @@ public class GameManager : MonoBehaviour
             {
                 continue;
             }
+
             else
                 enemyCubes[i].GetComponent<Outline>().enabled = false;
         }
        
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(1);
     }
 
     

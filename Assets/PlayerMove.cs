@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
         _cube = GetComponent<Cube>();
         playerSkill = GetComponent<PlayerSkill>();
         particlesLight = GetComponentInChildren<Light>();
+        
     }
 
     IEnumerator JumpDelay()
@@ -42,6 +43,10 @@ public class PlayerMove : MonoBehaviour
         {
             playerSkill.timeStop();
 
+        }
+        if(_cube.energy <= 0.02f)
+        {
+            GameManager.instance.RestartGame();
         }
     }
 

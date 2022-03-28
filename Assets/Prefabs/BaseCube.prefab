@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energy: 0
   cubeSpeed: 8.5
+  acceleration: 0
 --- !u!54 &3066740165716510281
 Rigidbody:
   m_ObjectHideFlags: 0

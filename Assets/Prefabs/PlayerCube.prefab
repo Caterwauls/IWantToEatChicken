@@ -27,9 +27,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canUseTimeStop: 1
-  TimeStopCoolTime: 10
+  timeStopStart: 0
+  toggle: 0
+  TimeStopCoolTime: 1
   stoppingTime: 4
   enemys: []
+  music: {fileID: 0}
 --- !u!1001 &5033103299008742027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +135,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6829244090255958045, guid: f90cfd6e3f0fdba4795a509a936542f3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1ce9aa87b132e44789c09d1713e2bdc, type: 2}
     - target: {fileID: 7106015727171173496, guid: f90cfd6e3f0fdba4795a509a936542f3,
         type: 3}
       propertyPath: energy

@@ -10,7 +10,7 @@ public class PlayerSkill : MonoBehaviour
     public float TimeStopCoolTime = 10f;
     public float stoppingTime = 2f;
     public List<Cube> enemys;
-    public AudioSource audio;
+    public AudioSource music;
 
 
     private PlayerMove playerMove;
@@ -76,21 +76,21 @@ public class PlayerSkill : MonoBehaviour
 
     private void pitchDown()
     {
-        if(audio.pitch > 0)
+        if(music.pitch > 0)
         {
-            audio.pitch -= Time.deltaTime;
+            music.pitch -= Time.deltaTime;
         }
     }
 
     private void pitchUp()
     {
-        if(audio.pitch < 1)
+        if(music.pitch < 1)
         {
-            audio.pitch += 1.3f * Time.deltaTime;
+            music.pitch += 1.3f * Time.deltaTime;
         }
-        else if(audio.pitch > 1)
+        else if(music.pitch > 1)
         {
-            audio.pitch = 1;
+            music.pitch = 1;
             toggle = false;
         }
     }

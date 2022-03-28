@@ -773,11 +773,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2829544173825375987, guid: 3455558df3e3ef3438b61e1601c554f0,
-        type: 3}
-      propertyPath: energy
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3681381660593262850, guid: 3455558df3e3ef3438b61e1601c554f0,
         type: 3}
       propertyPath: m_Name
@@ -785,21 +780,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7621615290760037198, guid: 3455558df3e3ef3438b61e1601c554f0,
         type: 3}
-      propertyPath: audio
+      propertyPath: music
       value: 
       objectReference: {fileID: 192098801}
-    - target: {fileID: 7621615290760037198, guid: 3455558df3e3ef3438b61e1601c554f0,
-        type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 882467042}
-    - target: {fileID: 7621615290760037198, guid: 3455558df3e3ef3438b61e1601c554f0,
-        type: 3}
-      propertyPath: TimeStopCoolTime
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6803104021160407537, guid: 3455558df3e3ef3438b61e1601c554f0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3455558df3e3ef3438b61e1601c554f0, type: 3}
 --- !u!4 &1302939265 stripped
 Transform:
