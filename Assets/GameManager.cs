@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public List<Cube> enemyCubes;
 
+
     private float _currentTime;
     private float _maxTime;
 
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         enemyCubes.Clear();
         NPCSkill[] list = FindObjectsOfType<NPCSkill>();
         Cube myCube = FindObjectOfType<PlayerMove>().GetComponent<Cube>();
-        
+
 
         for (int i = 0; i < list.Length; i++)
         {
@@ -57,13 +58,28 @@ public class GameManager : MonoBehaviour
             else
                 enemyCubes[i].GetComponent<Outline>().enabled = false;
         }
-       
+
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(1);
+
+        SceneManager.LoadScene(0);
     }
 
-    
+    public void PlayerDie()
+    {
+        
+        StartCoroutine(DeadTimer(5f));
+
+    }
+
+    IEnumerator DeadTimer(float TimerTime)
+    {
+        yield return new WaitForSeconds(TimerTime);
+        RestartGame();
+    }
+
+
+
 }

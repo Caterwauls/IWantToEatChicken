@@ -5,13 +5,14 @@ using UnityEngine;
 
 
 
+
 public class Cube : MonoBehaviour
 {
 
     public float energy;
     public float cubeSpeed = 8.5f;
     public float acceleration;
-
+    
 
 
     private Rigidbody _rb;
@@ -28,6 +29,7 @@ public class Cube : MonoBehaviour
     private void Start()
     {
         UpdateScale();
+        CheckCubeLeaveMap();
 
     }
 
@@ -67,9 +69,14 @@ public class Cube : MonoBehaviour
 
             UpdateScale();
 
-            if (otherCube.energy <= 0)
+            if (otherCube.energy <= 0 && !otherCube.GetComponent<PlayerMove>())
             {
                 Destroy(otherCube.gameObject);
+            }
+            else if(otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>())
+            {
+                otherCube.gameObject.SetActive(false);
+                otherCube.GetComponent<PlayerMove>().onPlayerDead.Invoke();
             }
             else
             {
@@ -92,5 +99,17 @@ public class Cube : MonoBehaviour
         _rb.AddForce(Vector3.up.normalized * 10f, ForceMode.Impulse);
     }
 
+    IEnumerator CheckCubeLeaveMap()
+    {
+        while (true)
+        {
+            if (transform.position.y < -10)
+            {
+                transform.position = new Vector3(0, 0, 0);
+            }
+            yield return new WaitForSeconds(1f);
+        }
 
+
+    }
 }

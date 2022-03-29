@@ -37,6 +37,8 @@ public class CamFollow : MonoBehaviour
             Move();
 
         }
+        //else
+        //    GameManager.instance.RestartGame();
     }
 
 

@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMove : MonoBehaviour
 {
     public bool jumpCheck = true;
     public Light particlesLight;
+    public UnityEvent onPlayerDead;
 
     private BoxCollider boxCollider;
-    private Rigidbody playerRigidbody; 
+    private Rigidbody playerRigidbody;
     private PlayerSkill playerSkill;
     private Cube _cube;
 
@@ -19,8 +21,10 @@ public class PlayerMove : MonoBehaviour
         _cube = GetComponent<Cube>();
         playerSkill = GetComponent<PlayerSkill>();
         particlesLight = GetComponentInChildren<Light>();
-        
+
     }
+
+   
 
     IEnumerator JumpDelay()
     {
@@ -33,6 +37,10 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        //if (transform.parent.localScale.x <= 0.02f)
+        //{
+        //    GameManager.instance.RestartGame();
+        //}
         if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
         {
             jumpCheck = false;
@@ -44,11 +52,10 @@ public class PlayerMove : MonoBehaviour
             playerSkill.timeStop();
 
         }
-        if(_cube.energy <= 0.02f)
-        {
-            GameManager.instance.RestartGame();
-        }
+        
     }
+
+
 
     void FixedUpdate()
     {
@@ -63,5 +70,6 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    
 
 }
