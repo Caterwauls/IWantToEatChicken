@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerSkill : MonoBehaviour
 {
-    
+
     public bool _canUseTimeStop = true;
     public bool timeStopStart = false;
     public bool toggle = false;
@@ -15,25 +15,30 @@ public class PlayerSkill : MonoBehaviour
 
     private PlayerMove playerMove;
     private Cube myCube;
+    private ParticleSystem shockwave;
 
     private void Awake()
     {
         playerMove = GetComponentInParent<PlayerMove>();
         myCube = GetComponent<Cube>();
-        enemys = GameManager.instance.enemyCubes;
+        shockwave = GetComponentInChildren<ParticleSystem>();
+    }
 
-        
+    private void Start()
+    {
+        enemys = GameManager.instance.enemyCubes;
     }
 
     private IEnumerator StoppingTime()
     {
-        yield return new WaitForSecondsRealtime (stoppingTime);
+        yield return new WaitForSecondsRealtime(stoppingTime);
         for (int i = 0; i < enemys.Count; i++)
         {
             enemys[i].GetComponent<Rigidbody>().isKinematic = false;
             enemys[i].GetComponent<CubeBehavior>().enabled = true;
             enemys[i].enabled = true;
         }
+        shockwave.Stop();
         timeStopStart = false;
         toggle = true;
     }
@@ -50,14 +55,19 @@ public class PlayerSkill : MonoBehaviour
     public void timeStop()
     {
         timeStopStart = true;
+        shockwave.Play();
         StartCoroutine(CoroutineCooldownTimer());
-        for(int i = 0; i < enemys.Count; i++)
+        for (int i = 0; i < enemys.Count; i++)
         {
-            enemys[i].GetComponent<Rigidbody>().isKinematic = true;
-            enemys[i].GetComponent<CubeBehavior>().enabled = false;
-            enemys[i].enabled = false;
+            if(enemys[i] != null)
+            {
+                enemys[i].GetComponent<Rigidbody>().isKinematic = true;
+                enemys[i].GetComponent<CubeBehavior>().enabled = false;
+                enemys[i].enabled = false;
+            }
+            
         }
-        
+
         StartCoroutine(StoppingTime());
     }
 
@@ -66,7 +76,7 @@ public class PlayerSkill : MonoBehaviour
         if (timeStopStart)
         {
             pitchDown();
-            
+
         }
         else if (toggle)
         {
@@ -76,7 +86,7 @@ public class PlayerSkill : MonoBehaviour
 
     private void pitchDown()
     {
-        if(music.pitch > 0)
+        if (music.pitch > 0)
         {
             music.pitch -= Time.deltaTime;
         }
@@ -84,17 +94,17 @@ public class PlayerSkill : MonoBehaviour
 
     private void pitchUp()
     {
-        if(music.pitch < 1)
+        if (music.pitch < 1)
         {
             music.pitch += 1.3f * Time.deltaTime;
         }
-        else if(music.pitch > 1)
+        else if (music.pitch > 1)
         {
             music.pitch = 1;
             toggle = false;
         }
     }
 
-    
-    
+
+
 }

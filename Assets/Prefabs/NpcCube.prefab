@@ -50,7 +50,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   BanishCoolTime: 15
   banishPower: 3
-  banishParticle: {fileID: 5393116923785945501, guid: 918adceed454b55418650f8e68963e0f,
+  banishParticle: {fileID: 2458959733328621765, guid: 588954fea01bead449964106c824c21a,
     type: 3}
 --- !u!1001 &5949456262914472528
 PrefabInstance:

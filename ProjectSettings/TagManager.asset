@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - CubeCollider
+  - Shootable
   - Cube
+  - CubeCollider
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Cube
   - Ground
   - Postprocessing
-  - BanishTrigger
+  - 
   - 
   - 
   - 

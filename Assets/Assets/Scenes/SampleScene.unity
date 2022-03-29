@@ -778,6 +778,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCube
       objectReference: {fileID: 0}
+    - target: {fileID: 5553408544421665131, guid: 3455558df3e3ef3438b61e1601c554f0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753070272797952719, guid: 3455558df3e3ef3438b61e1601c554f0,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7621615290760037198, guid: 3455558df3e3ef3438b61e1601c554f0,
         type: 3}
       propertyPath: music
