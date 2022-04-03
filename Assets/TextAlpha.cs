@@ -50,35 +50,7 @@ public class TextAlpha : MonoBehaviour
 
 
 
-    //private void Awake()
-    //{
-    //    isTimerEnd = false;
-    //    text = GetComponent<Text>();
-    //    text.color = new Color(text.color.r, text.color.g, text.color.b, 0);
-    //}
-
-    //public IEnumerator TextTimer()
-    //{
-    //    yield return new WaitForSeconds(2f);
-    //    isTimerEnd = true;
-    //    StopCoroutine(TextTimer());
-    //}
-
-    //public void TextAlphaControl()
-    //{
-    //    while (text.color.a < 1.0f)
-    //    {
-    //        text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime / 2f);
-
-    //    }
-    //    StartCoroutine(TextTimer());
-    //    while (text.color.a > 0.0f)
-    //    {
-    //        text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + Time.deltaTime / 2f);
-
-    //    }
-
-    //}
+    
 
 
 }

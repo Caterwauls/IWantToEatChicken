@@ -1,17 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public List<Cube> enemyCubes;
+    public Cube myCube;
+    public Camera scene1Camera;
+    public Text remainCubes;
+    public UnityEvent onPlayerWin;
 
 
     private float _currentTime;
     private float _maxTime;
+
+    private int remainCubeNum = 0;
 
 
     private void Awake()
@@ -19,22 +27,29 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+
+    }
+
     void Update()
     {
-        CubeCheckTimer();
-    }
-    private void CubeCheckTimer()
-    {
-        _currentTime += Time.fixedDeltaTime;
-
-        if (_currentTime > _maxTime)
+        if (SceneManager.GetActiveScene().buildIndex == 1) return;
+        AllCubeChecker();
+        updateRemainCube();
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            // _maxIdleTime 초마다 실행되는 코드.
-            _maxTime = 0.3f;
+            RestartGame();
+        }
+        if (enemyCubes.Count <= 0)
+        {
+            onPlayerWin.Invoke();
+            StartCoroutine(WinTimer());
+            return;
 
         }
-        AllCubeChecker();
     }
+
 
     public void AllCubeChecker()
     {
@@ -55,9 +70,11 @@ public class GameManager : MonoBehaviour
                 continue;
             }
 
+
             else
                 enemyCubes[i].GetComponent<Outline>().enabled = false;
         }
+
 
     }
 
@@ -69,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDie()
     {
-        
+
         StartCoroutine(DeadTimer(5f));
 
     }
@@ -80,6 +97,30 @@ public class GameManager : MonoBehaviour
         RestartGame();
     }
 
+    void updateRemainCube()
+    {
+        remainCubeNum = enemyCubes.Count;
+        remainCubes.text = "Cubes left: " + remainCubeNum;
+    }
+
+    IEnumerator WinTimer()
+    {
+        //myCube.enabled = false;
+        //myCube.GetComponent<PlayerSkill>().enabled = false;
+
+
+
+        yield return new WaitForSeconds(10f);
+
+        scene1Camera.gameObject.SetActive(false);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        yield break;
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
+
+        yield break;
+    }
 
 
 }

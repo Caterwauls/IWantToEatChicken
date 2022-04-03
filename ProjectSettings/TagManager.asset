@@ -28,7 +28,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - BG
   - 
   - 
   - 
@@ -41,7 +41,7 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Fire
+  - name: BG
     uniqueID: 3804908061
     locked: 0
   - name: Default
