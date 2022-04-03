@@ -8,16 +8,9 @@ public class CamFollow : MonoBehaviour
     public float smoothTime = 0.2f;
     private Vector3 lastMovingVelocity;
     private Vector3 targetPosition;
-    public Camera Cam;
     public float height = 15.5f;
     public float dist = 10.5f;
 
-
-    private void Awake()
-    {
-        Cam = GetComponent<Camera>();
-
-    }
 
     private void Move()
     {

@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     public Cube myCube;
     public Camera scene1Camera;
     public Text remainCubes;
+    public TextAlpha textAlpha;
     public UnityEvent onPlayerWin;
+    public UnityEvent WinTextEnd;
 
 
     private float _currentTime;
@@ -112,12 +114,13 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(10f);
 
-        scene1Camera.gameObject.SetActive(false);
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        yield break;
-        yield return new WaitForSeconds(1f);
+        //scene1Camera.gameObject.SetActive(false);
+        //SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        //yield break;
+        //yield return new WaitForSeconds(1f);
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
+        WinTextEnd.Invoke();
 
         yield break;
     }
