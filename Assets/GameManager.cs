@@ -57,7 +57,10 @@ public class GameManager : MonoBehaviour
     {
         enemyCubes.Clear();
         NPCSkill[] list = FindObjectsOfType<NPCSkill>();
-        Cube myCube = FindObjectOfType<PlayerMove>().GetComponent<Cube>();
+        if (list == null) return;
+        PlayerMove playerCube = FindObjectOfType<PlayerMove>();
+        if (playerCube == null) return;
+        Cube myCube = playerCube.GetComponent<Cube>();
 
 
         for (int i = 0; i < list.Length; i++)
