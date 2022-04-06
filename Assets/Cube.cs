@@ -12,7 +12,7 @@ public class Cube : MonoBehaviour
     public float energy;
     public float cubeSpeed = 8.5f;
     public float acceleration;
-    
+
 
 
     private Rigidbody _rb;
@@ -73,10 +73,9 @@ public class Cube : MonoBehaviour
             {
                 Destroy(otherCube.gameObject);
             }
-            else if(otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>())
+            else if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>())
             {
                 otherCube.gameObject.SetActive(false);
-                otherCube.GetComponent<PlayerMove>().onPlayerDead.Invoke();
             }
             else
             {

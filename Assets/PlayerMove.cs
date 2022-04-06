@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     public bool jumpCheck = true;
     public Light particlesLight;
-    public UnityEvent onPlayerDead;
+
 
     private BoxCollider boxCollider;
     private Rigidbody playerRigidbody;
@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-   
+
 
     IEnumerator JumpDelay()
     {
@@ -52,7 +52,7 @@ public class PlayerMove : MonoBehaviour
             playerSkill.timeStop();
 
         }
-        
+
     }
 
 
@@ -70,6 +70,6 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    
+
 
 }

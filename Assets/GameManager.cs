@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     public TextAlpha textAlpha;
     public UnityEvent onPlayerWin;
     public UnityEvent WinTextEnd;
+    public UnityEvent onPlayerDead;
+    public bool isCutScenePlaying;
+    public GameObject[] audios;
 
-
+    private float lastTimeScale;
     private float _currentTime;
     private float _maxTime;
 
@@ -27,22 +30,44 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        isCutScenePlaying = false;
     }
 
     private void Start()
     {
-
+        audios = GameObject.FindGameObjectsWithTag("Audio");
+        lastTimeScale = Time.timeScale;
     }
 
     void Update()
     {
+        audioTimeControl();
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !isCutScenePlaying)
+        {
+            if (Time.timeScale == 0) Time.timeScale = 1;
+            else Time.timeScale = 0;
+        }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         if (SceneManager.GetActiveScene().buildIndex == 1) return;
+
         AllCubeChecker();
         updateRemainCube();
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             RestartGame();
         }
+
+        
+        if(myCube == null)
+        {
+            onPlayerDead.Invoke();
+        }
+
         if (enemyCubes.Count <= 0)
         {
             onPlayerWin.Invoke();
@@ -52,6 +77,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   
+
 
     public void AllCubeChecker()
     {
@@ -59,8 +86,7 @@ public class GameManager : MonoBehaviour
         NPCSkill[] list = FindObjectsOfType<NPCSkill>();
         if (list == null) return;
         PlayerMove playerCube = FindObjectOfType<PlayerMove>();
-        if (playerCube == null) return;
-        Cube myCube = playerCube.GetComponent<Cube>();
+        
 
 
         for (int i = 0; i < list.Length; i++)
@@ -124,8 +150,23 @@ public class GameManager : MonoBehaviour
 
         //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
         WinTextEnd.Invoke();
+        isCutScenePlaying = true;
 
         yield break;
+    }
+
+    void audioTimeControl()
+    {
+        
+        if (Time.timeScale != lastTimeScale)
+        {
+            lastTimeScale = Time.timeScale;
+            for(int i=0; i<audios.Length; i++)
+            {
+                audios[i].GetComponent<AudioSource>().pitch = Time.timeScale;
+            }
+        }
+
     }
 
 
