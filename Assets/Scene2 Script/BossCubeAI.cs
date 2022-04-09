@@ -5,6 +5,12 @@ using UnityEngine;
 public class BossCubeAI : MonoBehaviour
 {
     public Transform player;
+    public Transform eye;
+
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
 
@@ -12,6 +18,17 @@ public class BossCubeAI : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(player);
+        lookTarget();
+
+
+
+    }
+
+    private void lookTarget()
+    {
+        Quaternion lookAt = Quaternion.identity;
+        Vector3 lookatVec = (player.position - eye.position).normalized;
+        lookAt.SetLookRotation(lookatVec);
+        eye.rotation = lookAt;
     }
 }

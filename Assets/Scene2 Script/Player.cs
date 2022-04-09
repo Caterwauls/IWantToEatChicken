@@ -8,18 +8,23 @@ public class Player : MonoBehaviour
     public bool jumpCheck = true;
     public Transform camTransform;
 
+    public Camera cameraPoint;
+    public PlayerCamera playerCamera;
+    public float distanceOfBeam = 3f;
+
     private Rigidbody _rb;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        cameraPoint = Camera.main;
 
     }
 
     void Update()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        ShootBeam();
+        
         if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
         {
             jumpCheck = false;
@@ -67,4 +72,17 @@ public class Player : MonoBehaviour
 
     }
 
+    void ShootBeam()
+    {
+        Vector3 rayOrigin = transform.position;
+        Vector3 rayDir = cameraPoint.ScreenPointToRay(Input.mousePosition).direction;
+
+        
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Physics.Raycast(rayOrigin, rayDir, distanceOfBeam);
+            Debug.DrawRay(rayOrigin, rayDir * distanceOfBeam, Color.green);
+        }
+    }
 }

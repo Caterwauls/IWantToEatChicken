@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 public class SignalManager : MonoBehaviour
 {
     public AudioSource bgm;
+    public EnergyToHp energyNum;
 
 
 
     public void GoNextScene()
     {
         SceneManager.LoadScene(1);
+        DontDestroyOnLoad(energyNum);
     }
 
     public void bgmOff()
