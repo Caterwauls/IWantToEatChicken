@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Cinemachine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public bool jumpCheck = true;
+    //public bool jumpCheck = true;
     public Light particlesLight;
+    public CinemachineVirtualCamera playerCamera;
+    public Camera mainCam;
 
 
     private BoxCollider boxCollider;
@@ -24,34 +27,36 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-
-
-    IEnumerator JumpDelay()
+    private void Start()
     {
 
-        yield return new WaitForSeconds(2);
-        jumpCheck = true;
 
     }
 
-    // Update is called once per frame
+    //IEnumerator JumpDelay()
+    //{
+
+    //    yield return new WaitForSeconds(2);
+    //    jumpCheck = true;
+
+    //}
+
+
     private void Update()
     {
-        //if (transform.parent.localScale.x <= 0.02f)
+
+        //if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
         //{
-        //    GameManager.instance.RestartGame();
+        //    jumpCheck = false;
+        //    _cube.CubeJump();
+        //    StartCoroutine(JumpDelay());
         //}
-        if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
-        {
-            jumpCheck = false;
-            _cube.CubeJump();
-            StartCoroutine(JumpDelay());
-        }
         if ((Input.GetKeyDown(KeyCode.F)) && playerSkill._canUseTimeStop)
         {
             playerSkill.timeStop();
 
         }
+        playerCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset.y = transform.localScale.y * 15;
 
     }
 
@@ -59,8 +64,13 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputZ = Input.GetAxis("Vertical");
+        Vector3 rayDirection = mainCam.ScreenPointToRay(Input.mousePosition).direction;
+
+        //float inputX = Input.GetAxis("Horizontal");
+        //float inputZ = Input.GetAxis("Vertical");
+
+        float inputX = rayDirection.x;
+        float inputZ = rayDirection.z;
 
         Vector3 velocity = new Vector3(inputX, 0, inputZ);
 

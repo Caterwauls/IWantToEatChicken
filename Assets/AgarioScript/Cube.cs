@@ -6,12 +6,14 @@ using UnityEngine;
 
 
 
+
 public class Cube : MonoBehaviour
 {
 
     public float energy;
     public float cubeSpeed = 8.5f;
     public float acceleration;
+
 
 
 
@@ -28,6 +30,7 @@ public class Cube : MonoBehaviour
 
     private void Start()
     {
+
         UpdateScale();
         CheckCubeLeaveMap();
 
@@ -36,6 +39,7 @@ public class Cube : MonoBehaviour
     private void UpdateScale()
     {
         transform.localScale = Vector3.one * Mathf.Pow(energy, 1 / 3f);
+
     }
 
     public void AbsorbPowerFrom(Cube otherCube)
@@ -93,10 +97,10 @@ public class Cube : MonoBehaviour
         _rb.velocity = newVelocity;
     }
 
-    public void CubeJump()
-    {
-        _rb.AddForce(Vector3.up.normalized * 10f, ForceMode.Impulse);
-    }
+    //public void CubeJump()
+    //{
+    //    _rb.AddForce(Vector3.up.normalized * 10f, ForceMode.Impulse);
+    //}
 
     IEnumerator CheckCubeLeaveMap()
     {

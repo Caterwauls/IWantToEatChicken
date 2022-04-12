@@ -9,13 +9,13 @@ using UnityEngine;
 
 public class CubeBehavior : MonoBehaviour
 {
-    
+
     public Cube myCube;
     public Rigidbody cubeRigidbody;
     public GameObject enemyGameObject;
     public NPCSkill npcSkill;
     public float smoothTime = 0.1f;
-    
+
 
     private Vector3 lastMovingVelocity;
     private Vector3 targetPosition;
@@ -24,7 +24,7 @@ public class CubeBehavior : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CubeJump());
+        //StartCoroutine(CubeJump());
     }
 
     public void Chase(Cube enemy)
@@ -63,9 +63,9 @@ public class CubeBehavior : MonoBehaviour
     {
         List<Cube> enemyCubes = new List<Cube>();
         Collider[] colliders = Physics.OverlapSphere(transform.position, 8f * transform.localScale.x);
-        
-        foreach(Collider col in colliders)
-        {       
+
+        foreach (Collider col in colliders)
+        {
             Cube cubeOfCol = col.GetComponentInParent<Cube>();
             if (cubeOfCol == myCube) continue;
             if (cubeOfCol == null) continue;
@@ -79,11 +79,11 @@ public class CubeBehavior : MonoBehaviour
     {
         List<Cube> BiggerCubeList = new List<Cube>();
 
-        for(int i = 0; i < AllenemiesInRange.Count; i++)
+        for (int i = 0; i < AllenemiesInRange.Count; i++)
         {
             if (AllenemiesInRange[i] == null) continue;
 
-            if(AllenemiesInRange[i].CanEat(myCube))
+            if (AllenemiesInRange[i].CanEat(myCube))
             {
                 BiggerCubeList.Add(AllenemiesInRange[i]);
             }
@@ -97,7 +97,7 @@ public class CubeBehavior : MonoBehaviour
     {
         List<Cube> SmallerCubeList = new List<Cube>();
 
-        for(int i = 0; i < AllenemiesInRange.Count; i++)
+        for (int i = 0; i < AllenemiesInRange.Count; i++)
         {
             if (AllenemiesInRange[i] == null) continue;
 
@@ -118,15 +118,15 @@ public class CubeBehavior : MonoBehaviour
         float temp = 0;
         Cube closestCube = null;
 
-        for(int i = 0; i < cubeList.Count; i++)
+        for (int i = 0; i < cubeList.Count; i++)
         {
             closestCube = cubeList[0];
             temp = Vector3.Distance(myCube.transform.position, cubeList[i].transform.position);
-            if(temp < shortDis)
+            if (temp < shortDis)
             {
                 shortDis = temp;
                 closestCube = cubeList[i];
-                
+
             }
 
         }
@@ -135,16 +135,16 @@ public class CubeBehavior : MonoBehaviour
     }
 
 
-    IEnumerator CubeJump()
-    {
-        while (true)
-        {
-            float ranTime = Random.Range(1f, 5f);
-            yield return new WaitForSeconds(ranTime);
-            myCube.CubeJump();
-        }
-        
-    }
+    //IEnumerator CubeJump()
+    //{
+    //    while (true)
+    //    {
+    //        float ranTime = Random.Range(1f, 5f);
+    //        yield return new WaitForSeconds(ranTime);
+    //        myCube.CubeJump();
+    //    }
+
+    //}
 
     private void FixedUpdate()
     {

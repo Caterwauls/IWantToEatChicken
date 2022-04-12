@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System.Linq;
 
 
 public class GameManager : MonoBehaviour
@@ -19,10 +20,15 @@ public class GameManager : MonoBehaviour
     public UnityEvent onPlayerDead;
     public bool isCutScenePlaying;
     public GameObject[] audios;
+    
+    public Text leaderboard;
+   
 
     private float lastTimeScale;
     private float _currentTime;
     private float _maxTime;
+
+    [SerializeField] private Texture2D cursorImg;
 
     private int remainCubeNum = 0;
 
@@ -49,21 +55,23 @@ public class GameManager : MonoBehaviour
             else Time.timeScale = 0;
         }
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);
 
         if (SceneManager.GetActiveScene().buildIndex == 1) return;
 
         AllCubeChecker();
-        updateRemainCube();
+        UpdateRanking();
+        UpdateRemainCube();
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             RestartGame();
         }
 
-        
-        if(myCube == null)
+
+        if (myCube != myCube.gameObject.activeSelf)
         {
             onPlayerDead.Invoke();
         }
@@ -77,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-   
+
 
 
     public void AllCubeChecker()
@@ -86,7 +94,7 @@ public class GameManager : MonoBehaviour
         NPCSkill[] list = FindObjectsOfType<NPCSkill>();
         if (list == null) return;
         PlayerMove playerCube = FindObjectOfType<PlayerMove>();
-        
+
 
 
         for (int i = 0; i < list.Length; i++)
@@ -128,7 +136,30 @@ public class GameManager : MonoBehaviour
         RestartGame();
     }
 
-    void updateRemainCube()
+    void UpdateRanking()
+    {
+        List<Cube> rankingCubeList = new List<Cube>();
+        List<Cube> allCubes = enemyCubes.ToList();
+
+        allCubes.Add(myCube);
+
+
+        var sortAllCubes = allCubes.OrderByDescending(x => x.energy).ToList();
+
+        leaderboard.text = "";
+        for (int i = 0; i < 5; i++)
+        {
+            if (i + 1 > sortAllCubes.Count) break;
+            rankingCubeList.Add(sortAllCubes[i]);
+            leaderboard.text += $"{i + 1}. {rankingCubeList[i].gameObject.name}: " + string.Format("{0:0.0}", rankingCubeList[i].energy) + "\n";
+        }
+        
+        rankingCubeList.Clear();
+        sortAllCubes.Clear();
+
+    }
+
+    void UpdateRemainCube()
     {
         remainCubeNum = enemyCubes.Count;
         remainCubes.text = "Cubes left: " + remainCubeNum;
@@ -157,11 +188,11 @@ public class GameManager : MonoBehaviour
 
     void audioTimeControl()
     {
-        
+
         if (Time.timeScale != lastTimeScale)
         {
             lastTimeScale = Time.timeScale;
-            for(int i=0; i<audios.Length; i++)
+            for (int i = 0; i < audios.Length; i++)
             {
                 audios[i].GetComponent<AudioSource>().pitch = Time.timeScale;
             }

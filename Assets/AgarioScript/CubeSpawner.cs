@@ -5,9 +5,13 @@ using UnityEngine;
 public class CubeSpawner : MonoBehaviour
 {
     public Cube prefab;
+    public Cube foodCube;
     public int cubeCount = 30;
-    public float minEnergy = 1;
-    public float maxEnergy = 5;
+    public int foodCount = 30;
+    public float minEnergy = 5;
+    public float maxEnergy = 10;
+    public float foodMin = 0.2f;
+    public float foodMax = 1f;
 
     public float allowedDistance = 3f;
 
@@ -16,12 +20,19 @@ public class CubeSpawner : MonoBehaviour
     private void Start()
     {
         _box = GetComponent<BoxCollider>();
-    
+
         for (int i = 0; i < cubeCount; i++)
         {
             Cube newCube = Instantiate(prefab, GetRandomPoint(), Random.rotation);
             newCube.energy = Random.Range(minEnergy, maxEnergy);
             newCube.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 1, 1, 0.75f, 1);
+        }
+
+        for (int j = 0; j < foodCount; j++)
+        {
+            Cube newFood = Instantiate(foodCube, GetRandomPoint(), Random.rotation);
+            newFood.energy = Random.Range(foodMin, foodMax);
+            newFood.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 1, 1, 0.75f, 1);
         }
     }
 
@@ -57,6 +68,6 @@ public class CubeSpawner : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 }
