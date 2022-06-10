@@ -10,7 +10,8 @@ public class SelectionManager : MonoBehaviour
     public GameObject barPrefab;
     public GameObject barCanvas;
     public GameObject player;
-    public Transform barPos;
+
+    public float barDistance = 100f;
 
     private Vector3 _barVec;
     private Vector3 _playerVec;
@@ -27,9 +28,9 @@ public class SelectionManager : MonoBehaviour
     private void OnEnable()
     {
         _playerVec = Camera.main.WorldToScreenPoint(player.transform.position);
-        _barVec = (Camera.main.WorldToScreenPoint(barPos.position) - _playerVec);
+        _barVec = Vector3.up * barDistance;
 
-        selectionList = PPGameManager.instance.answerChoice;
+        selectionList = DialogManager.instance.currentChoice.lines;
         choiceNum = selectionList.Count;
         _barAngle = 360 / choiceNum;
         _possibleAngle = new List<int>();
@@ -38,20 +39,16 @@ public class SelectionManager : MonoBehaviour
         {
             _possibleAngle.Add(-135 + _barAngle * i);
 
-            GameObject selectionBar = Instantiate(barPrefab) as GameObject;
+            GameObject selectionBar = Instantiate(barPrefab);
             selectionBar.transform.SetParent(barCanvas.transform, true);
 
             var quaternion = Quaternion.Euler(new Vector3(0, 0, _possibleAngle[i] - 135));
             selectionBar.transform.position = quaternion * _barVec + _playerVec; 
 
-            Vector3 selectionBarPos = selectionBar.transform.position;
             selectionBar.transform.GetComponentInChildren<Text>().text = (i + 1)  + ") " + selectionList[i];
 
             selectionBar.transform.GetComponent<SelectionBar>().myNum = i;
         }
-
-        
-
     }
 
     private void Update()
@@ -61,8 +58,8 @@ public class SelectionManager : MonoBehaviour
         {
             if (Input.GetKeyDown(keyCodes[i]))
             {
+                DialogManager.instance.lastChoice = i;
                 transform.rotation = Quaternion.Euler( new Vector3(0, 0, _possibleAngle[i]));
-
             }
         }
     }

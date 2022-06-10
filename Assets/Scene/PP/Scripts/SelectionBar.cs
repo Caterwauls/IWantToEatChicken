@@ -5,31 +5,16 @@ using UnityEngine.UI;
 
 public class SelectionBar : MonoBehaviour
 {
-    public float dis;
-    public Transform closetChoice;
     public int myNum;
-
-    private void Awake()
+    
+    private void Update()
     {
-        
-    }
-    void Start()
-    {
-        closetChoice = PPGameManager.instance.ClosetChoice;
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        dis = Vector3.Magnitude(transform.position - Camera.main.WorldToScreenPoint(closetChoice.position));
-        if (dis <= 110)
+        if (myNum == DialogManager.instance.lastChoice)
         {
             transform.GetComponent<Image>().color = new Color(1, 1, 1, 217 / 255f);
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                PPGameManager.instance.selectedAnswer = myNum;
-                PPGameManager.instance.flowRestart = true;
+                DialogManager.instance.didSelect = true;
                 Destroy(gameObject);
             }
         }
@@ -40,8 +25,6 @@ public class SelectionBar : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-                
         }
-        
     }
 }
