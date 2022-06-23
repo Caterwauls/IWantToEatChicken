@@ -22,7 +22,7 @@ public class SelectionManager : MonoBehaviour
 
     private void Awake()
     {
-        
+        DialogManager.instance.lastChoice = 0;
     }
 
     private void OnEnable()
@@ -43,9 +43,9 @@ public class SelectionManager : MonoBehaviour
             selectionBar.transform.SetParent(barCanvas.transform, true);
 
             var quaternion = Quaternion.Euler(new Vector3(0, 0, _possibleAngle[i] - 135));
-            selectionBar.transform.position = quaternion * _barVec + _playerVec; 
+            selectionBar.transform.position = quaternion * _barVec + _playerVec;
 
-            selectionBar.transform.GetComponentInChildren<Text>().text = (i + 1)  + ") " + selectionList[i];
+            selectionBar.transform.GetComponentInChildren<Text>().text = (i + 1) + ") " + selectionList[i];
 
             selectionBar.transform.GetComponent<SelectionBar>().myNum = i;
         }
@@ -54,12 +54,12 @@ public class SelectionManager : MonoBehaviour
     private void Update()
     {
         if (_possibleAngle == null) return;
-        for(int i = 0; i < _possibleAngle.Count; i++)
+        for (int i = 0; i < _possibleAngle.Count; i++)
         {
             if (Input.GetKeyDown(keyCodes[i]))
             {
                 DialogManager.instance.lastChoice = i;
-                transform.rotation = Quaternion.Euler( new Vector3(0, 0, _possibleAngle[i]));
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, _possibleAngle[i]));
             }
         }
     }

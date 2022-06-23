@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Flow : MonoBehaviour
 {
+    public int lastChoice
+    {
+        get
+        {
+            return DialogManager.instance.lastChoice;
+        }
+    }
+
     public void StartFlow()
     {
         StartCoroutine(FlowRoutine());
@@ -12,11 +20,6 @@ public class Flow : MonoBehaviour
     protected virtual IEnumerator FlowRoutine()
     {
         yield break;
-    }
-    
-    protected int GetLastSelection()
-    {
-        return DialogManager.instance.lastChoice;
     }
 
     private void StartAnswerFlow()
@@ -64,7 +67,7 @@ public class Flow : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.01f);
             }
 
-            else if (DialogManager.instance.dialogBoxScaler.scaleFactor >= 1 || 
+            else if (DialogManager.instance.dialogBoxScaler.scaleFactor >= 1 ||
                      DialogManager.instance.dialogBoxScaler.scaleFactor <= 0.01f)
             {
                 break;
@@ -81,23 +84,84 @@ public class Flow : MonoBehaviour
         EndAnswerFlow();
     }
 
+    private bool shouldSkip = false;
     protected IEnumerator PrintDialogRoutine(string dialogName)
     {
         DialogManager.instance.dialogText.text = "";
+
         yield return ShowDialogBoxRoutine(true);
-        DialogManager.instance.promptEffect.SetActive(false);
 
         Dialog dialog = DialogManager.instance.dialogs[dialogName];
 
-        for(int i = 0; i < dialog.lines.Count; i++)
+        for (int i = 0; i < dialog.lines.Count; i++)
         {
+            DialogManager.instance.promptEffect.SetActive(false);
             DialogManager.instance.dialogText.text = "";
             string text = dialog.lines[i];
+
+            shouldSkip = false;
+            Coroutine checkRoutine = StartCoroutine(PrintDialogCheckForSkipRoutine());
+            List<string> currentActiveSuffixes = new List<string>();
+            string currentTypedText = "";
             for (int j = 0; j < text.Length; j++)
             {
-                DialogManager.instance.dialogText.text += text[j];
+                // Tag를 만났으면?
+                if(text[j] == '<')
+                {
+                    // 그 태그가 Closing Tag라면?
+                    if (text[j + 1] == '/')
+                    {
+                        // Closing Tag를 완전히 스킵해서 > 다음까지 간다.
+                        while (text[j] != '>')
+                        {
+                            currentTypedText += text[j];
+                            j++;
+                        }
+                        currentTypedText += text[j];
+                        currentActiveSuffixes.RemoveAt(0);
+                    }
+                    else // Opening Tag라면?
+                    {
+                        j++;
+                        char currrentTagFirstChar = text[j];
+
+                        DialogManager.instance.richTextAfterWord.TryGetValue(currrentTagFirstChar, out string tag);
+                        currentActiveSuffixes.Insert(0, tag);
+
+                        // Opening Tag를 전부 집어넣는다.
+                        currentTypedText += '<';
+                        while (text[j] != '>')
+                        {
+                            currentTypedText += text[j];
+                            j++;
+                        }
+                        currentTypedText += text[j];
+                    }
+                }
+                else // 태그를 만난게 아니고 그냥 일반 글자라면?
+                {
+                    currentTypedText += text[j];
+                }
+
+                if (shouldSkip)
+                {
+                    shouldSkip = false;
+                    DialogManager.instance.dialogText.text = text;
+                    break;
+                }
+
+                string combinedSuffixes = "";
+                for (int k = 0; k < currentActiveSuffixes.Count; k++)
+                {
+                    combinedSuffixes += currentActiveSuffixes[k];
+                }
+
+                // 텍스트를 여기서 업데이트.
+                DialogManager.instance.dialogText.text = currentTypedText + combinedSuffixes;
+
                 yield return new WaitForSecondsRealtime(0.1f);
             }
+            StopCoroutine(checkRoutine);
             yield return new WaitForSecondsRealtime(0.3f);
 
             DialogManager.instance.dialogText.text += "_";
@@ -105,8 +169,18 @@ public class Flow : MonoBehaviour
 
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         }
-
+        DialogManager.instance.promptEffect.SetActive(false);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
         yield return ShowDialogBoxRoutine(false);
+    }
+
+    private IEnumerator PrintDialogCheckForSkipRoutine()
+    {
+        while (true)
+        {
+            yield return null;
+            if (Input.GetKeyDown(KeyCode.Return))
+                shouldSkip = true;
+        }
     }
 }
