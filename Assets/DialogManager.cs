@@ -28,7 +28,7 @@ public class DialogManager : MonoBehaviour
 
     public GameObject dialogBox;
     public GameObject blurEffect;
-    public GameObject playerSelectionRing;
+    public GameObject playerSelectionMode;
     public CanvasScaler dialogBoxScaler;
     public GameObject promptEffect;
 
@@ -42,6 +42,8 @@ public class DialogManager : MonoBehaviour
     public Text dialogText;
 
     public Dialog currentChoice = null;
+
+    public bool enableDialogBoxAnimation = true;
 
     private void Awake()
     {

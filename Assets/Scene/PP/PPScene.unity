@@ -10164,12 +10164,13 @@ MonoBehaviour:
   choiceFile: {fileID: 4900000, guid: 5082b7f33e5e4924e86e0bfa4a720333, type: 3}
   dialogBox: {fileID: 1072284776}
   blurEffect: {fileID: 1620273423}
-  playerSelectionRing: {fileID: 1231989501548118}
+  playerSelectionMode: {fileID: 0}
   dialogBoxScaler: {fileID: 1072284778}
   promptEffect: {fileID: 1518780772}
   lastChoice: -1
   didSelect: 0
   dialogText: {fileID: 1278097838}
+  enableDialogBoxAnimation: 1
 --- !u!4 &1134346820
 Transform:
   m_ObjectHideFlags: 0
@@ -11739,7 +11740,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1995283762}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &1371284385
 ParticleSystemRenderer:
@@ -18495,7 +18496,6 @@ MonoBehaviour:
   restartMessage: {fileID: 925909078}
   spaceEffect: {fileID: 1936616684}
   cutSceneDirector: {fileID: 1887321459}
-  debugOn: 1
 --- !u!4 &1735200970
 Transform:
   m_ObjectHideFlags: 0
@@ -19213,6 +19213,7 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: 4c03bb7aec4e2554e89d009b61ec723e, type: 2}
     - {fileID: 11400000, guid: bac8dff83daf058418b5d97914c3345f, type: 2}
+    - {fileID: 11400000, guid: 5ded4dd1402a2a44c8e6b99963ef3dfa, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -19250,6 +19251,19 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1039323821}
+          m_MethodName: LoadBballLoadingScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
           m_CallState: 2
 --- !u!4 &1889791969 stripped
 Transform:
@@ -25507,7 +25521,7 @@ Transform:
   m_Children:
   - {fileID: 1951400809}
   m_Father: {fileID: 1995283762}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -135}
 --- !u!23 &23606369523958162
 MeshRenderer:
