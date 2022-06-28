@@ -9,6 +9,7 @@ TagManager:
   - CubeCollider
   - Audio
   - Block
+  - EndOfStage
   layers:
   - Default
   - TransparentFX

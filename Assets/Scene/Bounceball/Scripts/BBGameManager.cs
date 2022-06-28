@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class BBGameManager : MonoBehaviour
 {
+    public static BBGameManager instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = FindObjectOfType<BBGameManager>();
+            return _instance;
+        }
+    }
+    private static BBGameManager _instance;
+
     public Flow flow;
-    public GameObject endOfStage0;
+    public Transform ground;
+    public Transform cams;
+    public int currentSceneNum;
     // Start is called before the first frame update
     void Start()
     {

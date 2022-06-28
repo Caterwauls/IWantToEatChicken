@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BBPlayerMove : MonoBehaviour
+public class BBPlayerManager : MonoBehaviour
 {
     public float bounce = 5f;
     public float acceleration = 199f;

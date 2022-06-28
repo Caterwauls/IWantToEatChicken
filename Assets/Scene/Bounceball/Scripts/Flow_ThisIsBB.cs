@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Flow_ThisIsBB : Flow
 {
     public GameObject guide;
     public GameObject player;
     public GameObject tutorial;
+    public GameObject Stages;
 
-    private BBPlayerMove _playerMove;
+    private BBPlayerManager _playerMove;
 
     protected override IEnumerator FlowRoutine()
     {
         DialogManager.instance.enableDialogBoxAnimation = false;
-        _playerMove = player.GetComponent<BBPlayerMove>();
+        _playerMove = player.GetComponent<BBPlayerManager>();
 
         _playerMove.playerMoveOn = false;
 
@@ -36,6 +38,8 @@ public class Flow_ThisIsBB : Flow
             yield return PrintDialogRoutine("그냥한다");
 
         }
+
+        yield return new WaitUntil(() => Stages.transform.GetChild(1).gameObject.active);
 
 
         yield break;
