@@ -10,10 +10,12 @@ public class BBPlayerManager : MonoBehaviour
     public float ballSpeed = 10f;
     public float wallReflection = 10f;
     public bool playerMoveOn = true;
+    public float abilityDis = 10f;
 
 
     public float jumpSpeed = 100f;
-    public GameObject effectPrefab;
+    public GameObject normalEffectPrefab;
+    public GameObject jumpTileEffectPrefab;
 
     private Vector3 _vec;
     private Rigidbody _rb;
@@ -28,6 +30,12 @@ public class BBPlayerManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (BBGameManager.instance.canUseAbility)
+        {
+        UseAbility();
+
+        }
+
         float speed = Time.fixedDeltaTime * ballSpeed;
         if (playerMoveOn)
         {
@@ -72,13 +80,25 @@ public class BBPlayerManager : MonoBehaviour
             _rb.MovePosition(transform.position + -sideCheck.direction * bounce * Time.fixedDeltaTime);
 
         }
-
+        Ray bottomCheck = new Ray();
+        RaycastHit hit;
         Vector3 bottomPos = transform.position + Vector3.down * transform.lossyScale.y / 2f;
+        bottomCheck.origin = bottomPos + Vector3.up * 0.1f;
+        bottomCheck.direction = Vector3.down;
 
         // 아래쪽으로 체크
-        if (Physics.Raycast(bottomPos + Vector3.up * 0.1f, Vector3.down, 0.5f, LayerMask.GetMask("Ground")))
+        if (Physics.Raycast(bottomCheck, out hit, 0.5f, LayerMask.GetMask("Ground")))
         {
-            Instantiate(effectPrefab, bottomPos, Quaternion.identity);
+            if (hit.collider.tag == "JumpTile")
+            {
+                Instantiate(normalEffectPrefab, bottomPos, Quaternion.identity);
+                Instantiate(jumpTileEffectPrefab, hit.transform.position, Quaternion.identity);
+                Vector3 jumpTileVelocity = _rb.velocity;
+                jumpTileVelocity.y = jumpSpeed * 2;
+                _rb.velocity = jumpTileVelocity;
+                return;
+            }
+            Instantiate(normalEffectPrefab, bottomPos, Quaternion.identity);
             Vector3 newVelocity = _rb.velocity;
             newVelocity.y = jumpSpeed;
             _rb.velocity = newVelocity;
@@ -86,5 +106,33 @@ public class BBPlayerManager : MonoBehaviour
         Debug.DrawRay(bottomPos + Vector3.up * 0.1f, Vector3.down * 0.5f, Color.red);
         
         
+    }
+
+    void UseAbility()
+    {
+        float delayTime = 0;
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (_vec.x < 0)
+            {
+                // 왼쪽
+                transform.position = transform.position + Vector3.left * abilityDis;
+                BBGameManager.instance.canUseAbility = false;
+
+
+            }
+            else if (_vec.x >= 0)
+            {
+                // 오른쪽
+                transform.position = transform.position + Vector3.right * abilityDis;
+                BBGameManager.instance.canUseAbility = false;
+            }
+        }
+        delayTime += Time.deltaTime;
+        if(delayTime >= BBGameManager.instance.coolTime)
+        {
+            BBGameManager.instance.canUseAbility = false;
+        }
+
     }
 }

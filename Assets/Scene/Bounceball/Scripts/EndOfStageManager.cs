@@ -10,6 +10,7 @@ public class EndOfStageManager : MonoBehaviour
 
     private void Awake()
     {
+        myStgNum = gameObject.name[3] - 48;
         endOfStages = transform.parent.gameObject;
     }
     private void OnTriggerEnter(Collider other)
@@ -20,16 +21,15 @@ public class EndOfStageManager : MonoBehaviour
             BBGameManager.instance.ground.transform.GetChild(myStgNum + 1).gameObject.SetActive(true);
             BBGameManager.instance.cams.transform.GetChild(myStgNum + 2).gameObject.SetActive(true);
             BBGameManager.instance.cams.transform.GetChild(myStgNum + 1).gameObject.SetActive(false);
-            BBGameManager.instance.currentSceneNum = myStgNum;
+            BBGameManager.instance.currentSceneNum = myStgNum + 1;
             
             blockOn = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Player" && endOfStages.transform.childCount > 1)
+        if (other.tag == "Player" && endOfStages.transform.childCount > 1 && !(myStgNum == BBGameManager.instance.currentSceneNum))
         {
-            endOfStages.transform.GetChild(myStgNum + 1).gameObject.SetActive(true);
             Destroy(this);
         }
     }

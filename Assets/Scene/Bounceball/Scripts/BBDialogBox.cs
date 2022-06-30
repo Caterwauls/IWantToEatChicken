@@ -22,5 +22,12 @@ public class BBDialogBox : MonoBehaviour
     void Update()
     {
         transform.position = Camera.main.WorldToScreenPoint(guide.position + new Vector3(-text_Xpos, text_Ypos));
+        if(transform.GetComponent<RectTransform>().anchoredPosition.x < -280)
+        {
+            Vector3 newPos = transform.GetComponent<RectTransform>().anchoredPosition;
+            var newPosX = -270 - newPos.x;
+            newPos.x = -280 + newPosX;
+            transform.GetComponent<RectTransform>().anchoredPosition = newPos;
+        }
     }
 }

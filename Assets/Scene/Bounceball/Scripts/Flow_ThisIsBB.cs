@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class Flow_ThisIsBB : Flow
 {
     public GameObject guide;
     public GameObject player;
     public GameObject tutorial;
-    public GameObject Stages;
+    public GameObject cinemachineManager;
 
     private BBPlayerManager _playerMove;
 
@@ -39,7 +40,22 @@ public class Flow_ThisIsBB : Flow
 
         }
 
-        yield return new WaitUntil(() => Stages.transform.GetChild(1).gameObject.active);
+        yield return new WaitUntil(() => BBGameManager.instance.currentSceneNum == 1);
+
+        tutorial.transform.GetChild(0).GetComponent<Text>().text = "    특수능력: F";
+        yield return new WaitForSeconds(1);
+        yield return PrintDialogRoutine("특수능력");
+
+        yield return new WaitUntil(() => BBGameManager.instance.currentSceneNum == 2);
+        tutorial.gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(1);
+        yield return PrintDialogRoutine("특수타일0");
+
+        cinemachineManager.transform.GetChild(0).gameObject.SetActive(true);
+        yield return new WaitUntil(() => !(cinemachineManager.transform.GetChild(0).gameObject.activeSelf));
+        yield return PrintDialogRoutine("특수타일1");
+
+
 
 
         yield break;

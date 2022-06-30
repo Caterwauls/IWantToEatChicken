@@ -10,6 +10,7 @@ TagManager:
   - Audio
   - Block
   - EndOfStage
+  - JumpTile
   layers:
   - Default
   - TransparentFX
