@@ -26,19 +26,23 @@ public class Flow : MonoBehaviour
     {
         DialogManager.instance.dialogBox.SetActive(false);
         DialogManager.instance.blurEffect.SetActive(true);
-        DialogManager.instance.playerSelectionRing.SetActive(true);
+        DialogManager.instance.playerSelectionMode.SetActive(true);
     }
 
     private void EndAnswerFlow()
     {
         DialogManager.instance.dialogBox.SetActive(true);
         DialogManager.instance.blurEffect.SetActive(false);
-        DialogManager.instance.playerSelectionRing.SetActive(false);
+        DialogManager.instance.playerSelectionMode.SetActive(false);
     }
 
     protected IEnumerator StopTimeAnimatedRoutine()
     {
-        while (true)
+        if (!DialogManager.instance.enableDialogBoxAnimation)
+        {
+            yield break;
+        }
+            while (true)
         {
             Time.timeScale -= 0.01f;
             yield return new WaitForSeconds(0.01f);
@@ -53,6 +57,27 @@ public class Flow : MonoBehaviour
 
     private IEnumerator ShowDialogBoxRoutine(bool isShow)
     {
+        if (!DialogManager.instance.enableDialogBoxAnimation)
+        {
+            if (isShow && DialogManager.instance.dialogBoxScaler.scaleFactor < 1)
+            {
+                DialogManager.instance.dialogBoxScaler.scaleFactor = 1;
+                yield break;
+            }
+
+            else if (!isShow && DialogManager.instance.dialogBoxScaler.scaleFactor > 0.01f)
+            {
+                DialogManager.instance.dialogBoxScaler.scaleFactor = 0.01f;
+                yield break;
+            }
+
+            else if (DialogManager.instance.dialogBoxScaler.scaleFactor >= 1 ||
+                     DialogManager.instance.dialogBoxScaler.scaleFactor <= 0.01f)
+            {
+                yield break;
+            }
+        }
+
         while (true)
         {
             if (isShow && DialogManager.instance.dialogBoxScaler.scaleFactor < 1)
@@ -75,17 +100,18 @@ public class Flow : MonoBehaviour
         }
     }
 
-    protected IEnumerator AskChoiceRoutine(string selectionName)
+    protected virtual IEnumerator AskChoiceRoutine(string selectionName)
     {
         DialogManager.instance.currentChoice = DialogManager.instance.choices[selectionName];
         DialogManager.instance.didSelect = false;
+        yield return new WaitForSecondsRealtime(1f);
         StartAnswerFlow();
         yield return new WaitUntil(() => DialogManager.instance.didSelect);
         EndAnswerFlow();
     }
 
     private bool shouldSkip = false;
-    protected IEnumerator PrintDialogRoutine(string dialogName)
+    protected virtual IEnumerator PrintDialogRoutine(string dialogName)
     {
         DialogManager.instance.dialogText.text = "";
 
@@ -106,7 +132,7 @@ public class Flow : MonoBehaviour
             for (int j = 0; j < text.Length; j++)
             {
                 // Tag를 만났으면?
-                if(text[j] == '<')
+                if (text[j] == '<')
                 {
                     // 그 태그가 Closing Tag라면?
                     if (text[j + 1] == '/')

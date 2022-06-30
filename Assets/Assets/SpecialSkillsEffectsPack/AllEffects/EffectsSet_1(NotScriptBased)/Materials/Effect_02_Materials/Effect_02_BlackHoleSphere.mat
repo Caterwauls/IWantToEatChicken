@@ -68,7 +68,7 @@ Material:
     - _NoiseNormal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 65.23, y: 348.76}
     - _NoiseTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,7 +76,7 @@ Material:
     - _NormalTex:
         m_Texture: {fileID: 2800000, guid: 794ee3411258ee44197c6443fd028cfc, type: 3}
         m_Scale: {x: 4, y: 4}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 6.59, y: 463.7}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -98,6 +98,7 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Impact: 0
+    - _ImpactFactor: 1
     - _ImpactSize: 0.5
     - _InvFade: 1
     - _Lighting: 0
@@ -106,6 +107,7 @@ Material:
     - _MaskCutOut: 1
     - _MaskFade: 0
     - _MaskOffsetFactor: 1
+    - _MaxIndex: 2
     - _Metallic: 0
     - _MixedMove: 1
     - _Mode: 0
@@ -131,7 +133,9 @@ Material:
     - _TexPosMove: -1
     - _TexcoordMove: 0
     - _TexcoordMoveStrength: 10
+    - _TexcoordMoveUsingCustom: 0
     - _TextureAnimate: 1
+    - _TextureAnimateAdvanced: 0
     - _TextureAnimateSpeed: 5
     - _TextureAnimateStyle: 0
     - _TextureBlend: 1

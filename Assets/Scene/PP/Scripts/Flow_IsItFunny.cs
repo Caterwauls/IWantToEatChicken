@@ -19,7 +19,7 @@ public class Flow_IsItFunny : Flow
     {
         PlayerControl pc = player.GetComponent<PlayerControl>();
 
-        yield return new WaitForSeconds(1f); // 8f
+        yield return new WaitForSeconds(8f); // 8f
 
         playerCloseupCam.SetActive(true);
 

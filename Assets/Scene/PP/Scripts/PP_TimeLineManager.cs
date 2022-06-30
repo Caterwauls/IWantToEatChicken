@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PP_TimeLineManager : MonoBehaviour
 {
@@ -34,6 +35,11 @@ public class PP_TimeLineManager : MonoBehaviour
         playerableDirector.Pause();
         StartCoroutine(TimeLineFlow());
 
+    }
+
+    public void LoadBballLoadingScene()
+    {
+        SceneManager.LoadScene("BBallLoadingScene");
     }
 
 }
