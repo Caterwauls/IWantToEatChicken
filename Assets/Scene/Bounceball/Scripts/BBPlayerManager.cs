@@ -10,15 +10,19 @@ public class BBPlayerManager : MonoBehaviour
     public float ballSpeed = 10f;
     public float wallReflection = 10f;
     public bool playerMoveOn = true;
-    public float abilityDis = 10f;
-
 
     public float jumpSpeed = 100f;
     public GameObject normalEffectPrefab;
     public GameObject jumpTileEffectPrefab;
 
+    public float teleportAbilityDis = 10f;
+    public float teleportAbilityDelay = 5;
+    public bool teleportAbilityOn = false;
+
+
     private Vector3 _vec;
     private Rigidbody _rb;
+    private float _timer = 0;
 
     private void Awake()
     {
@@ -30,19 +34,26 @@ public class BBPlayerManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (BBGameManager.instance.canUseAbility)
+        if (teleportAbilityOn)
         {
-        UseAbility();
+            UseTeleportAbility();
 
         }
 
+        PlayerMove();
+
+
+    }
+
+    void PlayerMove()
+    {
         float speed = Time.fixedDeltaTime * ballSpeed;
         if (playerMoveOn)
         {
             _vec = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
             _rb.MovePosition(transform.position + _vec * speed);
         }
-        
+
 
 
         _rb.velocity += Vector3.down * additionalGravity * Time.fixedDeltaTime;
@@ -89,6 +100,7 @@ public class BBPlayerManager : MonoBehaviour
         // 아래쪽으로 체크
         if (Physics.Raycast(bottomCheck, out hit, 0.5f, LayerMask.GetMask("Ground")))
         {
+            //점프 타일일때
             if (hit.collider.tag == "JumpTile")
             {
                 Instantiate(normalEffectPrefab, bottomPos, Quaternion.identity);
@@ -98,40 +110,43 @@ public class BBPlayerManager : MonoBehaviour
                 _rb.velocity = jumpTileVelocity;
                 return;
             }
+
+            //기본 점프
             Instantiate(normalEffectPrefab, bottomPos, Quaternion.identity);
             Vector3 newVelocity = _rb.velocity;
             newVelocity.y = jumpSpeed;
             _rb.velocity = newVelocity;
         }
         Debug.DrawRay(bottomPos + Vector3.up * 0.1f, Vector3.down * 0.5f, Color.red);
-        
-        
     }
-
-    void UseAbility()
+    void UseTeleportAbility()
     {
-        float delayTime = 0;
+
+
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (_vec.x < 0)
             {
                 // 왼쪽
-                transform.position = transform.position + Vector3.left * abilityDis;
-                BBGameManager.instance.canUseAbility = false;
+                transform.position = transform.position + Vector3.left * teleportAbilityDis;
+                teleportAbilityOn = false;
 
 
             }
             else if (_vec.x >= 0)
             {
                 // 오른쪽
-                transform.position = transform.position + Vector3.right * abilityDis;
-                BBGameManager.instance.canUseAbility = false;
+                transform.position = transform.position + Vector3.right * teleportAbilityDis;
+                teleportAbilityOn = false;
             }
         }
-        delayTime += Time.deltaTime;
-        if(delayTime >= BBGameManager.instance.coolTime)
+
+        _timer += Time.fixedDeltaTime;
+
+        if (_timer >= teleportAbilityDelay)
         {
-            BBGameManager.instance.canUseAbility = false;
+            teleportAbilityOn = false;
+            _timer = 0;
         }
 
     }

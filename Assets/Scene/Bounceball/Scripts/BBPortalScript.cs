@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class AbilirtOrbAbsorb : MonoBehaviour
+public class BBPortalScript : MonoBehaviour
 {
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            BBGameManager.instance.abillityRoutineOn = true;
-            Destroy(this.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

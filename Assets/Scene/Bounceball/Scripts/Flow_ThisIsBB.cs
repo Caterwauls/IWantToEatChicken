@@ -10,6 +10,7 @@ public class Flow_ThisIsBB : Flow
     public GameObject player;
     public GameObject tutorial;
     public GameObject cinemachineManager;
+    public GameObject abilityUI;
 
     private BBPlayerManager _playerMove;
 
@@ -37,13 +38,14 @@ public class Flow_ThisIsBB : Flow
         else if (lastChoice == 1)
         {
             yield return PrintDialogRoutine("그냥한다");
-
+            tutorial.SetActive(true);
         }
 
         yield return new WaitUntil(() => BBGameManager.instance.currentSceneNum == 1);
 
         tutorial.transform.GetChild(0).GetComponent<Text>().text = "    특수능력: F";
         yield return new WaitForSeconds(1);
+        abilityUI.SetActive(true);
         yield return PrintDialogRoutine("특수능력");
 
         yield return new WaitUntil(() => BBGameManager.instance.currentSceneNum == 2);
@@ -54,6 +56,10 @@ public class Flow_ThisIsBB : Flow
         cinemachineManager.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitUntil(() => !(cinemachineManager.transform.GetChild(0).gameObject.activeSelf));
         yield return PrintDialogRoutine("특수타일1");
+
+        yield return new WaitUntil(() => BBGameManager.instance.currentSceneNum == 3);
+        yield return new WaitForSecondsRealtime(1);
+        yield return PrintDialogRoutine("포탈");
 
 
 
