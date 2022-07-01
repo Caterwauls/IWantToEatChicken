@@ -14,6 +14,8 @@ public class EREntity : MonoBehaviour
 
     public float stunDurationOnGetDamage = 0.35f;
 
+    public GameObject deathEffectPrefab;
+
     private float _currentChannelTime = 0f;
     private float _currentStunTime = 0f;
 
@@ -72,5 +74,23 @@ public class EREntity : MonoBehaviour
     {
         health -= amount;
         _currentStunTime = Mathf.Max(_currentStunTime, stunDurationOnGetDamage);
+        if (health <= 0)
+        {
+            OnDeath();
+        }
+    }
+
+    protected virtual void OnDeath()
+    {
+        Instantiate(deathEffectPrefab, transform.position, transform.rotation);
+        foreach (var ren in GetComponentsInChildren<Renderer>())
+        {
+            ren.enabled = false;
+        }
+    }
+
+    public void ApplyHeal(float amount)
+    {
+        health = Mathf.MoveTowards(health, maxHealth, amount);
     }
 }

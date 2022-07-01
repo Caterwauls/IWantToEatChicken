@@ -14,8 +14,8 @@ public class ERPlayerCamera : MonoBehaviour
     public float sphereCastRadius = 1f;
     public float yCoordinateSmoothTime = 0.2f;
 
-    private float _pitch = 0;
-    private float _yaw = 0;
+    public float pitch = 0;
+    public float yaw = 0;
 
     private float _currentCamDistance;
     private float _currentCamDistanceDampVel;
@@ -43,10 +43,10 @@ public class ERPlayerCamera : MonoBehaviour
         var mouseX = Input.GetAxis("Mouse X");
         var mouseY = Input.GetAxis("Mouse Y");
 
-        _pitch = Mathf.Clamp(_pitch - mouseY * camSensitivity, -89, 89);
-        _yaw = Mathf.Repeat(_yaw + mouseX * camSensitivity, 360);
+        pitch = Mathf.Clamp(pitch - mouseY * camSensitivity, -89, 89);
+        yaw = Mathf.Repeat(yaw + mouseX * camSensitivity, 360);
 
-        var camRot = Quaternion.Euler(0, _yaw, 0) * Quaternion.Euler(_pitch, 0, 0);
+        var camRot = Quaternion.Euler(0, yaw, 0) * Quaternion.Euler(pitch, 0, 0);
         transform.rotation = camRot;
 
         var pivot = player.transform.position + pivotWorldOffset;

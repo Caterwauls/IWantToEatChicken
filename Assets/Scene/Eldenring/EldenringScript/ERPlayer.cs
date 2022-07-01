@@ -26,4 +26,16 @@ public class ERPlayer : EREntity
             stamina = Mathf.MoveTowards(stamina, maxStamina, staminaChargeSpeed * Time.deltaTime);
         }
     }
+
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        StartCoroutine(Routine());
+
+        IEnumerator Routine()
+        {
+            yield return new WaitForSeconds(1.5f);
+            ERUIManager.instance.ShowYouDiedMessage();
+        }
+    }
 }
