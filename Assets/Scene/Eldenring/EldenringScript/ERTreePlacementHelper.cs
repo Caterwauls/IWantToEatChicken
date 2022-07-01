@@ -8,6 +8,9 @@ using Random = UnityEngine.Random;
 public class ERTreePlacementHelper : MonoBehaviour
 {
     [SerializeField, HideInInspector] private Vector3 _lastPosition;
+
+    public bool randomizeScale = true;
+    public bool randomizeRotation = true;
     
     private void Update()
     {
@@ -25,7 +28,7 @@ public class ERTreePlacementHelper : MonoBehaviour
 
     private void RandomizePos()
     {
-        transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
-        transform.localScale = Vector3.one * Random.Range(0.8f, 1.2f);
+        if (randomizeRotation) transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+        if (randomizeScale) transform.localScale = Vector3.one * Random.Range(0.8f, 1.2f);
     }
 }

@@ -3,53 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ERPlayer : MonoBehaviour
+public class ERPlayer : EREntity
 {
-    public bool isChanneling => _currentChannelTime > 0;
-    public bool isStunned => _currentStunTime > 0;
-    public bool canChannel => !isChanneling && !isStunned;
+    public float stamina { get; private set; } = 100;
+    public float maxStamina = 100;
+    public float staminaChargeDelay = 1f;
+    public float staminaChargeSpeed = 30f;
     
-    private float _currentChannelTime = 0f;
-    private float _currentStunTime = 0f;
+    private float _lastStaminaUseTime;
     
-    public void StartChannel(float preDelay, float postDelay = 0f, Action onComplete = null, Action onCancel = null)
+    public void UseStamina(float amount)
     {
-        if (isStunned || isChanneling) throw new Exception("Player cannot channel now");
-        float fullChannelTime = preDelay + postDelay;
-        _currentChannelTime = fullChannelTime;
-        StartCoroutine(ChannelRoutine());
-        IEnumerator ChannelRoutine()
-        {
-            float elapsedTime = 0;
-            while (elapsedTime > preDelay)
-            {
-                if (isStunned)
-                {
-                    _currentChannelTime = 0f;
-                    onCancel?.Invoke();
-                    yield break;
-                }
-                yield return null;
-                _currentChannelTime -= Time.deltaTime;
-                elapsedTime = fullChannelTime - _currentChannelTime;
-            }
-            onComplete?.Invoke();
-            while (_currentChannelTime > 0)
-            {
-                if (isStunned)
-                {
-                    _currentChannelTime = 0f;
-                    yield break;
-                }
-                _currentChannelTime -= Time.deltaTime;
-                yield return null;
-            }
-            _currentChannelTime = 0f;
-        }
+        stamina = Mathf.MoveTowards(stamina, 0, amount);
+        _lastStaminaUseTime = Time.time;
     }
 
-    public void GrantInvincible(float duration)
+    protected override void Update()
     {
-        // Not Implemented
+        base.Update();
+        if (Time.time - _lastStaminaUseTime > staminaChargeDelay)
+        {
+            stamina = Mathf.MoveTowards(stamina, maxStamina, staminaChargeSpeed * Time.deltaTime);
+        }
     }
 }

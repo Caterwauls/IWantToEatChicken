@@ -13,9 +13,10 @@ public class ERPlayerMovement : ERPlayerComponent
     public float accelerationOnGround = 100;
     public float decelerationOnGround = 100;
     public float torqueMultiplier = 2f;
-
+    public float sprintStaminaCost = 10f;
     public float spaceHoldThreshold = 0.25f;
 
+    public float rollStaminaCost = 10f;
     public float rollStartSpeed = 50f;
     public float rollEndSpeed = 10f;
     public float rollStartUpSpeed = 10f;
@@ -25,8 +26,10 @@ public class ERPlayerMovement : ERPlayerComponent
     public float rollDuration = 0.7f;
     public float rollSpinSpeed = 8f;
 
+    public float rollReserveTime = 0.25f;
+    private float _currentRollReserveTime = 0;
+
     private ERPlayerGroundedChecker _grounded;
-    private Vector3 _rollFallbackDir;
 
     protected override void Awake()
     {
@@ -36,11 +39,18 @@ public class ERPlayerMovement : ERPlayerComponent
 
     private void Update()
     {
-        if (_player.isStunned || _player.isChanneling || !_grounded.isGrounded) return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(CheckSpaceActionRoutine());
         }
+
+        if (_currentRollReserveTime > 0 && _player.canChannel && _grounded.isGrounded)
+        { 
+            DoRoll();
+            _currentRollReserveTime = 0;
+        }
+
+        _currentRollReserveTime = Mathf.MoveTowards(_currentRollReserveTime, 0, Time.deltaTime);
     }
 
     private IEnumerator CheckSpaceActionRoutine()
@@ -48,23 +58,26 @@ public class ERPlayerMovement : ERPlayerComponent
         float startTime = Time.time;
         while (Time.time - startTime < spaceHoldThreshold)
         {
-            // Cannot roll neither sprint; break!
-            if (_player.isStunned || _player.isChanneling || !_grounded.isGrounded)
-                yield break;
-            
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 // Roll!    
-                DoRoll();
+                _currentRollReserveTime = rollReserveTime;
+                yield break;
             }
             yield return null;
         }
         
         // Sprint!
+        if (_player.isStunned || _player.isChanneling || !_grounded.isGrounded)
+            yield break;
+        if (_player.stamina < sprintStaminaCost) yield break;
         isSprinting = true;
         while (true)
         {
-            if (Input.GetKeyUp(KeyCode.Space) || _player.isStunned || _player.isChanneling || !_grounded.isGrounded)
+            _player.UseStamina(sprintStaminaCost * Time.deltaTime);
+            if (Input.GetKeyUp(KeyCode.Space) ||
+                _player.isStunned || _player.isChanneling || !_grounded.isGrounded || 
+                _player.stamina < sprintStaminaCost * Time.deltaTime)
             {
                 isSprinting = false;
                 yield break;
@@ -75,11 +88,15 @@ public class ERPlayerMovement : ERPlayerComponent
 
     private void DoRoll()
     {
+        if (_player.stamina < rollStaminaCost) return;
         StartCoroutine(RollRoutine());
         IEnumerator RollRoutine()
         {
+            _player.UseStamina(rollStaminaCost);
             var axisDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            Vector3 rollDir = _rollFallbackDir;
+            Vector3 rollDir = -movementDirectionBase.forward; // Backstep by default
+            rollDir.y = 0;
+            rollDir.Normalize();
             if (axisDir.sqrMagnitude > 0.01f)
             {
                 rollDir = Vector3.zero;
@@ -156,12 +173,7 @@ public class ERPlayerMovement : ERPlayerComponent
             rbNewVel.x = rbFlatVel.x;
             rbNewVel.z = rbFlatVel.y;
             _rb.velocity = rbNewVel;
-            
-            // Get roll fallback velocity
-            _rollFallbackDir = rbNewVel;
-            _rollFallbackDir.y = 0;
-            _rollFallbackDir.Normalize();
-            
+
             // Apply angular velocity
             var rightOfMovement = Vector3.Cross(Vector3.up, desiredVel).normalized;
             _rb.AddTorque(rightOfMovement * (desiredVel.magnitude * torqueMultiplier * Time.fixedDeltaTime), ForceMode.VelocityChange);
