@@ -31,7 +31,7 @@ public class EREnemySkill : MonoBehaviour
             {
                 if (!_self.canChannel)
                 {
-                    yield return new WaitForSeconds(Random.Range(0.25f, 1f));
+                    yield return new WaitForSeconds(Random.Range(0.15f, 0.35f));
                     continue;
                 }
                 if (Time.time - _lastSkillUseTime > cooldownTime && 
@@ -42,7 +42,7 @@ public class EREnemySkill : MonoBehaviour
                     _lastSkillUseTime = Time.time;
                     OnChannelStart();
                 }
-                yield return new WaitForSeconds(Random.Range(0.25f, 1.25f));
+                yield return new WaitForSeconds(Random.Range(0.15f, 0.35f));
             }
         }
     }

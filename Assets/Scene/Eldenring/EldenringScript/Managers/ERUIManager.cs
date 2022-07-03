@@ -148,7 +148,7 @@ public class ERUIManager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             for (float t = 0; t < 1; t += Time.deltaTime)
             {
                 youDiedMessageGroup.alpha = 1 - t;

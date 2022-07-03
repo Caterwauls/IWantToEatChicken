@@ -14,7 +14,7 @@ public class ERUIHeroBar : MonoBehaviour
     public Image staminaDelta;
     
     public float deltaDelay = 1.0f;
-    public float deltaDecaySpeed = 0.3f;
+    public float deltaDecaySpeed = 0.25f;
 
     private float _lastHealthFillAmount;
     private float _lastStaminaFillAmount;
@@ -26,12 +26,12 @@ public class ERUIHeroBar : MonoBehaviour
         health.fillAmount = player.health / player.maxHealth;
         stamina.fillAmount = player.stamina / player.maxStamina;
 
-        if (Math.Abs(healthDelta.fillAmount - health.fillAmount) < 0.001f)
+        if (Mathf.Abs(healthDelta.fillAmount - health.fillAmount) < 0.001f)
             _currentHealthDeltaDelay = deltaDelay;
         else
             _currentHealthDeltaDelay = Mathf.MoveTowards(_currentHealthDeltaDelay, 0, Time.deltaTime);
         
-        if (Math.Abs(staminaDelta.fillAmount - stamina.fillAmount) < 0.001f)
+        if (Mathf.Abs(staminaDelta.fillAmount - stamina.fillAmount) < 0.001f)
             _currentStaminaDeltaDelay = deltaDelay;
         else
             _currentStaminaDeltaDelay = Mathf.MoveTowards(_currentStaminaDeltaDelay, 0, Time.deltaTime);

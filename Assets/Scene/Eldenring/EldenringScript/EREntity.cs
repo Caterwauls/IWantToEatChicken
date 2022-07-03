@@ -114,8 +114,6 @@ public class EREntity : MonoBehaviour
         }
 
         GetComponent<Rigidbody>().isKinematic = true;
-
-        Destroy(gameObject, 5f);
     }
 
     public void ApplyHeal(float amount)

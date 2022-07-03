@@ -887,8 +887,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 0
-  m_Radius: 1
-  m_Height: 5.32
+  m_Radius: 1.25
+  m_Height: 6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3238843565235210909
@@ -906,8 +906,10 @@ MonoBehaviour:
   selfEntity: {fileID: 2861096023751183573}
   damageMin: 30
   damageMax: 50
-  pushVelocity: 5
-  stunDuration: 0.35
+  pushVelocity: 10
+  stunDuration: 0.45
+  canDamageEnemy: 0
+  canDamagePlayer: 1
 --- !u!1 &2331813020858815780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1451,8 @@ Transform:
   - {fileID: 8702620121003180990}
   - {fileID: 5511314291580773307}
   - {fileID: 1911665655410125176}
+  - {fileID: 3489242689832041632}
+  - {fileID: 8570478536871846544}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1464,7 +1468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53df64bc3b34e5a429b8df1197c7b98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 150
   damageEffectPrefab: {fileID: 9024818872798454240, guid: af7a6fb9fc2490748b1c9447c1213afb,
     type: 3}
   deathEffectPrefab: {fileID: 5013956153845512149, guid: d37152e46214cbd4bbeaf87649a4fb9e,
@@ -1472,6 +1476,8 @@ MonoBehaviour:
   canBeStunned: 1
   targetAcquisitionRange: 25
   targetLossRange: 35
+  lockOnPosition: {fileID: 3489242689832041632}
+  healthBarPosition: {fileID: 8570478536871846544}
 --- !u!114 &2861096023751183578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,6 +2853,36 @@ Transform:
   m_Father: {fileID: 5511314291580773307}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6310314605007834702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8570478536871846544}
+  m_Layer: 8
+  m_Name: HealthBar Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8570478536871846544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6310314605007834702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.98, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2861096023751183572}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6396410575980649518
 GameObject:
   m_ObjectHideFlags: 0
@@ -2889,8 +2925,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 0
-  m_Radius: 1
-  m_Height: 5.32
+  m_Radius: 1.25
+  m_Height: 6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7266963505359304262
@@ -2908,8 +2944,10 @@ MonoBehaviour:
   selfEntity: {fileID: 2861096023751183573}
   damageMin: 30
   damageMax: 50
-  pushVelocity: 5
-  stunDuration: 0.35
+  pushVelocity: 10
+  stunDuration: 0.45
+  canDamageEnemy: 0
+  canDamagePlayer: 1
 --- !u!1 &6470020356017680491
 GameObject:
   m_ObjectHideFlags: 0
@@ -3132,6 +3170,36 @@ Transform:
   - {fileID: 5030582576330685985}
   m_Father: {fileID: 5180974405207107655}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7191203831295482676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3489242689832041632}
+  m_Layer: 8
+  m_Name: Lock On Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3489242689832041632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7191203831295482676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2861096023751183572}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7326752172827887366
 GameObject:
@@ -3395,8 +3463,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 0
-  m_Radius: 1
-  m_Height: 5.32
+  m_Radius: 1.25
+  m_Height: 6
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5339406610751949304
@@ -3414,8 +3482,10 @@ MonoBehaviour:
   selfEntity: {fileID: 2861096023751183573}
   damageMin: 30
   damageMax: 50
-  pushVelocity: 5
-  stunDuration: 0.35
+  pushVelocity: 10
+  stunDuration: 0.45
+  canDamageEnemy: 0
+  canDamagePlayer: 1
 --- !u!1 &8154271612918241884
 GameObject:
   m_ObjectHideFlags: 0

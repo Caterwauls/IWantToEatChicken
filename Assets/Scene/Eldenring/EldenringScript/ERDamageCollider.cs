@@ -12,6 +12,9 @@ public class ERDamageCollider : MonoBehaviour
     public float pushVelocity = 5;
     public float stunDuration = 0.35f;
     public Action<float> onAttackBlocked;
+
+    public bool canDamageEnemy;
+    public bool canDamagePlayer;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -26,6 +29,8 @@ public class ERDamageCollider : MonoBehaviour
         
         var ent = other.GetComponentInParent<EREntity>();
         if (ent == null || ent == selfEntity || ent.isInvincible) return;
+        if (!canDamageEnemy && ent is EREnemy) return;
+        if (!canDamagePlayer && ent is ERPlayer) return;
         ent.ApplyDamage(Random.Range(damageMin, damageMax));
         ent.ApplyStun(stunDuration);
         var pushDir = (other.transform.position - transform.position).normalized;

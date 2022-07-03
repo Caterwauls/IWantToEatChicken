@@ -13,11 +13,15 @@ public class EREnemy : EREntity
     public float targetAcquisitionRange = 6f;
     public float targetLossRange = 10f;
 
+    public Transform lockOnPosition;
+    public Transform healthBarPosition;
+
     private Coroutine _acquireTargetRoutine;
     private void OnEnable()
     {
+        ERGameManager.instance.onEnemySpawn?.Invoke(this);
+        
         _acquireTargetRoutine = StartCoroutine(AcquireTargetRoutine());
-
         IEnumerator AcquireTargetRoutine()
         {
             while (true)
@@ -55,5 +59,12 @@ public class EREnemy : EREntity
     private void OnDisable()
     {
         StopCoroutine(_acquireTargetRoutine);
+        ERGameManager.instance.onEnemyDestroy?.Invoke(this);
+    }
+
+    protected override void OnDeath()
+    {
+        base.OnDeath();
+        Destroy(gameObject, 5f);
     }
 }

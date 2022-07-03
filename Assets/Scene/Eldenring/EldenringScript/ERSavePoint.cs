@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class ERSavePoint : ERInteractable
 {
-    public bool didSaveHere => Vector3.Distance(ERGameManager.savePosition, transform.position) < 1f;
+    public bool didSaveHere => Vector3.Distance(ERGameManager.savePosition, transform.position + savePointOffset) < 1f;
 
     public Transform animatedCube;
     public ParticleSystem explodeEffect;
     private Vector3 _animatedCubeStartPos;
+    public Vector3 savePointOffset = Vector3.up;
     
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class ERSavePoint : ERInteractable
         
         IEnumerator SaveRoutine()
         {
-            ERGameManager.savePosition = transform.position;
+            ERGameManager.savePosition = transform.position + savePointOffset;
             player.StartChannel(4.5f);
             yield return new WaitForSeconds(1.5f);
             explodeEffect.Play();

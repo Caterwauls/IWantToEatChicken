@@ -25,7 +25,6 @@ public class EEHurtEffect : MonoBehaviour
     {
         _currentWeight = Mathf.MoveTowards(_currentWeight, 0, Time.deltaTime * decaySpeed);
         _volume.weight = _currentWeight;
-        if (Input.GetKeyDown(KeyCode.Q)) PlayEffect();
     }
 
     private void PlayEffect()

@@ -17,6 +17,10 @@ public class ERGameManager : MonoBehaviour
 
     public static List<string> discoveredZones = new List<string>();
     public static Vector3 savePosition = Vector3.zero;
+
+    public Action<EREnemy> onEnemySpawn;
+    public Action<EREnemy> onEnemyDestroy;
+
     
     public Transform defaultSavePosition;
     public ERPlayer player;

@@ -37,9 +37,9 @@ public class ERPlayer : EREntity
         {
             yield return new WaitForSeconds(1.5f);
             ERUIManager.instance.ShowYouDiedMessage();
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(4.5f);
             ERUIManager.instance.FadeOut();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(2.0f);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
