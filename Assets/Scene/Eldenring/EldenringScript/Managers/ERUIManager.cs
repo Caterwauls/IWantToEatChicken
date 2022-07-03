@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,39 @@ public class ERUIManager : MonoBehaviour
     public Text newZoneNameText;
 
     public CanvasGroup youDiedMessageGroup;
+    public Transform youDiedTextTransform;
+
+    public CanvasGroup interactGroup;
+    public ERPlayer interactPlayer;
+    public float interactDistance;
+    public Text interactText;
+    
+    private void Update()
+    {
+        string text = null;
+        if (interactPlayer.canChannel)
+        {
+            var cols = Physics.OverlapSphere(interactPlayer.transform.position, interactDistance);
+            foreach (var col in cols)
+            {
+                if (!col.TryGetComponent(out ERInteractable interactable)) continue;
+                if (!interactable.CanInteract(interactPlayer)) continue;
+                
+                if (Input.GetKeyDown(KeyCode.E)) interactable.Interact(interactPlayer);
+                text = interactable.GetInteractText();
+            }
+        }
+        
+        if (text == null)
+        {
+            interactGroup.alpha = Mathf.MoveTowards(interactGroup.alpha, 0, Time.deltaTime * 4f);
+        }
+        else
+        {
+            interactText.text = text;
+            interactGroup.alpha = Mathf.MoveTowards(interactGroup.alpha, 1, Time.deltaTime * 4f);
+        }
+    }
 
     public void FadeIn()
     {
@@ -110,6 +144,7 @@ public class ERUIManager : MonoBehaviour
             for (float t = 0; t < 1; t += Time.deltaTime)
             {
                 youDiedMessageGroup.alpha = t;
+                youDiedTextTransform.localScale = Vector3.one * (0.9f + t * 0.1f);
                 yield return null;
             }
 
@@ -117,6 +152,7 @@ public class ERUIManager : MonoBehaviour
             for (float t = 0; t < 1; t += Time.deltaTime)
             {
                 youDiedMessageGroup.alpha = 1 - t;
+                youDiedTextTransform.localScale = Vector3.one * (1.0f + t * 0.1f);
                 yield return null;
             }
 

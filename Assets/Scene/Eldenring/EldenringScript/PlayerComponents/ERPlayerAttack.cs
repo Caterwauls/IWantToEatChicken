@@ -8,6 +8,8 @@ public class ERPlayerAttack : ERPlayerComponent
     public Transform directionBase;
     
     public CapsuleCollider swordCollider;
+    public ERDamageCollider swordDamageCollider;
+    
     public Transform swordTransform;
     public Transform swordPivotTransform;
 
@@ -31,11 +33,32 @@ public class ERPlayerAttack : ERPlayerComponent
 
     public float swingStaminaCost = 20;
     public float swingChannelTime = 0.7f;
-    
+
+    public float blockedStunDuration = 1f;
+    public float blockedStaminaCost = 10f;
+    public Vector3 blockedAngularVel;
+    public Vector3 blockedVel;
+
     private float _lastSwordUseTime = Mathf.NegativeInfinity;
     private float _currentSwingReserveTime = 0;
 
     private Vector3 _pivotCv;
+
+    private void Start()
+    {
+        swordDamageCollider.onAttackBlocked += _ =>
+        {
+            _player.ApplyStun(blockedStunDuration);
+            _player.UseStamina(blockedStaminaCost);
+            _rb.velocity = directionBase.rotation * blockedVel;
+            _rb.angularVelocity = directionBase.rotation * blockedAngularVel;
+        };
+    }
+
+    public void HolsterSword()
+    {
+        _lastSwordUseTime = Mathf.NegativeInfinity;
+    }
 
     private void Update()
     {
@@ -107,6 +130,11 @@ public class ERPlayerAttack : ERPlayerComponent
             _rb.angularVelocity = flatRot * playerSwingAngularVelocity;
             while (elapsedTime < swingChannelTime)
             {
+                if (_player.isStunned)
+                {
+                    swordCollider.enabled = false;
+                    yield break;
+                }
                 swordTransform.localRotation = Quaternion.Slerp(startRot, endRot, elapsedTime / swordSwingDuration);
                 yield return null;
                 elapsedTime = Time.time - startTime;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ERPlayer : EREntity
 {
@@ -36,6 +37,10 @@ public class ERPlayer : EREntity
         {
             yield return new WaitForSeconds(1.5f);
             ERUIManager.instance.ShowYouDiedMessage();
+            yield return new WaitForSeconds(2.5f);
+            ERUIManager.instance.FadeOut();
+            yield return new WaitForSeconds(1.0f);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

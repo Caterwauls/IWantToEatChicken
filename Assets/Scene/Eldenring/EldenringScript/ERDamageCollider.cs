@@ -6,16 +6,29 @@ using Random = UnityEngine.Random;
 
 public class ERDamageCollider : MonoBehaviour
 {
-    public Collider selfCollider;
+    public EREntity selfEntity;
     public float damageMin = 10;
     public float damageMax = 20;
+    public float pushVelocity = 5;
+    public float stunDuration = 0.35f;
+    public Action<float> onAttackBlocked;
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other == selfCollider) return;
-        if (other.TryGetComponent(out EREntity entity))
+        var shield = other.GetComponent<ERShieldCollider>();
+        if (shield != null && shield.enabled)
         {
-            entity.ApplyDamage(Random.Range(damageMin, damageMax));
+            var amount = Random.Range(damageMin, damageMax);
+            shield.NotifyBlock(amount);
+            onAttackBlocked?.Invoke(amount);
+            return;
         }
+        
+        var ent = other.GetComponentInParent<EREntity>();
+        if (ent == null || ent == selfEntity || ent.isInvincible) return;
+        ent.ApplyDamage(Random.Range(damageMin, damageMax));
+        ent.ApplyStun(stunDuration);
+        var pushDir = (other.transform.position - transform.position).normalized;
+        ent.GetComponent<Rigidbody>().velocity += pushDir * pushVelocity;
     }
 }

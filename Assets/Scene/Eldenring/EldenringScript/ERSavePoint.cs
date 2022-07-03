@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ERSavePoint : ERInteractable
 {
-    public bool didSaveHere => Vector3.Distance(ERGameManager.savePosition, transform.position) > 1f;
+    public bool didSaveHere => Vector3.Distance(ERGameManager.savePosition, transform.position) < 1f;
 
     public Transform animatedCube;
     public ParticleSystem explodeEffect;
@@ -34,9 +34,9 @@ public class ERSavePoint : ERInteractable
 
     public override void Interact(ERPlayer player)
     {
+        player.GetComponent<ERPlayerAttack>().HolsterSword();
         if (didSaveHere)
         {
-            player.StartChannel(2f);
             StartCoroutine(HealRoutine());
             return;
         }
