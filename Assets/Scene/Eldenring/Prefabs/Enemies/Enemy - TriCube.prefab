@@ -1210,7 +1210,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2697254015195250974}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -1474,8 +1474,8 @@ MonoBehaviour:
   deathEffectPrefab: {fileID: 5013956153845512149, guid: d37152e46214cbd4bbeaf87649a4fb9e,
     type: 3}
   canBeStunned: 1
-  targetAcquisitionRange: 25
-  targetLossRange: 35
+  targetAcquisitionRange: 20
+  targetLossRange: 25
   lockOnPosition: {fileID: 3489242689832041632}
   healthBarPosition: {fileID: 8570478536871846544}
 --- !u!114 &2861096023751183578

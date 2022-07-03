@@ -59,6 +59,7 @@ public class EREnemy : EREntity
     private void OnDisable()
     {
         StopCoroutine(_acquireTargetRoutine);
+        if (ERGameManager.instance == null) return;
         ERGameManager.instance.onEnemyDestroy?.Invoke(this);
     }
 
