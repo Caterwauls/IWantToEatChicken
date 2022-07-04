@@ -43,7 +43,7 @@ public class EREntity : MonoBehaviour
             float elapsedTime = 0;
             while (elapsedTime < preDelay)
             {
-                if (isStunned)
+                if (isStunned || isDead)
                 {
                     _currentChannelTime = 0f;
                     onCancel?.Invoke();
@@ -57,7 +57,7 @@ public class EREntity : MonoBehaviour
             while (_currentChannelTime > 0)
             {
                 yield return null;
-                if (isStunned)
+                if (isStunned || isDead)
                 {
                     _currentChannelTime = 0f;
                     yield break;

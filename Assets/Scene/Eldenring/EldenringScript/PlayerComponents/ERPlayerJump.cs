@@ -7,6 +7,7 @@ public class ERPlayerJump : ERPlayerComponent
     public float lastJumpTime { get; private set; }
 
     public float jumpVelocity = 30;
+    public GameObject jumpEffectPrefab;
 
     private float _currentJumpReserveTime = 0;
     private ERPlayerGroundedChecker _grounded;
@@ -30,6 +31,7 @@ public class ERPlayerJump : ERPlayerComponent
         if (_player.canChannel && _grounded.isGrounded && _currentJumpReserveTime > 0)
         {
             _currentJumpReserveTime = 0;
+            Instantiate(jumpEffectPrefab, transform.position, Quaternion.identity);
             var newJumpVel = _rb.velocity;
             newJumpVel *= 0.75f;
             newJumpVel.y = jumpVelocity;

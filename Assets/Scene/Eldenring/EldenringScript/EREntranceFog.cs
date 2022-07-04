@@ -6,6 +6,8 @@ public class EREntranceFog : ERInteractable
 {
     public ParticleSystem enterEffect;
     public Transform destination;
+    public GameObject[] objectsToDeactivate;
+    public GameObject[] objectsToActivate;
     
     public override bool CanInteract(ERPlayer player)
     {
@@ -28,6 +30,16 @@ public class EREntranceFog : ERInteractable
             yield return new WaitForSeconds(0.5f);
             ERUIManager.instance.FadeOut();
             yield return new WaitForSeconds(1);
+            for (int i = 0; i < objectsToDeactivate.Length; i++)
+            {
+                if (objectsToDeactivate[i] == null) continue;
+                objectsToDeactivate[i].SetActive(false);
+            }
+            for (int i = 0; i < objectsToActivate.Length; i++)
+            {
+                if (objectsToActivate[i] == null) continue;
+                objectsToActivate[i].SetActive(true);
+            }
             player.transform.position = destination.position;
             yield return new WaitForSeconds(0.5f);
             ERUIManager.instance.FadeIn();

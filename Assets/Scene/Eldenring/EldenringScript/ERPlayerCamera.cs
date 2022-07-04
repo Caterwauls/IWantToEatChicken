@@ -122,12 +122,12 @@ public class ERPlayerCamera : MonoBehaviour
 
     private void FindLockOnTarget(Func<EREnemy, float> scoreFunction = null)
     {
-        var num = Physics.OverlapSphereNonAlloc(player.transform.position, lockOnMaxDistance, _collisionCheckBuffer);
+        var num = Physics.OverlapSphereNonAlloc(player.transform.position, lockOnMaxDistance, _collisionCheckBuffer, ~0, QueryTriggerInteraction.Collide);
         Dictionary<EREnemy, float> enemies = new Dictionary<EREnemy, float>();
         for (int i = 0; i < num; i++)
         {
             var col = _collisionCheckBuffer[i];
-            var e = col.GetComponentInParent<EREnemy>();
+            var e = col.GetComponent<EREnemy>();
             if (e == null || e == lockOnTarget || e.isDead) continue;
             if (enemies.ContainsKey(e)) continue;
             if (scoreFunction == null)
@@ -148,7 +148,7 @@ public class ERPlayerCamera : MonoBehaviour
         EREnemy bestEnemy = null;
         foreach (var pair in enemies)
         {
-            if (bestScore > pair.Value) return;
+            if (bestScore > pair.Value) continue;
             bestScore = pair.Value;
             bestEnemy = pair.Key;
         }

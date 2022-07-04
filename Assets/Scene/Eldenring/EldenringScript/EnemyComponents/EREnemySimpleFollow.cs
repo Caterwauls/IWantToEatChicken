@@ -13,6 +13,10 @@ public class EREnemySimpleFollow : EREnemyComponent
     public float offsetMax = 8f;
     public float offsetResetIntervalMin = 2f;
     public float offsetResetIntervalMax = 6f;
+
+    public bool rotateTowardsTarget = false;
+    public float rotationSpeed = 360f;
+    
     private Vector3 _currentOffset;
 
     private void Start()
@@ -39,5 +43,11 @@ public class EREnemySimpleFollow : EREnemyComponent
         moveDir.y = 0;
         moveDir.Normalize();
         transform.position += moveDir * followSpeed * Time.deltaTime;
+        if (rotateTowardsTarget)
+        {
+            var desiredRot = Quaternion.Euler(0, Quaternion.LookRotation(_enemy.target.transform.position - transform.position).eulerAngles.y, 0);
+            transform.rotation =
+                Quaternion.RotateTowards(transform.rotation, desiredRot, rotationSpeed * Time.deltaTime);
+        }
     }
 }

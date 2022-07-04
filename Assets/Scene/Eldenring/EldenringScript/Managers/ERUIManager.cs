@@ -23,14 +23,17 @@ public class ERUIManager : MonoBehaviour
 
     public CanvasGroup newZoneFoundMessageGroup;
     public Text newZoneNameText;
+    public AudioSource newZoneFoundAudio;
 
     public CanvasGroup youDiedMessageGroup;
     public Transform youDiedTextTransform;
+    public AudioSource youDiedAudio;
 
     public CanvasGroup interactGroup;
     public ERPlayer interactPlayer;
     public float interactDistance;
     public Text interactText;
+    public AudioSource interactAudio;
     
     private void Update()
     {
@@ -42,8 +45,12 @@ public class ERUIManager : MonoBehaviour
             {
                 if (!col.TryGetComponent(out ERInteractable interactable)) continue;
                 if (!interactable.CanInteract(interactPlayer)) continue;
-                
-                if (Input.GetKeyDown(KeyCode.E)) interactable.Interact(interactPlayer);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactable.Interact(interactPlayer);
+                    interactAudio.Play();
+                }
                 text = interactable.GetInteractText();
             }
         }
@@ -117,6 +124,7 @@ public class ERUIManager : MonoBehaviour
         IEnumerator Routine()
         {
             newZoneFoundMessageGroup.gameObject.SetActive(true);
+            newZoneFoundAudio.Play();
             newZoneNameText.text = zoneName;
             for (float t = 0; t < 1; t += Time.deltaTime)
             {
@@ -124,7 +132,7 @@ public class ERUIManager : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1.5f);
             for (float t = 0; t < 1; t += Time.deltaTime)
             {
                 newZoneFoundMessageGroup.alpha = 1 - t;
@@ -141,6 +149,7 @@ public class ERUIManager : MonoBehaviour
         IEnumerator Routine()
         {
             youDiedMessageGroup.gameObject.SetActive(true);
+            youDiedAudio.Play();
             for (float t = 0; t < 1; t += Time.deltaTime)
             {
                 youDiedMessageGroup.alpha = t;

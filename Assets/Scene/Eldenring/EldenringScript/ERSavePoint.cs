@@ -8,7 +8,7 @@ public class ERSavePoint : ERInteractable
     public bool didSaveHere => Vector3.Distance(ERGameManager.savePosition, transform.position + savePointOffset) < 1f;
 
     public Transform animatedCube;
-    public ParticleSystem explodeEffect;
+    public Effect explodeEffect;
     private Vector3 _animatedCubeStartPos;
     public Vector3 savePointOffset = Vector3.up;
     
@@ -47,6 +47,7 @@ public class ERSavePoint : ERInteractable
         IEnumerator SaveRoutine()
         {
             ERGameManager.savePosition = transform.position + savePointOffset;
+            player.GetComponent<ERPlayerPotion>().RechargePotions();
             player.StartChannel(4.5f);
             yield return new WaitForSeconds(1.5f);
             explodeEffect.Play();
@@ -61,6 +62,7 @@ public class ERSavePoint : ERInteractable
         IEnumerator HealRoutine()
         {
             player.StartChannel(1.5f);
+            player.GetComponent<ERPlayerPotion>().RechargePotions();
             while (player.health < player.maxHealth)
             {
                 player.ApplyHeal(50 * Time.deltaTime);

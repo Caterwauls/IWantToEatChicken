@@ -35,6 +35,7 @@ public class ERPlayer : EREntity
 
         IEnumerator Routine()
         {
+            BGMManager.instance.desiredClip = null;
             yield return new WaitForSeconds(1.5f);
             ERUIManager.instance.ShowYouDiedMessage();
             yield return new WaitForSeconds(4.5f);

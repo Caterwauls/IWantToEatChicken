@@ -16,6 +16,7 @@ public class ERPlayerMovement : ERPlayerComponent
     public float sprintStaminaCost = 10f;
     public float spaceHoldThreshold = 0.25f;
 
+    public GameObject rollEffectPrefab;
     public float rollStaminaCost = 10f;
     public float rollStartSpeed = 50f;
     public float rollEndSpeed = 10f;
@@ -107,6 +108,8 @@ public class ERPlayerMovement : ERPlayerComponent
                 rollDir += axisDir.y * flatForward;
                 rollDir = rollDir.normalized;
             }
+
+            Instantiate(rollEffectPrefab, transform.position, Quaternion.LookRotation(rollDir));
 
             var startTime = Time.time;
             var didGrantInvincible = false;

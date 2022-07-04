@@ -19,6 +19,7 @@ public class ERPlayerAttack : ERPlayerComponent
     public float swordPivotRotSpeed = 360f;
     public float swordPivotSmoothTime = 0.2f;
 
+    public Effect fxSwing;
     public float swordSwingDuration = 0.4f;
     public Vector3 swordIdleRot;
     public float swordIdleRotSpeed = 720f;
@@ -115,6 +116,7 @@ public class ERPlayerAttack : ERPlayerComponent
         StartCoroutine(SwingSwordRoutine());
         IEnumerator SwingSwordRoutine()
         {
+            fxSwing.Play();
             _player.StartChannel(swingChannelTime);
             _player.UseStamina(swingStaminaCost);
         

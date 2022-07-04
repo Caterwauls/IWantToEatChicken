@@ -7,6 +7,7 @@ public class ERPlayerGroundedChecker : ERPlayerComponent
     public bool isGrounded { get; private set; }
     
     public float raycastDistance = 1.25f;
+    public GameObject landEffectPrefab;
     
     private ERPlayerJump _jump;
     
@@ -29,6 +30,11 @@ public class ERPlayerGroundedChecker : ERPlayerComponent
             return;
         }
 
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, raycastDistance, LayerMask.GetMask("Ground"));
+        if (!isGrounded &&
+            Physics.Raycast(transform.position, Vector3.down, raycastDistance, LayerMask.GetMask("Ground")))
+        {
+            isGrounded = true;
+            Instantiate(landEffectPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -10,7 +10,11 @@ public class EREnemySkill : MonoBehaviour
     public float targetRange = 5f;
     public float channelTime = 1f;
     public float postDelay = 2f;
-    
+
+    public Effect fxOnChannelStart;
+    public Effect fxOnChannelComplete;
+    public Effect fxOnChannelCancel;
+
     protected EREnemy _self { get; private set; }
 
     private float _lastSkillUseTime = float.NegativeInfinity;
@@ -54,16 +58,16 @@ public class EREnemySkill : MonoBehaviour
 
     protected virtual void OnChannelStart()
     {
-        
+        if (fxOnChannelStart != null) fxOnChannelStart.Play();
     }
     
     protected virtual void OnChannelCancel()
     {
-        
+        if (fxOnChannelCancel != null) fxOnChannelCancel.Play();
     }
     
     protected virtual void OnChannelComplete()
     {
-        
+        if (fxOnChannelComplete != null) fxOnChannelComplete.Play();
     }
 }

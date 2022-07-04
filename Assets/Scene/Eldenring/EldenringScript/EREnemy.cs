@@ -16,11 +16,17 @@ public class EREnemy : EREntity
     public Transform lockOnPosition;
     public Transform healthBarPosition;
 
+    public bool isBoss = false;
+
     private Coroutine _acquireTargetRoutine;
-    private void OnEnable()
+
+    private void Start()
     {
         ERGameManager.instance.onEnemySpawn?.Invoke(this);
-        
+    }
+
+    private void OnEnable()
+    {
         _acquireTargetRoutine = StartCoroutine(AcquireTargetRoutine());
         IEnumerator AcquireTargetRoutine()
         {
@@ -56,11 +62,15 @@ public class EREnemy : EREntity
         }
     }
 
+    private void OnDestroy()
+    {
+        if (ERGameManager.instance == null) return;
+        ERGameManager.instance.onEnemyDestroy?.Invoke(this);
+    }
+
     private void OnDisable()
     {
         StopCoroutine(_acquireTargetRoutine);
-        if (ERGameManager.instance == null) return;
-        ERGameManager.instance.onEnemyDestroy?.Invoke(this);
     }
 
     protected override void OnDeath()
