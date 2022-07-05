@@ -45,6 +45,7 @@ public class CubeSpawner : MonoBehaviour
         {
             Cube newFood = Instantiate(foodCube, GetRandomPoint(), Random.rotation);
             newFood.energy = Random.Range(foodMin, foodMax);
+            newFood.cubeName = "food";
             newFood.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 0.1f, 0.5f, 0.75f, 1);
         }
 

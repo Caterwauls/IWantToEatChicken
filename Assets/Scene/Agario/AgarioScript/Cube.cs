@@ -63,7 +63,7 @@ public class Cube : MonoBehaviour
 
     private void UpdateScale()
     {
-        transform.localScale = Vector3.one * Mathf.Pow(energy, 1 / 3f);
+        transform.localScale = Vector3.one * Mathf.Pow(2 * energy, 1 / 3f);
 
     }
 
@@ -98,11 +98,11 @@ public class Cube : MonoBehaviour
 
             UpdateScale();
 
-            if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>() == null)
+            if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>() == null )
             {
                 string newName = otherCube.cubeName;
                 Destroy(otherCube.gameObject);
-                if (GetComponent<PlayerMove>() == null)
+                if (GetComponent<PlayerMove>() == null && otherCube.GetComponent<CubeBehavior>() != null)
                 {
                     var newSpawnPos = Return_RandomPosition();
                     var viewportX = Camera.main.WorldToViewportPoint(newSpawnPos).x;
@@ -113,6 +113,7 @@ public class Cube : MonoBehaviour
                         a.transform.position = newSpawnPos;
                         a.GetComponent<Cube>().energy = Random.RandomRange(1, 3);
                         a.GetComponent<Cube>().cubeName = newName;
+                        a.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 1, 1, 0.75f, 1);
                     }
                 }
                 
@@ -127,17 +128,18 @@ public class Cube : MonoBehaviour
                 var a = Instantiate(absorbEffect);
                 a.GetComponent<ParticleSystem>().startColor = other.transform.GetComponentInParent<MeshRenderer>().material.color;
                 a.transform.position = transform.position;
+                absorbSound.pitch = 1 / (0.1f * otherCube.energy);
+                absorbSound.volume = 0.1f;
+                if (otherCube.GetComponent<PlayerMove>() || GetComponent<PlayerMove>())
+                {
+                    absorbSound.volume = 1f;
+                }
                 if (!absorbSound.isPlaying)
                 {
                     absorbSound.Play();
                 }
                 
-                absorbSound.pitch = 1 / (0.5f + energy);
-                absorbSound.volume = 0.1f;
-                if (otherCube.GetComponent<PlayerMove>()||GetComponent<PlayerMove>())
-                {
-                    absorbSound.volume = 1f;
-                }
+                
             }
 
         }

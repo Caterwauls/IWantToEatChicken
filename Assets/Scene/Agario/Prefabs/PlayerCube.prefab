@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d90cf8020477943b74e74961bc9abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpCheck: 1
   particlesLight: {fileID: 4790574238251395607}
+  playerCamera: {fileID: 0}
+  mainCam: {fileID: 0}
+  playerName: 
+  distanceOfMaxSpeed: 8
 --- !u!114 &7621615290760037198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,6 +36,9 @@ MonoBehaviour:
   stoppingTime: 4
   enemys: []
   music: {fileID: 0}
+  tiktak: {fileID: 0}
+  stopEffect: {fileID: 0}
+  x: 0
 --- !u!1001 &4450720756361839182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,6 +165,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432417312634390127, guid: f90cfd6e3f0fdba4795a509a936542f3,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
     - target: {fileID: 6455945715944993183, guid: f90cfd6e3f0fdba4795a509a936542f3,
         type: 3}
       propertyPath: m_RootOrder
@@ -233,6 +244,11 @@ PrefabInstance:
         type: 3}
       propertyPath: acceleration
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7694808485580263738, guid: f90cfd6e3f0fdba4795a509a936542f3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8561283334344266633, guid: f90cfd6e3f0fdba4795a509a936542f3,
         type: 3}

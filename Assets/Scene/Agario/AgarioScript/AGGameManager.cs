@@ -20,6 +20,11 @@ public class AGGameManager : MonoBehaviour
     public UnityEvent onPlayerDead;
     public bool isCutScenePlaying;
     public GameObject[] audios;
+    public GameObject playerDeadEffect;
+    public Vector3 playerPos;
+
+    public GameObject blur;
+    public GameObject inGameUI;
 
     public Text leaderboard;
 
@@ -47,12 +52,30 @@ public class AGGameManager : MonoBehaviour
 
     void Update()
     {
+        playerPos = myCube.transform.position;
         audioTimeControl();
 
         if (Input.GetKeyDown(KeyCode.Escape) && !isCutScenePlaying)
         {
-            if (Time.timeScale == 0) Time.timeScale = 1;
-            else Time.timeScale = 0;
+            if (Time.timeScale == 0)
+            {
+                blur.SetActive(false);
+                inGameUI.SetActive(true);
+                Cursor.visible = true;
+                Time.timeScale = 1;
+
+
+
+            }
+            else
+            {
+                blur.SetActive(true);
+                inGameUI.SetActive(false);
+                Cursor.visible = false;
+                Time.timeScale = 0;
+            }
+
+
         }
 
 
@@ -73,6 +96,7 @@ public class AGGameManager : MonoBehaviour
 
         if (myCube != myCube.gameObject.activeSelf)
         {
+            
             onPlayerDead.Invoke();
         }
 
@@ -83,6 +107,11 @@ public class AGGameManager : MonoBehaviour
             return;
 
         }
+    }
+    public void PlayerDeadEffect()
+    {
+        var a = Instantiate(playerDeadEffect);
+        a.transform.position = playerPos;
     }
 
 
@@ -120,7 +149,7 @@ public class AGGameManager : MonoBehaviour
     public void RestartGame()
     {
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void PlayerDie()
