@@ -18,6 +18,10 @@ public class Cube : MonoBehaviour
     public GameObject absorbEffect;
     public float magnetRadius = 1;
     public float magnetPullSpeed = 1f;
+    public CubeSpawner cubeSpawner;
+    public GameObject newNpcCube;
+    public GameObject rangeObject;
+    public BoxCollider rangeCollider;
 
 
 
@@ -35,7 +39,9 @@ public class Cube : MonoBehaviour
 
     private void Start()
     {
-
+        cubeSpawner = FindObjectOfType<CubeSpawner>();
+        rangeObject = cubeSpawner.gameObject;
+        rangeCollider = cubeSpawner.GetComponent<BoxCollider>();
         UpdateScale();
         CheckCubeLeaveMap();
         gameObject.name = cubeName;
@@ -44,7 +50,7 @@ public class Cube : MonoBehaviour
 
     private void Update()
     {
-        var cubesCanPull = Physics.OverlapSphere(transform.position, magnetRadius);
+        var cubesCanPull = Physics.OverlapSphere(transform.position, transform.localScale.x / 2f + magnetRadius);
         foreach(Collider cube in cubesCanPull)
         {
             if (cube.GetComponent<Cube>() != null && (CanEat(cube.GetComponent<Cube>())))
@@ -92,11 +98,26 @@ public class Cube : MonoBehaviour
 
             UpdateScale();
 
-            if (otherCube.energy <= 0 && !otherCube.GetComponent<PlayerMove>())
+            if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>() == null)
             {
-                Destroy(otherCube.gameObject);
+                string newName = otherCube.cubeName;
+                Destroy(other.gameObject);
+                if (GetComponent<PlayerMove>() == null)
+                {
+                    var newSpawnPos = Return_RandomPosition();
+                    var viewportX = Camera.main.WorldToViewportPoint(newSpawnPos).x;
+                    var viewportY = Camera.main.WorldToViewportPoint(newSpawnPos).y;
+                    if ( !(viewportX >=0 && viewportX <= 1) && !(viewportY  <= 1 && viewportY >= 0))
+                    {
+                        var a = Instantiate(newNpcCube);
+                        a.transform.position = newSpawnPos;
+                        a.GetComponent<Cube>().energy = Random.RandomRange(1, 3);
+                        a.GetComponent<Cube>().cubeName = newName;
+                    }
+                }
+                
             }
-            else if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>())
+            else if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>() != null)
             {
                 otherCube.gameObject.SetActive(false);
             }
@@ -121,10 +142,23 @@ public class Cube : MonoBehaviour
 
         }
     }
+    Vector3 Return_RandomPosition()
+    {
+        Vector3 originPosition = rangeObject.transform.position;
+        // 콜라이더의 사이즈를 가져오는 bound.size 사용
+        float range_X = rangeCollider.bounds.size.x;
+        float range_Z = rangeCollider.bounds.size.z;
+
+        range_X = Random.Range((range_X / 2) * -1, range_X / 2);
+        range_Z = Random.Range((range_Z / 2) * -1, range_Z / 2);
+        Vector3 RandomPostion = new Vector3(range_X, 0f, range_Z);
+
+        Vector3 respawnPosition = originPosition + RandomPostion;
+        return respawnPosition;
+    }
 
     public void MoveMyVelocity(Vector3 targetVelocity)
     {
-
         Vector3 newVelocity = Vector3.MoveTowards(_rb.velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
         newVelocity.y = _rb.velocity.y;
         _rb.velocity = newVelocity;

@@ -28,7 +28,10 @@ public class CubeBehavior : MonoBehaviour
 
     public void Chase(Cube enemy)
     {
-        myCube.MoveMyVelocity((enemy.transform.position - transform.position).normalized * myCube.cubeSpeed);
+        var dir = enemy.transform.position - transform.position;
+        dir.y = 0;
+        dir.Normalize();
+        myCube.MoveMyVelocity(dir * myCube.cubeSpeed);
     }
 
     public void Run(Cube enemy)

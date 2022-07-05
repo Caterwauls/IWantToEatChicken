@@ -15,7 +15,6 @@ MonoBehaviour:
   myCube: {fileID: 3462447141318624808}
   cubeRigidbody: {fileID: 8655787769266306073}
   enemyGameObject: {fileID: 0}
-  npcSkill: {fileID: 6066941853454038276}
   smoothTime: 0.1
 --- !u!114 &4371581201553685541
 MonoBehaviour:
@@ -35,23 +34,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &6066941853454038276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2620953310021200345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb22a9beda9e14e86135565766b181, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
-  BanishCoolTime: 15
-  banishPower: 3
-  banishParticle: {fileID: 2458959733328621765, guid: 588954fea01bead449964106c824c21a,
-    type: 3}
 --- !u!1001 &5949456262914472528
 PrefabInstance:
   m_ObjectHideFlags: 0

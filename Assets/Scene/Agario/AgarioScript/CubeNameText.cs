@@ -8,14 +8,11 @@ public class CubeNameText : MonoBehaviour
 
     void LateUpdate()
     {
-        
-        transform.position = Camera.main.WorldToScreenPoint(target.transform.position + Vector3.up * (target.transform.lossyScale.y * 2));
-    }
-    private void Update()
-    {
-        if (target == null || target.gameObject.activeSelf == false)
+        if (target == null)
         {
             Destroy(gameObject);
+            return;
         }
+        transform.position = Camera.main.WorldToScreenPoint(target.transform.position + Vector3.up * (target.transform.lossyScale.y * 2));
     }
 }

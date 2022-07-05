@@ -609,8 +609,8 @@ MonoBehaviour:
   prefab: {fileID: 3462447141318624808, guid: 58fe3d7c9854713419634c358cac5308, type: 3}
   foodCube: {fileID: 3653375359529736602, guid: d2257429beb78344fbb1ccdafa45d4eb,
     type: 3}
-  cubeCount: 20
-  foodCount: 50
+  cubeCount: 10
+  foodCount: 0
   minEnergy: 0.5
   maxEnergy: 2
   foodMin: 0.1
@@ -2546,7 +2546,7 @@ PrefabInstance:
     - target: {fileID: 2829544173825375987, guid: 3455558df3e3ef3438b61e1601c554f0,
         type: 3}
       propertyPath: energy
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2829544173825375987, guid: 3455558df3e3ef3438b61e1601c554f0,
         type: 3}
@@ -3129,7 +3129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.754717, g: 0.2171591, b: 0.2171591, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
