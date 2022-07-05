@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.Events;
 using Cinemachine;
+using Plane = UnityEngine.Plane;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -11,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     public CinemachineVirtualCamera playerCamera;
     public Camera mainCam;
     public string playerName = null;
+    public float distanceOfMaxSpeed = 8f;
 
 
     private BoxCollider boxCollider;
@@ -61,22 +65,16 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 rayDirection = mainCam.ScreenPointToRay(Input.mousePosition).direction;
+        var ray = mainCam.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
+        {
+            var dir = hit.point - transform.position;
+            dir.y = 0;
+            if (dir.magnitude > distanceOfMaxSpeed) 
+                dir = dir.normalized * distanceOfMaxSpeed;
 
-        //float inputX = Input.GetAxis("Horizontal");
-        //float inputZ = Input.GetAxis("Vertical");
-
-        float inputX = rayDirection.x;
-        float inputZ = rayDirection.z;
-
-        Vector3 velocity = new Vector3(inputX, 0, inputZ);
-
-        velocity *= _cube.cubeSpeed;
-
-        _cube.MoveMyVelocity(velocity);
-
+            dir /= 8;
+            _cube.MoveMyVelocity(dir * _cube.cubeSpeed);
+        }
     }
-
-
-
 }

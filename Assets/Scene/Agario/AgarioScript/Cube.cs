@@ -101,7 +101,7 @@ public class Cube : MonoBehaviour
             if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>() == null)
             {
                 string newName = otherCube.cubeName;
-                Destroy(other.gameObject);
+                Destroy(otherCube.gameObject);
                 if (GetComponent<PlayerMove>() == null)
                 {
                     var newSpawnPos = Return_RandomPosition();
