@@ -24,7 +24,7 @@ public class Cube : MonoBehaviour
     {
         acceleration = 20f;
         _rb = GetComponent<Rigidbody>();
-
+        gameObject.name = cubeName;
 
     }
 

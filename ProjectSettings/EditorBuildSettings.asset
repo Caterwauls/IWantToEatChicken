@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scene/Bounceball/BBallScene0.unity
     guid: aee66d295b399694282f8c9fd56c4193
   - enabled: 1
+    path: Assets/Scene/Bounceball/BBallScene1.unity
+    guid: d8fadb46ebce1e948bf2247e2ea3320f
+  - enabled: 1
+    path: Assets/Scene/Bounceball/BBallScene2.unity
+    guid: 1b41e7f45762d9e43ba578038de82b8d
+  - enabled: 1
     path: Assets/Scene/Agario/Agario.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1

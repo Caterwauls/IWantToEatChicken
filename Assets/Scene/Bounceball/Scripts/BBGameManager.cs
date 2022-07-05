@@ -20,11 +20,30 @@ public class BBGameManager : MonoBehaviour
     public Transform ground;
     public Transform cams;
     public int currentSceneNum = 0;
+    public BBPlayer player;
+    public int deadNum;
+    public int currentStg;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
         flow.StartFlow();
+        if (!PlayerPrefs.HasKey("deadNum"))
+        {
+            PlayerPrefs.SetInt("deadNum", 0);
+        }
+        deadNum = PlayerPrefs.GetInt("deadNum");
 
+        currentStg = FindObjectOfType<Flow>().name[11] - 48;
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
 

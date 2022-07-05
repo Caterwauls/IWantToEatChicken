@@ -37,4 +37,14 @@ public class BarControl : MonoBehaviour
                 new Vector3(transform.position.x, minPos, transform.position.z);
 
     }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Player")
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+        }
+        else
+            GetComponent<Rigidbody>().isKinematic = true;
+    }
 }

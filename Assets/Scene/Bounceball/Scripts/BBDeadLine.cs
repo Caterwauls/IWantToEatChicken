@@ -7,8 +7,13 @@ public class BBDeadLine : MonoBehaviour
 {
     public GameObject prefab;
 
-    private GameObject dieEffect;
+    private GameObject _dieEffect;
+    private int _deadNum;
 
+    private void Start()
+    {
+        _deadNum = PlayerPrefs.GetInt("deadNum");
+    }
     private void Update()
     {
         waitDie();
@@ -17,16 +22,18 @@ public class BBDeadLine : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            dieEffect = Instantiate(prefab);
-            dieEffect.transform.position = other.transform.position;
+            _deadNum++;
+            PlayerPrefs.SetInt("deadNum", _deadNum);
+            _dieEffect = Instantiate(prefab);
+            _dieEffect.transform.position = other.transform.position;
             other.gameObject.SetActive(false);
         }
     }
 
     void waitDie()
     {
-        if (dieEffect == null) return;
-        if (!dieEffect.GetComponent<ParticleSystem>().isPlaying)
+        if (_dieEffect == null) return;
+        if (!_dieEffect.GetComponent<ParticleSystem>().isPlaying)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             return;

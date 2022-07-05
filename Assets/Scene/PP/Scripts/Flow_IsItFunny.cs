@@ -19,7 +19,10 @@ public class Flow_IsItFunny : Flow
     {
         PlayerControl pc = player.GetComponent<PlayerControl>();
 
-        yield return new WaitForSeconds(8f); // 8f
+        yield return new WaitUntil(() => Input.anyKeyDown);
+        player.GetComponent<PlayerControl>().canPlayerMove = true;
+
+        yield return new WaitForSecondsRealtime(30f);
 
         playerCloseupCam.SetActive(true);
 

@@ -9,7 +9,7 @@ public class PlayerControl : MonoBehaviour
         public Vector3 position;
         public Vector3 velocity;
     }
-
+    public bool canPlayerMove = false;
     public bool isCanResist = false;
 
     public float PlayerSpeed;
@@ -25,6 +25,15 @@ public class PlayerControl : MonoBehaviour
         Init();
         _playerStates = new PlayerState[10];
         StartCoroutine(SavePlayerState());
+    }
+    private void FixedUpdate()
+    {
+        if (!canPlayerMove) return;
+        float inputX = Input.GetAxisRaw("Horizontal");
+        float inputY = Input.GetAxisRaw("Vertical");
+
+        Vector3 _vec = new Vector3(inputX, inputY, 0);
+        GetComponent<Rigidbody>().velocity = _vec * Time.fixedDeltaTime * 100;
     }
 
     // Update is called once per frame

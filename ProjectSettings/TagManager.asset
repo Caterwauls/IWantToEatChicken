@@ -11,6 +11,10 @@ TagManager:
   - Block
   - EndOfStage
   - JumpTile
+  - ReverseTile
+  - BulletTile
+  - RereverseTile
+  - CrackTile
   layers:
   - Default
   - TransparentFX

@@ -2006,7 +2006,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a976f71b12448b340b104c746488079c, type: 3}
     m_FontSize: 14
     m_FontStyle: 3
     m_BestFit: 0
@@ -2018,7 +2018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB2E4\uC2DC \uD55C\uBC88 \uAFC8\uC744 \uC2DC\uC791\uD558\uAE30"
+  m_Text: "\uB2E4\uC2DC \uC2DC\uC791\uD558\uAE30"
 --- !u!222 &342806784
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2360,6 +2360,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &352919010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 291457795277484777, guid: ba86c27b4640d834699724b4693fc02b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5388916}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &352919014
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352919010}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 56
+  m_CollisionDetection: 0
 --- !u!4 &353730340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 975230427701687858, guid: ef99eb653867e254da497a5a9fd7542b,
@@ -8364,7 +8386,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a976f71b12448b340b104c746488079c, type: 3}
     m_FontSize: 70
     m_FontStyle: 1
     m_BestFit: 0
@@ -8940,7 +8962,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.3
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9871,6 +9893,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1385435623}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1053712083 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 291457795277484777, guid: ba86c27b4640d834699724b4693fc02b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7485928357740905343}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1053712087
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053712083}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 56
+  m_CollisionDetection: 0
 --- !u!4 &1062203795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6881274462878262570, guid: ef99eb653867e254da497a5a9fd7542b,
@@ -10164,7 +10208,7 @@ MonoBehaviour:
   choiceFile: {fileID: 4900000, guid: 5082b7f33e5e4924e86e0bfa4a720333, type: 3}
   dialogBox: {fileID: 1072284776}
   blurEffect: {fileID: 1620273423}
-  playerSelectionMode: {fileID: 0}
+  playerSelectionMode: {fileID: 1231989501548118}
   dialogBoxScaler: {fileID: 1072284778}
   promptEffect: {fileID: 1518780772}
   lastChoice: -1
@@ -10899,9 +10943,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a976f71b12448b340b104c746488079c, type: 3}
     m_FontSize: 25
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 25
@@ -18278,7 +18322,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5388916}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 352919010}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56a6de0ecb509094094c2e0d4501661c, type: 3}
@@ -18516,7 +18560,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7485928357740905343}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1053712083}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56a6de0ecb509094094c2e0d4501661c, type: 3}
@@ -18677,7 +18721,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: a976f71b12448b340b104c746488079c, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
     m_BestFit: 0
@@ -25808,6 +25852,21 @@ PrefabInstance:
     - target: {fileID: 7013396840607232112, guid: 3feed9acaac8ebe4b80f3a3afe09457e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013396840607232113, guid: 3feed9acaac8ebe4b80f3a3afe09457e,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013396840607232113, guid: 3feed9acaac8ebe4b80f3a3afe09457e,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 7013396840607232113, guid: 3feed9acaac8ebe4b80f3a3afe09457e,
+        type: 3}
+      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7013396840607232114, guid: 3feed9acaac8ebe4b80f3a3afe09457e,
