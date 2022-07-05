@@ -111,7 +111,7 @@ public class AGGameManager : MonoBehaviour
 
 
             else
-                enemyCubes[i].GetComponent<Outline>().enabled = false;
+                enemyCubes[i].GetComponent<Outline>().enabled =false;
         }
 
 
@@ -147,7 +147,7 @@ public class AGGameManager : MonoBehaviour
         var sortAllCubes = allCubes.OrderByDescending(x => x.energy).ToList();
 
         leaderboard.text = "";
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (i + 1 > sortAllCubes.Count) break;
             rankingCubeList.Add(sortAllCubes[i]);
@@ -162,7 +162,7 @@ public class AGGameManager : MonoBehaviour
     void UpdateRemainCube()
     {
         remainCubeNum = enemyCubes.Count;
-        remainCubes.text = "Cubes left: " + remainCubeNum;
+        remainCubes.text = "남은 큐브 수: " + remainCubeNum;
     }
 
     IEnumerator WinTimer()

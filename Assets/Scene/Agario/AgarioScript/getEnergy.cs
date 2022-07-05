@@ -16,6 +16,6 @@ public class getEnergy : MonoBehaviour
 
     private void Update()
     {
-        energyText.text = "Energy: " + string.Format("{0:0.#}", playerCube.energy);
+        energyText.text = "HP = " + string.Format("{0:0.#}", playerCube.energy);
     }
 }
