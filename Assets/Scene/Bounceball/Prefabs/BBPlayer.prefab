@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052e3e2c6beacbf42b5e7185c706d586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 6993753283430046713, guid: f68c2945f23cbad40a7bffdd47dab627, type: 3}
 --- !u!114 &1762501054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +343,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reverseOn: 0
   playerMoveDuration: 1
+  reverseEffect: {fileID: 6956502745523985765, guid: 9cd2a2cb9718d52499103e19518e51c8,
+    type: 3}
+  rereverseEffect: {fileID: 4261277762701085733, guid: 90e0661cd5561c747bc6618c2d84ac15,
+    type: 3}
 --- !u!114 &1762501051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashAbilityDis: 10
   dashAbilityOn: 0
+  dashDuration: 0.3
+  dashSweepCount: 15
   dashAbilityEffect: {fileID: 526376503476287152, guid: f06d51983f30b214291c271d1ab0ceeb,
     type: 3}
   flyAbilityOn: 0

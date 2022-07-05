@@ -6,7 +6,7 @@ public class BBPlayerBulletTile : BBPlayerComponentBase
 {
     private BBPlayerMovement _movement;
     private BBPlayerAdditionalGravity _gravity;
-
+    public GameObject effect;
 
     protected override void Awake()
     {
@@ -28,8 +28,9 @@ public class BBPlayerBulletTile : BBPlayerComponentBase
 
     IEnumerator BulletRoutine(RaycastHit hit)
     {
+        Instantiate(effect, transform.position, Quaternion.identity);
         bool isRight = hit.transform.GetComponent<BBBulletTile>().tileDirRight;
-
+        
         Vector3 wantedVel;
         if (isRight)
         {

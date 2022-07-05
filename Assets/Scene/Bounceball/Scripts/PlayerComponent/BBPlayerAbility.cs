@@ -6,8 +6,12 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class BBPlayerAbility : BBPlayerComponentBase
 {
+    private static Collider[] _colBuffer = new Collider[128];
+    
     public float dashAbilityDis = 10f;
     public bool dashAbilityOn = false;
+    public float dashDuration = 1f;
+    public int dashSweepCount = 15;
     public GameObject dashAbilityEffect;
 
     public bool flyAbilityOn = false;
@@ -31,33 +35,32 @@ public class BBPlayerAbility : BBPlayerComponentBase
     {
         if (dashAbilityOn)
         {
-            UseDashAbility();
-
+            CheckDashAbility();
         }
         else if (flyAbilityOn)
         {
-            UseFlyAbility();
+            CheckFlyAbility();
         }
         else if (doubleJumpOn)
         {
-            useDoubleJump();
+            CheckDoubleJump();
         }
 
         if(Input.GetKeyDown(KeyCode.G) && guideAbilityOn)
         {
             guideAbilityOn = false;
             var currentTime = Time.unscaledTime;
-            StartCoroutine(guideAbility(currentTime, BBGameManager.instance.currentStg));
+            StartCoroutine(GuideAbilityRoutine(currentTime, BBGameManager.instance.currentStg));
             
 
         }
         else if(Input.GetKeyDown(KeyCode.G) && !guideAbilityOn)
         {
-            StartCoroutine(showGuideAbilityText());
+            StartCoroutine(ShowGuideAbilityTextRoutine());
         }
     }
 
-    IEnumerator guideAbility(float currentTime,int currentStg)
+    IEnumerator GuideAbilityRoutine(float currentTime,int currentStg)
     {
         if (currentStg == 0) yield break;
         else if(currentStg == 1)
@@ -65,7 +68,7 @@ public class BBPlayerAbility : BBPlayerComponentBase
             var a = Instantiate(guideAbilityEffect);
             a.transform.position = transform.position;
             flyAbilityOn = true;
-            UseFlyAbility();
+            CheckFlyAbility();
 
             while (true)
             {
@@ -111,7 +114,7 @@ public class BBPlayerAbility : BBPlayerComponentBase
 
     }
     
-    IEnumerator showGuideAbilityText()
+    IEnumerator ShowGuideAbilityTextRoutine()
     {
         guideAbilityText.GetComponent<Text>().text = remainGuideAbilityTime + "초 남았습니다.";
         guideAbilityText.SetActive(true);
@@ -135,34 +138,40 @@ public class BBPlayerAbility : BBPlayerComponentBase
         yield break;
     }
 
-    void UseDashAbility()
+    void CheckDashAbility()
     {
-        var inputVec = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (!Input.GetKeyDown(KeyCode.F)) return;
+        
+        Instantiate(dashAbilityEffect, transform.position, Quaternion.identity);
+        dashAbilityOn = false;
 
-        if (Input.GetKeyDown(KeyCode.F))
+        Vector3 sweepDir = Input.GetAxis("Horizontal") < 0 ? Vector3.left : Vector3.right;
+        Vector3 start = transform.position;
+        Vector3 destination = transform.position;
+
+        for (int i = 0; i < dashSweepCount; i++)
         {
-            if (inputVec.x < 0)
-            {
-                // 왼쪽
-                Instantiate(dashAbilityEffect, transform.position,
-                    Quaternion.Euler(dashAbilityEffect.transform.rotation.x, dashAbilityEffect.transform.rotation.x - 90, dashAbilityEffect.transform.rotation.x));
-                transform.position = transform.position + Vector3.left * dashAbilityDis;
-                dashAbilityOn = false;
-            }
-            else if (inputVec.x >= 0)
-            {
-                // 오른쪽
-                Instantiate(dashAbilityEffect, transform.position,
-                    Quaternion.Euler(dashAbilityEffect.transform.rotation.x, dashAbilityEffect.transform.rotation.x + 90, dashAbilityEffect.transform.rotation.x));
-                transform.position = transform.position + Vector3.right * dashAbilityDis;
-                dashAbilityOn = false;
-
-            }
+            var candidate = transform.position + dashAbilityDis * i / (dashSweepCount - 1f) * sweepDir;
+            if (Physics.OverlapBoxNonAlloc(candidate, Vector3.one * 0.4f, _colBuffer, Quaternion.identity) > 0) 
+                continue;
+            destination = candidate;
         }
-
+        
+        StartCoroutine(InterpolatePosition());
+        IEnumerator InterpolatePosition()
+        {
+            _rb.isKinematic = true;
+            for (float t = 0; t < dashDuration; t += Time.deltaTime)
+            {
+                transform.position = Vector3.Lerp(start, destination, t / dashDuration);
+                yield return null;
+            }
+            _rb.velocity = Vector3.zero;
+            _rb.isKinematic = false;
+        }
     }
 
-    void UseFlyAbility()
+    void CheckFlyAbility()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -177,7 +186,7 @@ public class BBPlayerAbility : BBPlayerComponentBase
 
     }
 
-    void useDoubleJump()
+    void CheckDoubleJump()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {

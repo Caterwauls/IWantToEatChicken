@@ -13,6 +13,7 @@ public class Flow_BB_Stg1: Flow
 
     protected override IEnumerator FlowRoutine()
     {
+        yield break;
         DialogManager.instance.enableDialogBoxAnimation = false;
         _player = player.GetComponent<BBPlayer>();
 

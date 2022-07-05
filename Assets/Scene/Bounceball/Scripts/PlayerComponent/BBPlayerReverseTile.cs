@@ -7,6 +7,9 @@ public class BBPlayerReverseTile : BBPlayerComponentBase
     public bool reverseOn = false;
     public float playerMoveDuration = 1f;
     private BBPlayerMovement _movement;
+    public GameObject reverseEffect;
+    public GameObject rereverseEffect;
+
 
     protected override void Awake()
     {
@@ -33,6 +36,7 @@ public class BBPlayerReverseTile : BBPlayerComponentBase
             _player.movement.playerMoveOn = false;
             _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             _player.GetComponent<BoxCollider>().enabled = false;
+            Instantiate(reverseEffect, transform.position, Quaternion.identity);
 
             yield return MovePlayerRoutine(_player.transform.position, destination, playerMoveDuration);
 
@@ -50,6 +54,7 @@ public class BBPlayerReverseTile : BBPlayerComponentBase
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<BoxCollider>().enabled = false;
             reverseOn = false;
+            Instantiate(rereverseEffect, transform.position, Quaternion.identity);
 
             yield return MovePlayerRoutine(_player.transform.position, destination, playerMoveDuration);
 
