@@ -41,6 +41,9 @@ public class DialogManager : MonoBehaviour
     public bool didSelect = false;
     public Text dialogText;
 
+    public float perCharacterDelay = 0.05f;
+    public GameObject characterEffect;
+
     public Dialog currentChoice = null;
 
     public bool enableDialogBoxAnimation = true;
