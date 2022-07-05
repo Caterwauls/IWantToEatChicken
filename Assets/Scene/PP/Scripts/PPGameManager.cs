@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class PPGameManager : MonoBehaviour
 {
     public Flow flow;
-    public GameObject cinemachineDirector;
     public GameObject resistMessage;
     public GameObject endMessage;
     public GameObject restartMessage;
@@ -17,7 +16,6 @@ public class PPGameManager : MonoBehaviour
 
     private void Awake()
     {
-        cinemachineDirector.SetActive(false);
         resistMessage.SetActive(false);
         endMessage.SetActive(false);
         restartMessage.SetActive(false);
@@ -31,6 +29,5 @@ public class PPGameManager : MonoBehaviour
     public void restartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
     }
 }
