@@ -46,6 +46,7 @@ public class EREnemy : EREntity
                         var t = _overlapBuffer[i].GetComponentInParent<ERPlayer>();
                         if (t == null || t.isDead) continue;
                         target = t;
+                        ERGameManager.instance.onEnemyTargetAcquisition?.Invoke();
                     }
                 }
                 else

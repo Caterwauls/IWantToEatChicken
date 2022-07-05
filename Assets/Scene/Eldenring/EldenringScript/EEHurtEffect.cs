@@ -23,7 +23,12 @@ public class EEHurtEffect : MonoBehaviour
 
     private void Update()
     {
-        _currentWeight = Mathf.MoveTowards(_currentWeight, 0, Time.deltaTime * decaySpeed);
+        var desiredWeight = 0f;
+        if (player.health < player.maxHealth / 2f)
+        {
+            desiredWeight = (1f - player.health / player.maxHealth) - 0.5f;
+        }
+        _currentWeight = Mathf.MoveTowards(_currentWeight, desiredWeight, Time.deltaTime * decaySpeed);
         _volume.weight = _currentWeight;
     }
 

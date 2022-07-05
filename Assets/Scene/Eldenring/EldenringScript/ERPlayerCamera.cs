@@ -49,6 +49,7 @@ public class ERPlayerCamera : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale < 0.01f) return;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (lockOnTarget == null) FindLockOnTarget(enemy => -Vector3.Angle(transform.forward, enemy.transform.position - transform.position));
@@ -66,6 +67,7 @@ public class ERPlayerCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Time.timeScale < 0.01f) return;
         float desiredCamDistance = _movement.isSprinting ? camDistanceSprinting : camDistance;
         _currentCamDistance = Mathf.SmoothDamp(_currentCamDistance, desiredCamDistance, ref _currentCamDistanceDampVel, 0.2f);
         

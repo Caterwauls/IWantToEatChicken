@@ -21,7 +21,9 @@ public class ERGameManager : MonoBehaviour
     public Action<EREnemy> onEnemySpawn;
     public Action<EREnemy> onEnemyDestroy;
 
-    
+    public Action onSavePointUse;
+    public Action onEnemyTargetAcquisition;
+
     public Transform defaultSavePosition;
     public ERPlayer player;
 

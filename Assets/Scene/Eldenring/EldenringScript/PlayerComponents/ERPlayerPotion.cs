@@ -22,6 +22,7 @@ public class ERPlayerPotion : ERPlayerComponent
 
     private void Update()
     {
+        if (Time.timeScale < 0.01f) return;
         if (!_player.canChannel) return;
         if (currentPotion <= 0) return;
         if (_player.health + 1 >= _player.maxHealth) return;

@@ -63,6 +63,7 @@ public class ERPlayerAttack : ERPlayerComponent
 
     private void Update()
     {
+        if (Time.timeScale < 0.01f) return;
         // Keep Sword Pivot Position/Rotation
         if (!_player.isStunned)
         {
