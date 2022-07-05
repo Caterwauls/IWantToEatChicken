@@ -35,6 +35,7 @@ public class ERSavePoint : ERInteractable
 
     public override void Interact(ERPlayer player)
     {
+        ERGameManager.instance.onSavePointUse?.Invoke();
         player.GetComponent<ERPlayerAttack>().HolsterSword();
         if (didSaveHere)
         {

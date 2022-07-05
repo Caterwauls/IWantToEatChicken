@@ -20,6 +20,7 @@ public class ERPlayerJump : ERPlayerComponent
     
     private void Update()
     {
+        if (Time.timeScale < 0.01f) return;
         if (Input.GetKeyDown(KeyCode.F))
             _currentJumpReserveTime = 0.25f;
         else

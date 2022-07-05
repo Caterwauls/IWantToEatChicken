@@ -12,7 +12,6 @@ public class Orbit : MonoBehaviour
 
     private void Awake()
     {
-        
         plusRotation = Quaternion.Euler(OrbitVector * Time.deltaTime);  
     }
     void Update()

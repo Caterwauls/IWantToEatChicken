@@ -34,6 +34,11 @@ public class ERUIManager : MonoBehaviour
     public float interactDistance;
     public Text interactText;
     public AudioSource interactAudio;
+
+    public void PlayInteractSound()
+    {
+        interactAudio.Play();
+    }
     
     private void Update()
     {
@@ -57,12 +62,12 @@ public class ERUIManager : MonoBehaviour
         
         if (text == null)
         {
-            interactGroup.alpha = Mathf.MoveTowards(interactGroup.alpha, 0, Time.deltaTime * 4f);
+            interactGroup.alpha = Mathf.MoveTowards(interactGroup.alpha, 0, Time.unscaledDeltaTime * 4f);
         }
         else
         {
             interactText.text = text;
-            interactGroup.alpha = Mathf.MoveTowards(interactGroup.alpha, 1, Time.deltaTime * 4f);
+            interactGroup.alpha = Mathf.MoveTowards(interactGroup.alpha, 1, Time.unscaledDeltaTime * 4f);
         }
     }
 
@@ -71,7 +76,7 @@ public class ERUIManager : MonoBehaviour
         StartCoroutine(FadeInRoutine());
         IEnumerator FadeInRoutine()
         {
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 fadeEffectGroup.alpha = 1 - t;
                 yield return null;
@@ -85,7 +90,7 @@ public class ERUIManager : MonoBehaviour
         StartCoroutine(FadeOutRoutine());
         IEnumerator FadeOutRoutine()
         {
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 fadeEffectGroup.alpha = t;
                 yield return null;
@@ -100,7 +105,7 @@ public class ERUIManager : MonoBehaviour
         IEnumerator Routine()
         {
             savedMessageGroup.gameObject.SetActive(true);
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 savedMessageGroup.alpha = t;
                 dimmerTextTransform.transform.localScale = new Vector3(0.9f + t * 0.3f, 1, 1);
@@ -108,7 +113,7 @@ public class ERUIManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(3f);
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 savedMessageGroup.alpha = 1 - t;
                 yield return null;
@@ -126,14 +131,14 @@ public class ERUIManager : MonoBehaviour
             newZoneFoundMessageGroup.gameObject.SetActive(true);
             newZoneFoundAudio.Play();
             newZoneNameText.text = zoneName;
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 newZoneFoundMessageGroup.alpha = t;
                 yield return null;
             }
 
             yield return new WaitForSeconds(1.5f);
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 newZoneFoundMessageGroup.alpha = 1 - t;
                 yield return null;
@@ -150,7 +155,7 @@ public class ERUIManager : MonoBehaviour
         {
             youDiedMessageGroup.gameObject.SetActive(true);
             youDiedAudio.Play();
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 youDiedMessageGroup.alpha = t;
                 youDiedTextTransform.localScale = Vector3.one * (0.9f + t * 0.1f);
@@ -158,7 +163,7 @@ public class ERUIManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(2f);
-            for (float t = 0; t < 1; t += Time.deltaTime)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime)
             {
                 youDiedMessageGroup.alpha = 1 - t;
                 youDiedTextTransform.localScale = Vector3.one * (1.0f + t * 0.1f);
