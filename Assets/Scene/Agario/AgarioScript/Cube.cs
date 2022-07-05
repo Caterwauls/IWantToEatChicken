@@ -14,6 +14,10 @@ public class Cube : MonoBehaviour
     public float cubeSpeed = 8.5f;
     public float acceleration;
     public string cubeName;
+    public AudioSource absorbSound;
+    public GameObject absorbEffect;
+    public float magnetRadius = 1;
+    public float magnetPullSpeed = 1f;
 
 
 
@@ -24,7 +28,7 @@ public class Cube : MonoBehaviour
     {
         acceleration = 20f;
         _rb = GetComponent<Rigidbody>();
-        gameObject.name = cubeName;
+        
 
     }
 
@@ -34,7 +38,21 @@ public class Cube : MonoBehaviour
 
         UpdateScale();
         CheckCubeLeaveMap();
+        gameObject.name = cubeName;
 
+    }
+
+    private void Update()
+    {
+        var cubesCanPull = Physics.OverlapSphere(transform.position, magnetRadius);
+        foreach(Collider cube in cubesCanPull)
+        {
+            if (cube.GetComponent<Cube>() != null && (CanEat(cube.GetComponent<Cube>())))
+            {
+                cube.transform.position = Vector3.MoveTowards(cube.transform.position, transform.position, magnetPullSpeed * Time.deltaTime);
+            }
+            
+        }
     }
 
     private void UpdateScale()
@@ -45,7 +63,7 @@ public class Cube : MonoBehaviour
 
     public void AbsorbPowerFrom(Cube otherCube)
     {
-        float absorbSpeed = energy / 10 + 10;
+        float absorbSpeed = energy / 10 + 3;
 
         otherCube.energy -= absorbSpeed * Time.fixedDeltaTime;
         energy += absorbSpeed * Time.fixedDeltaTime;
@@ -85,6 +103,19 @@ public class Cube : MonoBehaviour
             else
             {
                 otherCube.UpdateScale();
+                var a = Instantiate(absorbEffect);
+                a.transform.position = transform.position;
+                if (!absorbSound.isPlaying)
+                {
+                    absorbSound.Play();
+                }
+                
+                absorbSound.pitch = 1 / (0.5f + energy);
+                absorbSound.volume = 0.1f;
+                if (otherCube.GetComponent<PlayerMove>()||GetComponent<PlayerMove>())
+                {
+                    absorbSound.volume = 1f;
+                }
             }
 
         }

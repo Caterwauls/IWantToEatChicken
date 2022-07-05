@@ -10,6 +10,8 @@ public class SpawnGenerator : MonoBehaviour
     private BoxCollider area;
     private List<GameObject> props = new List<GameObject>();
 
+    private List<string> cubeNames = new List<string>();
+
 
 
     void Start()

@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     public Light particlesLight;
     public CinemachineVirtualCamera playerCamera;
     public Camera mainCam;
+    public string playerName = null;
 
 
     private BoxCollider boxCollider;
@@ -24,12 +25,8 @@ public class PlayerMove : MonoBehaviour
         _cube = GetComponent<Cube>();
         playerSkill = GetComponent<PlayerSkill>();
         particlesLight = GetComponentInChildren<Light>();
-
-    }
-
-    private void Start()
-    {
-
+        playerName = PlayerPrefs.GetString("AgarioPlayerName");
+        _cube.cubeName = playerName;
 
     }
 

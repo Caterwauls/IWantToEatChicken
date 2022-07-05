@@ -12,11 +12,22 @@ public class CubeSpawner : MonoBehaviour
     public float maxEnergy = 10;
     public float foodMin = 0.2f;
     public float foodMax = 1f;
+    public GameObject cubeNameManager;
+    public List<Cube> enemyCubeList = new List<Cube>();
+
+    public string[] cubeNames =
+    {
+        "오헤부너", "무한복귀","ZI존아델S22","검찢","클링위즈","흰뿔도마뱀","MADGECKO","제일약한전사","버프귤","Lunaris",
+        "쁘쁘띠따","system준몽","루시케","TT소년","토익잘보자","새우고로케","AUG로어그로","배고프다","훔","아악", "염소"
+    };
 
     public float allowedDistance = 3f;
 
     private BoxCollider _box;
 
+    private void Awake()
+    {
+    }
     private void Start()
     {
         _box = GetComponent<BoxCollider>();
@@ -24,6 +35,8 @@ public class CubeSpawner : MonoBehaviour
         for (int i = 0; i < cubeCount; i++)
         {
             Cube newCube = Instantiate(prefab, GetRandomPoint(), Random.rotation);
+            enemyCubeList.Add(newCube);
+            newCube.cubeName = cubeNames[i];
             newCube.energy = Random.Range(minEnergy, maxEnergy);
             newCube.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 1, 1, 0.75f, 1);
         }
@@ -32,8 +45,10 @@ public class CubeSpawner : MonoBehaviour
         {
             Cube newFood = Instantiate(foodCube, GetRandomPoint(), Random.rotation);
             newFood.energy = Random.Range(foodMin, foodMax);
-            newFood.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 1, 1, 0.75f, 1);
+            newFood.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 0.1f, 0.5f, 0.75f, 1);
         }
+
+        cubeNameManager.SetActive(true);
     }
 
     private Vector3 GetRandomPoint()
