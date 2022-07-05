@@ -91,7 +91,7 @@ public class AGGameManager : MonoBehaviour
     public void AllCubeChecker()
     {
         enemyCubes.Clear();
-        NPCSkill[] list = FindObjectsOfType<NPCSkill>();
+        CubeBehavior[] list = FindObjectsOfType<CubeBehavior>();
         if (list == null) return;
         PlayerMove playerCube = FindObjectOfType<PlayerMove>();
 

@@ -13,7 +13,6 @@ public class CubeBehavior : MonoBehaviour
     public Cube myCube;
     public Rigidbody cubeRigidbody;
     public GameObject enemyGameObject;
-    public NPCSkill npcSkill;
     public float smoothTime = 0.1f;
 
 
@@ -155,10 +154,6 @@ public class CubeBehavior : MonoBehaviour
         if (bigEnemy != null)
         {
             Run(bigEnemy);
-            if (npcSkill.CanBanish(bigEnemy))
-            {
-                npcSkill.Banish(bigEnemy);
-            }
         }
         else if (smallEnemy != null)
         {

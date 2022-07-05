@@ -104,6 +104,7 @@ public class Cube : MonoBehaviour
             {
                 otherCube.UpdateScale();
                 var a = Instantiate(absorbEffect);
+                a.GetComponent<ParticleSystem>().startColor = other.transform.GetComponentInParent<MeshRenderer>().material.color;
                 a.transform.position = transform.position;
                 if (!absorbSound.isPlaying)
                 {

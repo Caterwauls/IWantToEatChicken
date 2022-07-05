@@ -102,10 +102,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ec7fd3eed0d7f6448a8ebe8feb67919a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 2.83
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   acceleration: 0
   cubeName: 
   absorbSound: {fileID: 4432417312634390127}
-  absorbEffect: {fileID: 2091816747955395592, guid: 2746c3682ebccc849a5d52fc1d7cac6e,
+  absorbEffect: {fileID: 186250700266633827, guid: 2746c3682ebccc849a5d52fc1d7cac6e,
     type: 3}
   magnetRadius: 1.5
   magnetPullSpeed: 10
