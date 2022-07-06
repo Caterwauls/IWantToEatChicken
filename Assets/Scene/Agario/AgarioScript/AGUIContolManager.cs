@@ -29,7 +29,7 @@ public class AGUIContolManager : MonoBehaviour
 
 
             }
-            else
+            else if(Time.timeScale == 1 && !AGGameManager.instance.isPlayerDead)
             {
                 blur.SetActive(true);
                 inGameUI.SetActive(false);
