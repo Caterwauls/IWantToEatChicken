@@ -20,7 +20,7 @@ public class EREndingActivator : ERInteractable
     
     private void Awake()
     {
-        _light = GetComponent<Light>();
+        _light = GetComponentInChildren<Light>();
         _animatedCubeStartPos = animatedCube.position;
     }
 
@@ -49,13 +49,14 @@ public class EREndingActivator : ERInteractable
             player.GetComponent<ERPlayerAttack>().HolsterSword();
             player.StartChannel(10f);
             effect.Play();
-            ERUIManager.instance.WhiteFadeOut();
             for (float t = 0; t < duration; t += Time.deltaTime)
             {
                 _light.intensity = Mathf.Lerp(startIntensity, endIntensity, t / duration);
                 _light.range = Mathf.Lerp(startRange, endRange, t / duration);
+                yield return null;
             }
-            yield return new WaitForSeconds(2.5f);
+            ERUIManager.instance.WhiteFadeOut();
+            yield return new WaitForSeconds(5.5f);
             SceneManager.LoadScene(nextSceneName);
         }
     }

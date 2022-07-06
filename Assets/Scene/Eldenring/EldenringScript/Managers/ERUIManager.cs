@@ -105,7 +105,7 @@ public class ERUIManager : MonoBehaviour
         StartCoroutine(FadeInRoutine());
         IEnumerator FadeInRoutine()
         {
-            for (float t = 0; t < 1; t += Time.unscaledDeltaTime * 0.5f)
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime * 4f)
             {
                 whiteFadeEffectGroup.alpha = 1 - t;
                 yield return null;

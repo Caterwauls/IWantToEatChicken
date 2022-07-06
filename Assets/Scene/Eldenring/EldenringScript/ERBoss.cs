@@ -5,6 +5,7 @@ using UnityEngine;
 public class ERBoss : EREnemy
 {
     public GameObject boomEffect;
+    public GameObject activatedAfterDeath;
     
     protected override void OnDeath()
     {
@@ -17,8 +18,7 @@ public class ERBoss : EREnemy
             {
                 col.enabled = false;
             }
-            BGMManager.instance.
-
+            
             GetComponent<Rigidbody>().isKinematic = true;
             var player = FindObjectOfType<ERPlayer>();
             player.ApplyHeal(player.maxHealth - player.health);
@@ -32,6 +32,8 @@ public class ERBoss : EREnemy
                 Instantiate(boomEffect, transform.position + Vector3.up, transform.rotation);
             ERUIManager.instance.WhiteFadeIn();
             Destroy(gameObject);
+            activatedAfterDeath.SetActive(true);
+            BGMManager.instance.desiredClip = null;
         }
     }
 }

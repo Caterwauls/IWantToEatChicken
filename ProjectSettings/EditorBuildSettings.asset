@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Eldenring/Eldenring_StartMenu.unity
     guid: d16de485a725e0140bcace25e3ea630f
+  - enabled: 1
+    path: Assets/Scene/Ending/Ending.unity
+    guid: ba5ae261b0fc1594ea1c83ce66f931cb
   m_configObjects: {}
