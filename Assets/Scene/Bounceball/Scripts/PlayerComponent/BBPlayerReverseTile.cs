@@ -29,7 +29,7 @@ public class BBPlayerReverseTile : BBPlayerComponentBase
 
     IEnumerator OnCollisionRoutine(RaycastHit hit)
     {
-        if (hit.collider.tag == "ReverseTile")
+        if (hit.collider.tag == "ReverseTile" && !reverseOn)
         {
             reverseOn = true;
             var destination = hit.collider.GetComponent<BBReverseTile>().reversePlayerPos.position;

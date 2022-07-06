@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +7,14 @@ using UnityEngine.UI;
 public class BBAbilityUIControl : MonoBehaviour
 {
     public int rotSpeed = -60;
-    public BBPlayer player;
+    private BBPlayer _player;
 
     private float _time;
+
+    private void Start()
+    {
+        _player = FindObjectOfType<BBPlayer>();
+    }
 
     void Update()
     {
@@ -17,9 +23,9 @@ public class BBAbilityUIControl : MonoBehaviour
         var img = GetComponent<RawImage>();
         Color color;
     
-        if (player.ability.dashAbilityOn) color = new Color(1, 0.5f, 0.9f); // 대쉬
-        else if (player.ability.flyAbilityOn) color = new Color(0.3f, 1, 0.2f); // 날기
-        else if (player.ability.doubleJumpOn) color = new Color(0.15f, 0.48f, 1); // 더블점프
+        if (_player.ability.dashAbilityOn) color = new Color(1, 0.5f, 0.9f); // 대쉬
+        else if (_player.ability.flyAbilityOn) color = new Color(0.3f, 1, 0.2f); // 날기
+        else if (_player.ability.doubleJumpOn) color = new Color(0.15f, 0.48f, 1); // 더블점프
         else
         {
             img.color = Color.clear;

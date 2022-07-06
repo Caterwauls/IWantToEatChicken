@@ -13,7 +13,7 @@ public class BBPlayerMovement : BBPlayerComponentBase
     public float wallReflection = 10f;
     public bool playerMoveOn = true;
 
-
+    public System.Action onBounce;
     public GameObject normalEffectPrefab;
     public float jumpSpeed = 100f;
 
@@ -133,6 +133,7 @@ public class BBPlayerMovement : BBPlayerComponentBase
 
             //기본 점프
             Instantiate(normalEffectPrefab, bottomPos, Quaternion.identity);
+            onBounce?.Invoke();
             Vector3 newVelocity = _rb.velocity;
             newVelocity.y = jumpSpeed;
             _rb.velocity = newVelocity;

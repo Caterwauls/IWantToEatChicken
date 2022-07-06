@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,12 +9,12 @@ public class BBDeadLine : MonoBehaviour
     public GameObject prefab;
 
     private GameObject _dieEffect;
-    private int _deadNum;
 
-    private void Start()
+    private void Awake()
     {
-        _deadNum = PlayerPrefs.GetInt("deadNum");
+        GetComponent<MeshRenderer>().enabled = false;
     }
+
     private void Update()
     {
         waitDie();
@@ -22,8 +23,6 @@ public class BBDeadLine : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            _deadNum++;
-            PlayerPrefs.SetInt("deadNum", _deadNum);
             _dieEffect = Instantiate(prefab);
             _dieEffect.transform.position = other.transform.position;
             other.gameObject.SetActive(false);

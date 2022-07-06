@@ -8,17 +8,11 @@ public class Flow_BB_Stg2 : Flow
     public GameObject cams;
 
     private BBPlayer _player;
-    private int _deadNum => PlayerPrefs.GetInt("deadNum");
-
 
     protected override IEnumerator FlowRoutine()
     {
         DialogManager.instance.enableDialogBoxAnimation = false;
         _player = player.GetComponent<BBPlayer>();
-
-
-        player.GetComponent<BBPlayerAbility>().guideAbilityOn = true;
-
 
         yield break;
     }
