@@ -8,8 +8,7 @@ public class ERStartMenuSequence : MonoBehaviour
 {
     public CanvasGroup fadeGroup;
     public CanvasGroup pressAnyButtonGroup;
-    public AudioSource interactAudio;
-    public string nextSceneName;
+    public Flow flow;
 
     private void Start()
     {
@@ -26,30 +25,13 @@ public class ERStartMenuSequence : MonoBehaviour
             fadeGroup.alpha = 0f;
             yield return new WaitForSeconds(2f);
             var elapsed = 0f;
+            flow.StartFlow();
             while (true)
             {
                 pressAnyButtonGroup.alpha = Mathf.Sin(elapsed * 2f + 3f/2f * Mathf.PI) / 2f + 0.5f;
                 elapsed += Time.deltaTime;
-                if (Input.GetKeyDown(KeyCode.Space)) break;
                 yield return null;
             }
-
-            interactAudio.Play();
-            BGMManager.instance.desiredClip = null;
-            for (float t = 0; t < 1; t += Time.deltaTime * 2f)
-            {
-                pressAnyButtonGroup.alpha = 1 - t;
-                yield return null;
-            }
-            for (float t = 0; t < 1; t += Time.deltaTime / 2f)
-            {
-                fadeGroup.alpha = t;
-                yield return null;
-            }
-
-            fadeGroup.alpha = 1;
-            yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene(nextSceneName);
         }
     }
 }

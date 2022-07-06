@@ -49,7 +49,7 @@ public class ERSavePoint : ERInteractable
         {
             ERGameManager.savePosition = transform.position + savePointOffset;
             player.GetComponent<ERPlayerPotion>().RechargePotions();
-            player.StartChannel(4.5f);
+            player.StartChannel(3.5f);
             yield return new WaitForSeconds(1.5f);
             explodeEffect.Play();
             ERUIManager.instance.ShowSavedMessage();

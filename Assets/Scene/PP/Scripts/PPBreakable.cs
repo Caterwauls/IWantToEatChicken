@@ -54,6 +54,8 @@ public class PPBreakable : MonoBehaviour
         {
             Instantiate(damageEffect, transform.position, Quaternion.identity);
         }
+
+        if (curHP < 0) curHP = 0;
     }
 
     public void ReturnToOriginal()

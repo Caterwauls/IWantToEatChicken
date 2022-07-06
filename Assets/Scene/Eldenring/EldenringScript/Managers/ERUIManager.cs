@@ -20,6 +20,7 @@ public class ERUIManager : MonoBehaviour
     public Transform dimmerTextTransform;
 
     public CanvasGroup fadeEffectGroup;
+    public CanvasGroup whiteFadeEffectGroup;
 
     public CanvasGroup newZoneFoundMessageGroup;
     public Text newZoneNameText;
@@ -96,6 +97,34 @@ public class ERUIManager : MonoBehaviour
                 yield return null;
             }
             fadeEffectGroup.alpha = 1;
+        }
+    }
+
+    public void WhiteFadeIn()
+    {
+        StartCoroutine(FadeInRoutine());
+        IEnumerator FadeInRoutine()
+        {
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime * 0.5f)
+            {
+                whiteFadeEffectGroup.alpha = 1 - t;
+                yield return null;
+            }
+            whiteFadeEffectGroup.alpha = 0;
+        }
+    }
+
+    public void WhiteFadeOut()
+    {
+        StartCoroutine(FadeOutRoutine());
+        IEnumerator FadeOutRoutine()
+        {
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime * 0.5f)
+            {
+                whiteFadeEffectGroup.alpha = t;
+                yield return null;
+            }
+            whiteFadeEffectGroup.alpha = 1;
         }
     }
     

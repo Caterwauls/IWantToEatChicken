@@ -39,7 +39,7 @@ public class ERDamageCollider : MonoBehaviour
         if (Time.time - _lastDamageTime < damageCooldown) return;
         _lastDamageTime = Time.time;
         ent.ApplyDamage(Random.Range(damageMin, damageMax));
-        ent.ApplyStun(stunDuration);
+        if (stunDuration > 0.01f) ent.ApplyStun(stunDuration);
         var pushDir = (other.transform.position - transform.position).normalized;
         ent.GetComponent<Rigidbody>().velocity += pushDir * pushVelocity + Vector3.up * verticalPushVelocity;
     }

@@ -55,7 +55,7 @@ public class Flow : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowDialogBoxRoutine(bool isShow)
+    protected virtual IEnumerator ShowDialogBoxRoutine(bool isShow)
     {
         if (!DialogManager.instance.enableDialogBoxAnimation)
         {
@@ -188,7 +188,7 @@ public class Flow : MonoBehaviour
                 yield return new WaitForSecondsRealtime(DialogManager.instance.perCharacterDelay);
             }
             StopCoroutine(checkRoutine);
-            yield return new WaitForSecondsRealtime(0.3f);
+            yield return new WaitForSecondsRealtime(0.05f);
 
             DialogManager.instance.dialogText.text += "_";
             DialogManager.instance.promptEffect.SetActive(true);
