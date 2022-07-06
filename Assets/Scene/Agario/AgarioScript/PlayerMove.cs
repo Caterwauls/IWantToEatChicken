@@ -45,21 +45,10 @@ public class PlayerMove : MonoBehaviour
 
     //}
 
-    private void Start()
-    {
-        _isCanPlayerMove = AGGameManager.instance.flow.isCanPlayerMove;
-    }
 
     private void Update()
     {
-        _isCanPlayerMove = AGGameManager.instance.flow.isCanPlayerMove;
-        if (!_isCanPlayerMove) return;
-        //if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
-        //{
-        //    jumpCheck = false;
-        //    _cube.CubeJump();
-        //    StartCoroutine(JumpDelay());
-        //}
+        if (!AGGameManager.instance.isCanPlayerMove) return;
         if ((Input.GetKeyDown(KeyCode.F)) && playerSkill._canUseTimeStop)
         {
             playerSkill.timeStop();

@@ -529,6 +529,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97807094}
   m_CullTransparentMesh: 0
+--- !u!1 &121814609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121814610}
+  - component: {fileID: 121814612}
+  - component: {fileID: 121814611}
+  m_Layer: 5
+  m_Name: PressEsc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &121814610
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121814609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 955173832}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 200}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &121814611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121814609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6431373}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: defa63f8bfb429a4299e1bfa6e5084bd, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 4
+    m_MaxSize: 40
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "ESC \uD0A4\uB97C \uB204\uB974\uC138\uC694."
+--- !u!222 &121814612
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121814609}
+  m_CullTransparentMesh: 0
 --- !u!1 &168515577
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,11 +1038,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDialogEnd: 0
   initWhenDialogEnded: {fileID: 211723003}
-  isCanPlayerMove: 0
-  inGameUi: {fileID: 0}
-  guideArrowUi: {fileID: 0}
+  inGameUi: {fileID: 511831358}
+  guideArrowUi: {fileID: 2005468772}
   didSeeGuide: 0
   startGame: 0
+  pressEsc: {fileID: 121814609}
 --- !u!1 &266736325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,7 +1863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -55, y: 40}
+  m_AnchoredPosition: {x: -135, y: 55}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &459057256
@@ -1987,6 +2065,42 @@ Transform:
   m_Father: {fileID: 813814456}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &511831358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 511831359}
+  m_Layer: 5
+  m_Name: ThisCanPlayWhenDialogEnded
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &511831359
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511831358}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1324882776}
+  m_Father: {fileID: 955173832}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &539886596
 GameObject:
   m_ObjectHideFlags: 3
@@ -3329,16 +3443,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 813814452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08626c67fb3554d4fbaae18bf3ca693d, type: 3}
+  m_Script: {fileID: 11500000, guid: 84eaa2487950baa46b72af6043e49e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   choiceNum: 0
   selectionList: []
-  barPrefab: {fileID: 1827577424201537177, guid: cbeb7b15bac8dc44eaa66aa62d775059,
+  barPrefab: {fileID: 1827577424201537177, guid: 99e6446e73fac7d408f2cd30c6e089ef,
     type: 3}
   barCanvas: {fileID: 955173828}
-  player: {fileID: 342567160}
-  barDistance: 160
+  player: {fileID: 2058995185}
+  barDistance: 200
 --- !u!23 &813814454
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4014,6 +4128,9 @@ MonoBehaviour:
     type: 3}
   playerPos: {x: 0, y: 0, z: 0}
   isPlayerDead: 0
+  deadNum: 0
+  isCanPlayerMove: 0
+  isCanUseUi: 0
   flow: {fileID: 254780990}
   leaderboard: {fileID: 1834697337}
 --- !u!1 &886089719
@@ -4702,12 +4819,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1324882776}
+  - {fileID: 511831359}
   - {fileID: 740737496}
   - {fileID: 1436812303}
   - {fileID: 1506134351}
   - {fileID: 1057930022}
   - {fileID: 2005468773}
+  - {fileID: 121814610}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5479,9 +5597,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2829544173825375987, guid: 3455558df3e3ef3438b61e1601c554f0,
         type: 3}
+      propertyPath: cubeSpawner
+      value: 
+      objectReference: {fileID: 409168236}
+    - target: {fileID: 2829544173825375987, guid: 3455558df3e3ef3438b61e1601c554f0,
+        type: 3}
+      propertyPath: rangeObject
+      value: 
+      objectReference: {fileID: 409168234}
+    - target: {fileID: 2829544173825375987, guid: 3455558df3e3ef3438b61e1601c554f0,
+        type: 3}
       propertyPath: acceleration
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2829544173825375987, guid: 3455558df3e3ef3438b61e1601c554f0,
+        type: 3}
+      propertyPath: rangeCollider
+      value: 
+      objectReference: {fileID: 409168235}
     - target: {fileID: 3681381660593262850, guid: 3455558df3e3ef3438b61e1601c554f0,
         type: 3}
       propertyPath: m_Name
@@ -6794,7 +6927,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324882775}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6802,13 +6935,13 @@ RectTransform:
   - {fileID: 1328507631}
   - {fileID: 1834697336}
   - {fileID: 1563904996}
-  m_Father: {fileID: 955173832}
+  m_Father: {fileID: 511831359}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 823.88116, y: 419.5473}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1328507630
 GameObject:
@@ -7413,8 +7546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d84833110c712649a62476f8b4163b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogFile: {fileID: 4900000, guid: c513594d6f823a244b7af70bc1bd4987, type: 3}
-  choiceFile: {fileID: 4900000, guid: 8c56b9d96dddc9c4f91641c2cc8818c8, type: 3}
+  dialogFile: {fileID: 4900000, guid: a7e0cfc2f7b1948408a697f97ccab604, type: 3}
+  choiceFile: {fileID: 4900000, guid: dfed32027bc7d14409abb07d199265f3, type: 3}
   dialogBox: {fileID: 1663366416}
   blurEffect: {fileID: 452185059}
   playerSelectionMode: {fileID: 813814452}
@@ -7422,7 +7555,7 @@ MonoBehaviour:
   promptEffect: {fileID: 459057254}
   lastChoice: -1
   didSelect: 0
-  dialogText: {fileID: 0}
+  dialogText: {fileID: 404230203}
   perCharacterDelay: 0.05
   characterEffect: {fileID: 4929648634204783916, guid: 070d818ad3b33f844a8f5b539edec1aa,
     type: 3}

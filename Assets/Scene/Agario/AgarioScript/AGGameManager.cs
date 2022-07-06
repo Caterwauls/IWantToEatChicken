@@ -25,6 +25,8 @@ public class AGGameManager : MonoBehaviour
     public Vector3 playerPos;
     public bool isPlayerDead = false;
     public int deadNum;
+    public bool isCanPlayerMove = false;
+    public bool isCanUseUi = false;
 
     public Flow_AG flow;
 
@@ -35,7 +37,7 @@ public class AGGameManager : MonoBehaviour
     private float _currentTime;
     private float _maxTime;
 
-    
+
 
     private int remainCubeNum = 0;
 
@@ -78,6 +80,7 @@ public class AGGameManager : MonoBehaviour
 
         if (myCube != myCube.gameObject.activeSelf)
         {
+            PlayerPrefs.SetInt("AGdeadNum", deadNum++);
             isPlayerDead = true;
             onPlayerDead.Invoke();
         }
@@ -122,7 +125,7 @@ public class AGGameManager : MonoBehaviour
 
 
             else
-                enemyCubes[i].GetComponent<Outline>().enabled =false;
+                enemyCubes[i].GetComponent<Outline>().enabled = false;
         }
 
 

@@ -39,9 +39,6 @@ public class Cube : MonoBehaviour
 
     private void Start()
     {
-        cubeSpawner = FindObjectOfType<CubeSpawner>();
-        rangeObject = cubeSpawner.gameObject;
-        rangeCollider = cubeSpawner.GetComponent<BoxCollider>();
         UpdateScale();
         CheckCubeLeaveMap();
         gameObject.name = cubeName;
