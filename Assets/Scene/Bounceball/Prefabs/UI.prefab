@@ -126,7 +126,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &4405293031838211040
 MonoBehaviour:
@@ -259,6 +259,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4405293031838211046}
     m_Modifications:
+    - target: {fileID: 1528559482559909873, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559482679535549, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559482803793027, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559482803793029, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559482845793358, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559483044325919, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1528559483067743417, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -368,6 +398,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UniversalMenus
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559483221914561, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559483221914623, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559483288801428, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bccb3997dba4e7946ba306a8cf9cdcc8, type: 3}

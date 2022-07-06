@@ -769,12 +769,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.28
-  m_Text: "<color=yellow><size=45>\uAC00\uC774\uB4DC</size></color>\n\n\uC790\uC2E0\uBCF4\uB2E4
-    <color=red>HP</color>\uAC00 \uC801\uC740 \uD050\uBE0C\uC5D0\uAC8C \uB2E4\uAC00\uAC00\uBA74
-    \uD761\uC218\uD569\uB2C8\uB2E4.\n\uB9C8\uC6B0\uC2A4\uB85C \uC870\uC791\uD569\uB2C8\uB2E4.
-    \n\uD761\uC218 \uAC00\uB2A5\uD55C \uD050\uBE0C\uB294 \uBE68\uAC04\uC0C9 \uC678\uACFD\uC120\uC774
-    \uD45C\uC2DC\uB429\uB2C8\uB2E4.\n\uBAA8\uB4E0 \uD050\uBE0C\uB97C \uD761\uC218\uD558\uBA74
-    \uC2B9\uB9AC\uD569\uB2C8\uB2E4.  \n"
+  m_Text: "<color=yellow><size=45>\uAC00\uC774\uB4DC</size></color>\n\n\uD280\uB294
+    \uACF5\uC744 \uC870\uC885\uD558\uC5EC \uAC01 \uC2A4\uD14C\uC774\uC9C0\uC758 \uD3EC\uD0C8\uB85C
+    \uB4E4\uC5B4\uAC00\uC138\uC694.\n\uBC29\uD5A5\uD0A4 \uD639\uC740 WASD\uD0A4\uB85C
+    \uC6C0\uC9C1\uC77C \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uC544\uC774\uD15C\uC744
+    \uC8FC\uC6B8 \uC218 \uC788\uACE0, F\uD0A4\uB97C \uB20C\uB7EC \uC8FC\uC6B4 \uC544\uC774\uD15C\uC744
+    \uC0AC\uC6A9\uD569\uB2C8\uB2E4.\n\nSpace\uB97C \uB20C\uB7EC \uC2A4\uD14C\uC774\uC9C0
+    \uC804\uCCB4\uB97C \uBCFC \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n"
 --- !u!1 &1528559481916640430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2883,7 +2884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0.018100739, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3908,7 +3909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

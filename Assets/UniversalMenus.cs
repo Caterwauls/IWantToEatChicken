@@ -25,6 +25,8 @@ public class UniversalMenus : MonoBehaviour
         if (_isOpen)
         {
             menuBase.SetActive(!menuBase.activeSelf);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else
         {
