@@ -765,6 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputText: {fileID: 1212411979}
+  cursorImg: {fileID: 2800000, guid: 6cdac76f86a64c14c83de536ad8d8bc7, type: 3}
 --- !u!1 &630843327
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,43 +6,16 @@ using UnityEngine.EventSystems;
 
 public class MenuBarControl : MonoBehaviour
 {
-    public int menuBarNum = 0;
-    public GameObject[] menubars = new GameObject[4];
-
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(menuBarRoutine());
-        
-
-    }
-
-    IEnumerator menuBarRoutine()
-    {
-        while (true)
+        for (int i = 0; i < transform.GetChildCount(); i++)
         {
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            if (i == 0)
             {
-                if (menuBarNum != 0)
-                {
-                    menuBarNum++;
-                }
-
+                transform.GetChild(0).gameObject.SetActive(true);
             }
-            else if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                if(menuBarNum != 3)
-                {
-                    menuBarNum--;
-                }
-            }
-            EventSystem.current.SetSelectedGameObject(menubars[menuBarNum].gameObject);
-
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                menubars[menuBarNum].GetComponent<Button>().onClick.Invoke();
-            }
-
-            yield return new WaitForSecondsRealtime(0.1f);
+            else
+                transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 }

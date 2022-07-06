@@ -7,7 +7,10 @@ using UnityEngine.SceneManagement;
 public class AgarioMenuScene : MonoBehaviour
 {
     public GameObject inputText;
+
     private string playerName = null;
+
+    [SerializeField] private Texture2D cursorImg;
 
     private void Awake()
     {
@@ -15,6 +18,11 @@ public class AgarioMenuScene : MonoBehaviour
         playerName = inputText.GetComponent<Text>().text;
     }
 
+    private void Update()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);
+    }
     //마우스
     public void InputName()
     {

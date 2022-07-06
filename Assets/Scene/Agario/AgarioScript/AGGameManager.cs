@@ -23,9 +23,6 @@ public class AGGameManager : MonoBehaviour
     public GameObject playerDeadEffect;
     public Vector3 playerPos;
 
-    public GameObject blur;
-    public GameObject inGameUI;
-
     public Text leaderboard;
 
 
@@ -33,7 +30,7 @@ public class AGGameManager : MonoBehaviour
     private float _currentTime;
     private float _maxTime;
 
-    [SerializeField] private Texture2D cursorImg;
+    
 
     private int remainCubeNum = 0;
 
@@ -54,33 +51,6 @@ public class AGGameManager : MonoBehaviour
     {
         playerPos = myCube.transform.position;
         audioTimeControl();
-
-        if (Input.GetKeyDown(KeyCode.Escape) && !isCutScenePlaying)
-        {
-            if (Time.timeScale == 0)
-            {
-                blur.SetActive(false);
-                inGameUI.SetActive(true);
-                Cursor.visible = true;
-                Time.timeScale = 1;
-
-
-
-            }
-            else
-            {
-                blur.SetActive(true);
-                inGameUI.SetActive(false);
-                Cursor.visible = false;
-                Time.timeScale = 0;
-            }
-
-
-        }
-
-
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.SetCursor(cursorImg, Vector2.zero, CursorMode.ForceSoftware);
 
         if (SceneManager.GetActiveScene().buildIndex == 1) return;
 

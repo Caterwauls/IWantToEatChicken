@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: defa63f8bfb429a4299e1bfa6e5084bd
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Joongnajoche
+  fontNames:
+  - Joongnajoche
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 52c80e4a1deb1a340825c0d2dc49b88d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
