@@ -6,37 +6,33 @@ public class SearchWhereIsEnemey : MonoBehaviour
 {
     private static Collider[] _collisionBuffer = new Collider[128];
 
-    public GameObject player;
+    public Cube player;
     public float rotSpeed = 360f;
-    public float shortestDis = float.PositiveInfinity;
-    public Cube shortestEnemy = null;
+
 
     private void Update()
     {
+        float shortestDis = float.PositiveInfinity;
+        Cube shortestEnemy = null;
         transform.position = player.transform.position;
 
         var numOfEntity = Physics.OverlapSphereNonAlloc(transform.position, 100, _collisionBuffer);
-        List<Cube> enemyCubes = new List<Cube>();
+
         for(int i = 0; i < numOfEntity; i++)
         {
             var col = _collisionBuffer[i];
-            if (col.GetComponent<CubeBehavior>() != null)
-            {
-                enemyCubes.Insert(0, col.GetComponent<Cube>());
-            }
-            else continue;
+            var cube = col.GetComponent<CubeBehavior>();
+            if (cube == null) continue;
+            var sqrDist = Vector3.SqrMagnitude(cube.transform.position - player.transform.position);
+            if (sqrDist > shortestDis) continue;
+            if (!player.CanEat(cube.myCube)) continue;
+            shortestDis = sqrDist;
+            shortestEnemy = cube.myCube;
+            
         }
-        for(int i = 0; i < enemyCubes.Count; i++)
-        {
-            if(shortestDis >= Vector3.SqrMagnitude(enemyCubes[i].transform.position - player.transform.position) && player.GetComponent<Cube>().CanEat(enemyCubes[i]))
-            {
-                shortestDis = Vector3.SqrMagnitude(enemyCubes[i].transform.position - player.transform.position);
-                shortestEnemy = enemyCubes[i];
-            }
-        }
+
         if (shortestEnemy == null) return;
         ThereIsMyEnemy(shortestEnemy.transform);
-        enemyCubes.Clear();
     }
 
     void ThereIsMyEnemy(Transform target)
