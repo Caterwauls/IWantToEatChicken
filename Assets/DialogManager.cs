@@ -37,7 +37,7 @@ public class DialogManager : MonoBehaviour
 
     public Dictionary<char, string> richTextAfterWord = new Dictionary<char, string>();
 
-    public int lastChoice = -1;
+    public int lastChoice = 0;
     public bool didSelect = false;
     public Text dialogText;
 

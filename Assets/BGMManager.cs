@@ -33,13 +33,12 @@ public class BGMManager : MonoBehaviour
             if (_source.volume < 0.01f || _source.clip == null)
             {
                 _source.clip = desiredClip;
-                _source.volume = 1f;
                 _source.Play();
             }
         }
         else
         {
-            _source.volume = Mathf.MoveTowards(_source.volume, 1, Time.deltaTime / 2f);
+            _source.volume = Mathf.MoveTowards(_source.volume, 1, Time.deltaTime);
         }
     }
 }

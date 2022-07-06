@@ -31,7 +31,6 @@ public class Flow : MonoBehaviour
 
     private void EndAnswerFlow()
     {
-        DialogManager.instance.dialogBox.SetActive(true);
         DialogManager.instance.blurEffect.SetActive(false);
         DialogManager.instance.playerSelectionMode.SetActive(false);
     }
@@ -102,6 +101,7 @@ public class Flow : MonoBehaviour
 
     protected virtual IEnumerator AskChoiceRoutine(string selectionName)
     {
+        DialogManager.instance.lastChoice = 0;
         DialogManager.instance.currentChoice = DialogManager.instance.choices[selectionName];
         DialogManager.instance.didSelect = false;
         yield return new WaitForSecondsRealtime(1f);
