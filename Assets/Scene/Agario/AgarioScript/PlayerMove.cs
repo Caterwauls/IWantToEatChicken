@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
@@ -26,7 +27,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        _isCanPlayerMove = AGGameManager.instance.flow.isCanPlayerMove;
+        
         playerRigidbody = GetComponent<Rigidbody>();
         _cube = GetComponent<Cube>();
         playerSkill = GetComponent<PlayerSkill>();
@@ -44,6 +45,10 @@ public class PlayerMove : MonoBehaviour
 
     //}
 
+    private void Start()
+    {
+        _isCanPlayerMove = AGGameManager.instance.flow.isCanPlayerMove;
+    }
 
     private void Update()
     {
