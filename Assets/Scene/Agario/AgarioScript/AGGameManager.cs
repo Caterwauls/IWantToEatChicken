@@ -13,18 +13,13 @@ public class AGGameManager : MonoBehaviour
     public static AGGameManager instance;
     public List<Cube> enemyCubes;
     public Cube myCube;
-    public Camera scene1Camera;
     public Text remainCubes;
-    public TextAlpha textAlpha;
     public UnityEvent onPlayerWin;
-    public UnityEvent WinTextEnd;
     public UnityEvent onPlayerDead;
-    public bool isCutScenePlaying;
     public GameObject[] audios;
     public GameObject playerDeadEffect;
     public Vector3 playerPos;
     public bool isPlayerDead = false;
-    public int deadNum;
     public bool isCanPlayerMove = false;
     public bool isCanUseUi = false;
 
@@ -45,17 +40,11 @@ public class AGGameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        isCutScenePlaying = false;
     }
 
     private void Start()
     {
         flow.StartFlow();
-        if (!PlayerPrefs.HasKey("AGdeadNum"))
-        {
-            PlayerPrefs.SetInt("AGdeadNum", 0);
-        }
-        deadNum = PlayerPrefs.GetInt("AGdeadNum");
         audios = GameObject.FindGameObjectsWithTag("Audio");
         lastTimeScale = Time.timeScale;
     }
@@ -78,9 +67,9 @@ public class AGGameManager : MonoBehaviour
         }
 
 
-        if (myCube != myCube.gameObject.activeSelf)
+        if (!myCube.gameObject.activeSelf && !isPlayerDead)
         {
-            PlayerPrefs.SetInt("AGdeadNum", deadNum++);
+            Flow_AG._deadNum++;
             isPlayerDead = true;
             onPlayerDead.Invoke();
         }
@@ -88,8 +77,6 @@ public class AGGameManager : MonoBehaviour
         if (enemyCubes.Count <= 0)
         {
             onPlayerWin.Invoke();
-            StartCoroutine(WinTimer());
-            return;
 
         }
     }
@@ -179,26 +166,7 @@ public class AGGameManager : MonoBehaviour
         remainCubes.text = "남은 큐브 수: " + remainCubeNum;
     }
 
-    IEnumerator WinTimer()
-    {
-        //myCube.enabled = false;
-        //myCube.GetComponent<PlayerSkill>().enabled = false;
-
-
-
-        yield return new WaitForSeconds(10f);
-
-        //scene1Camera.gameObject.SetActive(false);
-        //SceneManager.LoadScene(1, LoadSceneMode.Additive);
-        //yield break;
-        //yield return new WaitForSeconds(1f);
-
-        //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
-        WinTextEnd.Invoke();
-        isCutScenePlaying = true;
-
-        yield break;
-    }
+    
 
     void audioTimeControl()
     {
@@ -212,10 +180,5 @@ public class AGGameManager : MonoBehaviour
             }
         }
 
-    }
-
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.DeleteAll();
     }
 }
