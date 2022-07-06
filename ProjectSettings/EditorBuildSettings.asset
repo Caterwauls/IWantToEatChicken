@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/Continue.unity
+    path: Assets/Scene/Continue/Continue.unity
     guid: 65d69751c8cf53e468cb95aa0a18acf4
   - enabled: 1
     path: Assets/Scene/PP/PPScene.unity
