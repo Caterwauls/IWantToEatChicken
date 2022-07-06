@@ -36,12 +36,12 @@ public class ENFlow : Flow
         yield return BlackFadeIn();
         player.canMove = false;
         BGMManager.instance.desiredClip = defaultAmbience;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         moveMessage.SetActive(true);
         player.canMove = true;
         yield return new WaitForSeconds(3f);
         moveMessage.SetActive(false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
         yield return PrintDialogRoutine("바깥피막");
         yield return AskChoiceRoutine("의미");
         BGMManager.instance.desiredClip = caveAmbience;
