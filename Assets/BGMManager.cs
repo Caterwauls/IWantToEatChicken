@@ -23,6 +23,14 @@ public class BGMManager : MonoBehaviour
     private void Awake()
     {
         _source = GetComponent<AudioSource>();
+        if (_instance != null && _instance != this)
+        {
+            _instance.desiredClip = desiredClip;
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
