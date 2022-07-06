@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,9 @@ public class AGGameManager : MonoBehaviour
     public GameObject playerDeadEffect;
     public Vector3 playerPos;
     public bool isPlayerDead = false;
+    public int deadNum;
+
+    public Flow_AG flow;
 
     public Text leaderboard;
 
@@ -44,12 +48,19 @@ public class AGGameManager : MonoBehaviour
 
     private void Start()
     {
+        flow.StartFlow();
+        if (!PlayerPrefs.HasKey("AGdeadNum"))
+        {
+            PlayerPrefs.SetInt("AGdeadNum", 0);
+        }
+        deadNum = PlayerPrefs.GetInt("AGdeadNum");
         audios = GameObject.FindGameObjectsWithTag("Audio");
         lastTimeScale = Time.timeScale;
     }
 
     void Update()
     {
+        if (!flow.isDialogEnd) return;
         playerPos = myCube.transform.position;
         audioTimeControl();
 
@@ -200,5 +211,8 @@ public class AGGameManager : MonoBehaviour
 
     }
 
-
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

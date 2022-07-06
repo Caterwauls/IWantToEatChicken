@@ -21,10 +21,12 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody playerRigidbody;
     private PlayerSkill playerSkill;
     private Cube _cube;
+    private bool _isCanPlayerMove;
 
 
     private void Awake()
     {
+        _isCanPlayerMove = AGGameManager.instance.flow.isCanPlayerMove;
         playerRigidbody = GetComponent<Rigidbody>();
         _cube = GetComponent<Cube>();
         playerSkill = GetComponent<PlayerSkill>();
@@ -45,7 +47,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-
+        _isCanPlayerMove = AGGameManager.instance.flow.isCanPlayerMove;
+        if (!_isCanPlayerMove) return;
         //if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
         //{
         //    jumpCheck = false;
@@ -65,6 +68,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!_isCanPlayerMove) return;
         var ray = mainCam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
         {

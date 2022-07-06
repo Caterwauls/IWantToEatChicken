@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Flow_AG : Flow
+{
+    public bool isDialogEnd = false;
+    public GameObject initWhenDialogEnded;
+    public bool isCanPlayerMove = false;
+    public GameObject inGameUi;
+    public GameObject guideArrowUi;
+    public bool didSeeGuide = false;
+    public bool startGame = false;
+
+    private int _deadNum;
+    
+    
+    private void Awake()
+    {
+        _deadNum = PlayerPrefs.GetInt("AGdeadNum");
+    }
+
+     
+    
+    protected override IEnumerator FlowRoutine()
+    {
+
+        if (_deadNum == 0)
+        {
+            yield return new WaitForSecondsRealtime(3f);
+            Time.timeScale = 0;
+        
+            yield return PrintDialogRoutine("무슨");
+
+            yield return AskChoiceRoutine("무슨");
+
+            yield return new WaitForSecondsRealtime(0.5f);
+
+            yield return PrintDialogRoutine("포기");
+
+            Time.timeScale = 1;
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Escape));
+            guideArrowUi.SetActive(true);
+
+            yield return new WaitUntil(() => didSeeGuide);
+            guideArrowUi.SetActive(false);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Escape) || startGame);
+            
+        }
+        else if (_deadNum == 1)
+        {
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(1f);
+            yield return PrintDialogRoutine("1데스");
+            
+        }
+        else if (_deadNum == 2)
+        {
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(1f);
+            yield return PrintDialogRoutine("2데스");
+            
+        }
+        else
+        {
+            Time.timeScale = 0;
+            yield return new WaitForSecondsRealtime(1f);
+            yield return PrintDialogRoutine("3데스");
+            
+            
+        }
+        inGameUi.SetActive(true);
+        initWhenDialogEnded.SetActive(true);
+        isDialogEnd = true;
+        isCanPlayerMove = true;
+        Time.timeScale = 1;
+        
+        
+        
+        
+        
+        
+        yield return new WaitForSecondsRealtime(0.1f);
+    }
+    
+    public void DidSeeGuide()
+    {
+        didSeeGuide = true;
+    }
+
+    public void FinallyStartGame()
+    {
+        startGame = true;
+    }
+}
+
+
