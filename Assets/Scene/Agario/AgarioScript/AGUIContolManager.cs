@@ -31,7 +31,7 @@ public class AGUIContolManager : MonoBehaviour
 
 
             }
-            else if(Time.timeScale == 1 && !AGGameManager.instance.isPlayerDead)
+            else if (Time.timeScale == 1 && !AGGameManager.instance.isPlayerDead)
             {
                 blur.SetActive(true);
                 inGameUI.SetActive(false);
@@ -58,6 +58,6 @@ public class AGUIContolManager : MonoBehaviour
 
     public void OnClickGiveUp()
     {
-        SceneManager.LoadScene(10);
+        SceneManager.LoadScene(0);
     }
 }
