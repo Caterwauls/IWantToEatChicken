@@ -22,19 +22,6 @@ public class Flow : MonoBehaviour
         yield break;
     }
 
-    private void StartAnswerFlow()
-    {
-        DialogManager.instance.dialogBox.SetActive(false);
-        DialogManager.instance.blurEffect.SetActive(true);
-        DialogManager.instance.playerSelectionMode.SetActive(true);
-    }
-
-    private void EndAnswerFlow()
-    {
-        DialogManager.instance.blurEffect.SetActive(false);
-        DialogManager.instance.playerSelectionMode.SetActive(false);
-    }
-
     protected IEnumerator StopTimeAnimatedRoutine()
     {
         if (!DialogManager.instance.enableDialogBoxAnimation)
@@ -105,9 +92,13 @@ public class Flow : MonoBehaviour
         DialogManager.instance.currentChoice = DialogManager.instance.choices[selectionName];
         DialogManager.instance.didSelect = false;
         yield return new WaitForSecondsRealtime(1f);
-        StartAnswerFlow();
+        DialogManager.instance.dialogBox.SetActive(false);
+        DialogManager.instance.blurEffect.SetActive(true);
+        DialogManager.instance.playerSelectionMode.SetActive(true);
         yield return new WaitUntil(() => DialogManager.instance.didSelect);
-        EndAnswerFlow();
+        DialogManager.instance.blurEffect.SetActive(false);
+        DialogManager.instance.playerSelectionMode.SetActive(false);
+        DialogManager.instance.dialogBox.SetActive(true);
     }
 
     private bool shouldSkip = false;

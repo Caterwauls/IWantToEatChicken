@@ -28,7 +28,7 @@ public class Effect : MonoBehaviour
     {
         if (destroyOnEnd) _waitingForDestroy = true;
         _watchedConditions.Clear();
-        _lastPlayTime = Time.time;
+        _lastPlayTime = Time.unscaledTime;
         
         foreach (var ps in GetComponentsInChildren<ParticleSystem>())
         {
@@ -69,7 +69,7 @@ public class Effect : MonoBehaviour
     private void FixedUpdate()
     {
         if (!_waitingForDestroy) return;
-        if (Time.time - _lastPlayTime < MinimumPlayDuration) return;
+        if (Time.unscaledTime - _lastPlayTime < MinimumPlayDuration) return;
 
         foreach (var cond in _watchedConditions)
         {
