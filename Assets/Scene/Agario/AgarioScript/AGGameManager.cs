@@ -22,6 +22,7 @@ public class AGGameManager : MonoBehaviour
     public GameObject[] audios;
     public GameObject playerDeadEffect;
     public Vector3 playerPos;
+    public bool isPlayerDead = false;
 
     public Text leaderboard;
 
@@ -66,7 +67,7 @@ public class AGGameManager : MonoBehaviour
 
         if (myCube != myCube.gameObject.activeSelf)
         {
-            
+            isPlayerDead = true;
             onPlayerDead.Invoke();
         }
 
