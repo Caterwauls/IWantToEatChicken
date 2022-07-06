@@ -34,6 +34,7 @@ public class BBCubenRing : MonoBehaviour
         {
             interactAudio.Play();
             _didActivate = true;
+            BGMManager.instance.desiredClip = null;
             StartCoroutine(Routine());
         }
     }
