@@ -76,6 +76,8 @@ public class AGGameManager : MonoBehaviour
 
         if (enemyCubes.Count <= 0)
         {
+            Time.timeScale = 1;
+            isCanPlayerMove = false;
             onPlayerWin.Invoke();
 
         }
@@ -180,5 +182,15 @@ public class AGGameManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void StopBGM()
+    {
+        BGMManager.instance.desiredClip = null;
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
