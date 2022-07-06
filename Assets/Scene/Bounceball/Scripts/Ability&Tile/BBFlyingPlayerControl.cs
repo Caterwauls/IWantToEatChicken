@@ -18,6 +18,7 @@ public class BBFlyingPlayerControl : MonoBehaviour
         Vector3 startPosition = new Vector3(_player.transform.position.x, _player.transform.position.y, _player.transform.position.z - 5);
         transform.position = startPosition;
         flyingPlayer.transform.position = _player.transform.position;
+        Physics.IgnoreCollision(_player.GetComponent<Collider>(), flyingPlayer.GetComponent<Collider>());
     }
 
     private void Start()

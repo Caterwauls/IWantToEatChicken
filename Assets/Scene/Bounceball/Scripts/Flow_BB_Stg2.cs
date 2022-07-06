@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class Flow_BB_Stg2 : Flow
 {
-    public GameObject player;
-    public GameObject cams;
-
     private BBPlayer _player;
 
     protected override IEnumerator FlowRoutine()
     {
-        DialogManager.instance.enableDialogBoxAnimation = false;
-        _player = player.GetComponent<BBPlayer>();
-
         yield break;
     }
 
