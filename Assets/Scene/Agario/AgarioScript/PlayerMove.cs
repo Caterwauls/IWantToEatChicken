@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
@@ -21,10 +22,12 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody playerRigidbody;
     private PlayerSkill playerSkill;
     private Cube _cube;
+    private bool _isCanPlayerMove;
 
 
     private void Awake()
     {
+        
         playerRigidbody = GetComponent<Rigidbody>();
         _cube = GetComponent<Cube>();
         playerSkill = GetComponent<PlayerSkill>();
@@ -45,13 +48,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-
-        //if ((Input.GetKeyDown(KeyCode.Space)) && (jumpCheck))
-        //{
-        //    jumpCheck = false;
-        //    _cube.CubeJump();
-        //    StartCoroutine(JumpDelay());
-        //}
+        if (!AGGameManager.instance.isCanPlayerMove) return;
         if ((Input.GetKeyDown(KeyCode.F)) && playerSkill._canUseTimeStop)
         {
             playerSkill.timeStop();
@@ -65,6 +62,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!_isCanPlayerMove) return;
         var ray = mainCam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
         {

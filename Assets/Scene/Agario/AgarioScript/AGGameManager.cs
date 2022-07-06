@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,11 @@ public class AGGameManager : MonoBehaviour
     public GameObject playerDeadEffect;
     public Vector3 playerPos;
     public bool isPlayerDead = false;
+    public int deadNum;
+    public bool isCanPlayerMove = false;
+    public bool isCanUseUi = false;
+
+    public Flow_AG flow;
 
     public Text leaderboard;
 
@@ -31,7 +37,7 @@ public class AGGameManager : MonoBehaviour
     private float _currentTime;
     private float _maxTime;
 
-    
+
 
     private int remainCubeNum = 0;
 
@@ -44,12 +50,19 @@ public class AGGameManager : MonoBehaviour
 
     private void Start()
     {
+        flow.StartFlow();
+        if (!PlayerPrefs.HasKey("AGdeadNum"))
+        {
+            PlayerPrefs.SetInt("AGdeadNum", 0);
+        }
+        deadNum = PlayerPrefs.GetInt("AGdeadNum");
         audios = GameObject.FindGameObjectsWithTag("Audio");
         lastTimeScale = Time.timeScale;
     }
 
     void Update()
     {
+        if (!flow.isDialogEnd) return;
         playerPos = myCube.transform.position;
         audioTimeControl();
 
@@ -67,6 +80,7 @@ public class AGGameManager : MonoBehaviour
 
         if (myCube != myCube.gameObject.activeSelf)
         {
+            PlayerPrefs.SetInt("AGdeadNum", deadNum++);
             isPlayerDead = true;
             onPlayerDead.Invoke();
         }
@@ -111,7 +125,7 @@ public class AGGameManager : MonoBehaviour
 
 
             else
-                enemyCubes[i].GetComponent<Outline>().enabled =false;
+                enemyCubes[i].GetComponent<Outline>().enabled = false;
         }
 
 
@@ -200,5 +214,8 @@ public class AGGameManager : MonoBehaviour
 
     }
 
-
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

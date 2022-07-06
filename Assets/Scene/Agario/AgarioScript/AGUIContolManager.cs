@@ -19,6 +19,8 @@ public class AGUIContolManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (!AGGameManager.instance.isCanUseUi) return;
+
             if (Time.timeScale == 0)
             {
                 blur.SetActive(false);
