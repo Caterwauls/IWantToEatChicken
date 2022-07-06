@@ -22,7 +22,6 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody playerRigidbody;
     private PlayerSkill playerSkill;
     private Cube _cube;
-    private bool _isCanPlayerMove;
 
 
     private void Awake()
@@ -62,7 +61,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!_isCanPlayerMove) return;
+        if (!AGGameManager.instance.isCanPlayerMove) return;
         var ray = mainCam.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, 1000f))
         {

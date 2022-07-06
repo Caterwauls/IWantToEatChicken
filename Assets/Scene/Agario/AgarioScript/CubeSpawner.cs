@@ -38,6 +38,8 @@ public class CubeSpawner : MonoBehaviour
             enemyCubeList.Add(newCube);
             newCube.cubeName = cubeNames[i];
             newCube.energy = Random.Range(minEnergy, maxEnergy);
+            newCube.rangeObject = gameObject;
+            newCube.rangeCollider = GetComponent<BoxCollider>();
             newCube.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 1, 1, 0.75f, 1);
         }
 

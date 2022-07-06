@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Flow_AG : Flow
 {
@@ -12,18 +13,20 @@ public class Flow_AG : Flow
     public bool didSeeGuide = false;
     public bool startGame = false;
     public GameObject pressEsc;
+    public GameObject guideText;
 
-    private int _deadNum => PlayerPrefs.GetInt("deadNum");
+    public static int _deadNum;
 
 
 
     protected override IEnumerator FlowRoutine()
     {
+        Time.timeScale = 0;
 
         if (_deadNum == 0)
         {
             yield return new WaitForSecondsRealtime(3f);
-            Time.timeScale = 0;
+            
 
             yield return PrintDialogRoutine("무슨");
 
@@ -48,29 +51,39 @@ public class Flow_AG : Flow
         }
         else if (_deadNum == 1)
         {
-            Time.timeScale = 0;
             yield return new WaitForSecondsRealtime(1f);
             yield return PrintDialogRoutine("1데스");
 
         }
         else if (_deadNum == 2)
         {
-            Time.timeScale = 0;
             yield return new WaitForSecondsRealtime(1f);
             yield return PrintDialogRoutine("2데스");
 
         }
         else
         {
-            Time.timeScale = 0;
             yield return new WaitForSecondsRealtime(1f);
             yield return PrintDialogRoutine("3데스");
 
+            yield return new WaitForSecondsRealtime(1f);
+            pressEsc.GetComponent<Text>().text = "이번 플레이에서는 가이드를 확인해보세요.";
+            Time.timeScale = 1;
+            AGGameManager.instance.isCanUseUi = true;
+            pressEsc.SetActive(true);
+            yield return new WaitForSecondsRealtime(5f);
+            pressEsc.SetActive(false);
+            guideText.GetComponent<Text>().text = "F는 플레이어의 숨겨진 스킬입니다. 게임이 너무 어렵다면 유용하게 사용해봐요.";
+
 
         }
-        inGameUi.SetActive(true);
-        initWhenDialogEnded.SetActive(true);
         isDialogEnd = true;
+        inGameUi.SetActive(true);
+        inGameUi.transform.GetChild(0).gameObject.SetActive(true);
+        AGGameManager.instance.isCanUseUi = true;
+        
+        initWhenDialogEnded.SetActive(true);
+        
         AGGameManager.instance.isCanPlayerMove = true;
         Time.timeScale = 1;
 

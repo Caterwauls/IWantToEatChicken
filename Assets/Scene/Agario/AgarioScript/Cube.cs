@@ -98,7 +98,7 @@ public class Cube : MonoBehaviour
             if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>() == null )
             {
                 string newName = otherCube.cubeName;
-                Destroy(otherCube.gameObject);
+                
                 if (GetComponent<PlayerMove>() == null && otherCube.GetComponent<CubeBehavior>() != null)
                 {
                     var newSpawnPos = Return_RandomPosition();
@@ -110,9 +110,12 @@ public class Cube : MonoBehaviour
                         a.transform.position = newSpawnPos;
                         a.GetComponent<Cube>().energy = Random.RandomRange(1, 3);
                         a.GetComponent<Cube>().cubeName = newName;
+                        a.GetComponent<Cube>().rangeCollider = otherCube.rangeCollider;
+                        a.GetComponent<Cube>().rangeObject = otherCube.rangeObject;
                         a.GetComponent<MeshRenderer>().material.color = Random.ColorHSV(0, 1, 1, 1, 0.75f, 1);
                     }
                 }
+                Destroy(otherCube.gameObject);
                 
             }
             else if (otherCube.energy <= 0 && otherCube.GetComponent<PlayerMove>() != null)
