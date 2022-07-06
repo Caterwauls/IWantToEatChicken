@@ -33,9 +33,9 @@ public class ENFlow : Flow
 
     protected override IEnumerator FlowRoutine()
     {
+        BGMManager.instance.desiredClip = defaultAmbience;
         yield return BlackFadeIn();
         player.canMove = false;
-        BGMManager.instance.desiredClip = defaultAmbience;
         yield return new WaitForSeconds(2f);
         moveMessage.SetActive(true);
         player.canMove = true;

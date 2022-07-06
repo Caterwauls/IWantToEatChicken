@@ -9487,12 +9487,12 @@ Transform:
   - {fileID: 8352294714200318780}
   - {fileID: 995278451}
   - {fileID: 1497254177}
+  - {fileID: 6057432257812090790}
   - {fileID: 1713396366}
   - {fileID: 941579629}
   - {fileID: 1820136271}
   - {fileID: 292927258}
   - {fileID: 24392547}
-  - {fileID: 6057432257812090790}
   - {fileID: 773262116}
   - {fileID: 1149719333}
   - {fileID: 1102481400}
@@ -16715,7 +16715,7 @@ Transform:
   - {fileID: 3855685112393259792}
   - {fileID: 3073677021349714455}
   m_Father: {fileID: 1747141833}
-  m_RootOrder: 8
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &6591048677542282372
 ParticleSystemRenderer:
