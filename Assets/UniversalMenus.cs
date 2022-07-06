@@ -38,7 +38,7 @@ public class UniversalMenus : MonoBehaviour
 
     public void GiveUp()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("PPScene");
         Time.timeScale = 1f;
     }
 

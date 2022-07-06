@@ -12,7 +12,7 @@ public class SignalManager : MonoBehaviour
 
     public void GoNextScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("AgarioMenuScene");
         
     }
 

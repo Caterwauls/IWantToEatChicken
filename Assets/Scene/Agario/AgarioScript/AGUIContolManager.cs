@@ -58,6 +58,6 @@ public class AGUIContolManager : MonoBehaviour
 
     public void OnClickGiveUp()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("PPScene");
     }
 }

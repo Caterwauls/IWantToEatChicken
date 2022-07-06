@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 1
+    m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
@@ -943,22 +943,22 @@ PrefabInstance:
     - target: {fileID: 4895704483327985483, guid: 91d43a6ee5cc46549a59c539790216ca,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: -0.00000004371139
       objectReference: {fileID: 0}
     - target: {fileID: 4895704483327985483, guid: 91d43a6ee5cc46549a59c539790216ca,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4895704483327985483, guid: 91d43a6ee5cc46549a59c539790216ca,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4895704483327985483, guid: 91d43a6ee5cc46549a59c539790216ca,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4895704483327985483, guid: 91d43a6ee5cc46549a59c539790216ca,
         type: 3}
@@ -1770,6 +1770,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BB Foundation
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8633.736
+      objectReference: {fileID: 0}
+    - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 53324.492
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ca4796b352d67848b08a37e82b2ff62, type: 3}
