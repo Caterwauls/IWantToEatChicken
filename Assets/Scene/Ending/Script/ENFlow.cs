@@ -31,6 +31,20 @@ public class ENFlow : Flow
         StartFlow();
     }
 
+    protected override IEnumerator AskChoiceRoutine(string selectionName)
+    {
+        DialogManager.instance.lastChoice = 0;
+        DialogManager.instance.currentChoice = DialogManager.instance.choices[selectionName];
+        DialogManager.instance.didSelect = false;
+        yield return new WaitForSecondsRealtime(1f);
+        DialogManager.instance.dialogBox.SetActive(false);
+        DialogManager.instance.blurEffect.SetActive(true);
+        DialogManager.instance.playerSelectionMode.SetActive(true);
+        yield return new WaitUntil(() => DialogManager.instance.didSelect);
+        DialogManager.instance.blurEffect.SetActive(false);
+        DialogManager.instance.playerSelectionMode.SetActive(false);
+    }
+
     protected override IEnumerator FlowRoutine()
     {
         BGMManager.instance.desiredClip = defaultAmbience;
@@ -67,7 +81,7 @@ public class ENFlow : Flow
         {
             yield return PrintDialogRoutine("일이좋아");
         }
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.75f);
         yield return PrintDialogRoutine("돌아와");
         yield return new WaitForSeconds(0.5f);
         moveMessage.SetActive(true);
