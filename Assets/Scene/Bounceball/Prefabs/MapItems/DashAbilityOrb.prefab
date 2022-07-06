@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3984826185264669200}
+  - component: {fileID: 3984826185264669196}
   - component: {fileID: 3984826185264669197}
   - component: {fileID: 3984826185264669202}
   - component: {fileID: 3984826185264669203}
-  - component: {fileID: 3984826185264669196}
   - component: {fileID: 3984826185264669198}
   - component: {fileID: 3984826185264669199}
   m_Layer: 0
@@ -36,6 +36,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3984826185264669196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3984826185264669201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985a20b24a124a545a16c892eec7e19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  absorbEffect: {fileID: 8804881477381202154, guid: 9ddace7bfdd1228498805503274b75ac,
+    type: 3}
 --- !u!135 &3984826185264669197
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -96,19 +110,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3984826185264669196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984826185264669201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 985a20b24a124a545a16c892eec7e19f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 8804881477381202154, guid: 9ddace7bfdd1228498805503274b75ac, type: 3}
 --- !u!198 &3984826185264669198
 ParticleSystem:
   m_ObjectHideFlags: 0

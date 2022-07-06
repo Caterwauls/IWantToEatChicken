@@ -43,7 +43,6 @@ public class BBPlayerBulletTile : BBPlayerComponentBase
             wantedVel = Vector3.left * _movement.ballSpeed * 2;
         }
 
-        var startVel = Mathf.Abs(_rb.velocity.x);
         _gravity.enabled = false;
         _movement.enabled = false;
         hit.collider.enabled = false;
@@ -56,15 +55,17 @@ public class BBPlayerBulletTile : BBPlayerComponentBase
                 _rb.velocity = wantedVel;
 
             // 부딪힐 경우
-            if (Mathf.Abs(_rb.velocity.x) < startVel * 0.8f)
+            if (Mathf.Abs(_rb.velocity.x) < wantedVel.magnitude * 0.8f)
             {
                 break;
             }
 
             // 사용자 입력이 올 경우
-            if (Time.time - startTime > 0.5f && Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1)
+            var hAxis = Input.GetAxis("Horizontal");
+            if (Time.time - startTime > 0.5f && Mathf.Abs(hAxis) > 0.1)
             {
-                break;
+                // 방향이 달라야한다. 같으면 괜찮다.
+                if ((isRight && hAxis < 0) || (!isRight && hAxis > 0)) break;
             }
         
             yield return null;

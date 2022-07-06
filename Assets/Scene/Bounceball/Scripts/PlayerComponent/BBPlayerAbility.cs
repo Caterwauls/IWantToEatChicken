@@ -47,7 +47,12 @@ public class BBPlayerAbility : BBPlayerComponentBase
         Instantiate(dashAbilityEffect, transform.position, Quaternion.identity);
         dashAbilityOn = false;
 
-        Vector3 sweepDir = Input.GetAxis("Horizontal") < 0 ? Vector3.left : Vector3.right;
+        var hAxis = Input.GetAxis("Horizontal");
+        Vector3 sweepDir = hAxis < 0 ? Vector3.left : Vector3.right;
+        if (Mathf.Abs(hAxis) < 0.1f && Mathf.Abs(_rb.velocity.x) > 1f)
+        {
+            sweepDir = _rb.velocity.x < 0 ? Vector3.left : Vector3.right;
+        }
         Vector3 start = transform.position;
         Vector3 destination = transform.position;
 

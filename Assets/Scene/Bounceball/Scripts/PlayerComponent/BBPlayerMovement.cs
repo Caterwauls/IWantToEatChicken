@@ -8,7 +8,8 @@ public class BBPlayerMovement : BBPlayerComponentBase
 
     public float bounce = 5f;
     public float acceleration = 199f;
-
+    public float velocityLostOnNormalJump = 2f;
+    
     public float ballSpeed = 10f;
     public float wallReflection = 10f;
     public bool playerMoveOn = true;
@@ -136,6 +137,7 @@ public class BBPlayerMovement : BBPlayerComponentBase
             onBounce?.Invoke();
             Vector3 newVelocity = _rb.velocity;
             newVelocity.y = jumpSpeed;
+            newVelocity.x = Mathf.MoveTowards(newVelocity.x, 0, velocityLostOnNormalJump);
             _rb.velocity = newVelocity;
 
             if (_reverseOn)

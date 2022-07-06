@@ -22,8 +22,19 @@ public class BBPortalScript : MonoBehaviour
             }
             _didActivate = true;
             portalEffect.Play();
-            yield return new WaitForSeconds(1.5f);
+            for (float t = 0; t < 1.5f; t += Time.deltaTime)
+            {
+                other.transform.position = transform.position;
+                yield return null;
+            }
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        var col = GetComponent<SphereCollider>();
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(col.center + transform.position, col.radius);
     }
 }

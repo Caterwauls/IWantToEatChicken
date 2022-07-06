@@ -32,6 +32,8 @@ public class BBPlayerJumpTile : BBPlayerComponentBase
         {
             jumpTileVelocity.y = -_movement.jumpSpeed * 2;
         }
+
+        jumpTileVelocity.x = 0;
         _rb.velocity = jumpTileVelocity;
         _movement.skipNormalJump = true;
     }

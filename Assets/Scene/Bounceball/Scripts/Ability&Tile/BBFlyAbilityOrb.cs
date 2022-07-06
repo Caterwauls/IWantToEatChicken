@@ -2,20 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BBFlyAbilityOrb : MonoBehaviour
+public class BBFlyAbilityOrb : BBAbilityOrb
 {
-    public GameObject prefab;
-    private void OnTriggerEnter(Collider other)
+    protected override void OnAbsorb(BBPlayer player)
     {
-        if (other.tag == "Player")
-        {
-            other.transform.GetComponent<BBPlayer>().ability.flyAbilityOn = true;
-            var abilityOrbEffect = Instantiate(prefab);
-
-            Vector3 bottomPos = transform.position + Vector3.down * transform.lossyScale.y;
-            abilityOrbEffect.transform.position = bottomPos;
-
-            Destroy(this.gameObject);
-        }
+        player.ability.flyAbilityOn = true;
     }
 }

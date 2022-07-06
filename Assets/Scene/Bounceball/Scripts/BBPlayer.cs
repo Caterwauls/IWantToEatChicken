@@ -1,14 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BBPlayer : MonoBehaviour
 {
-
-
-
-
-
     public BBPlayerReverseTile reverse { get; private set; }
     public BBPlayerMovement movement  { get; private set; }
     public BBPlayerAbility ability { get; private set; }
@@ -26,5 +23,9 @@ public class BBPlayer : MonoBehaviour
         ability = GetComponent<BBPlayerAbility>();
     }
 
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }
