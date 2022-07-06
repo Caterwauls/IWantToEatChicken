@@ -12,7 +12,9 @@ public class PPBarControl : MonoBehaviour
     public Transform uLine;
 
     public Transform manualTrack;
-    
+
+    public Transform standardPos;
+
     private PPPlayer _player;
 
     private void Awake()
@@ -21,7 +23,7 @@ public class PPBarControl : MonoBehaviour
         maxPos = uLine.position.y - 1.7f;
         _player = FindObjectOfType<PPPlayer>();
     }
-    
+
     private void Update()
     {
         if (manualTrack == null && _player.restraintCount == 0) return;
@@ -30,18 +32,22 @@ public class PPBarControl : MonoBehaviour
 
     public void BarMovement()
     {
+        var trackPos = manualTrack != null ? manualTrack.transform.position : _player.transform.position;
+        if (standardPos.position.x <= trackPos.x && transform.position.x < trackPos.x) return;
+        else if (standardPos.position.x > trackPos.x && transform.position.x > trackPos.x) return;
         transform.position = Vector3.MoveTowards(
-            transform.position, 
+            transform.position,
             new Vector3(
-                transform.position.x, 
-                manualTrack != null ? manualTrack.transform.position.y : _player.transform.position.y, 
+                transform.position.x,
+                trackPos.y,
                 transform.position.z
-                ), 
+                ),
             barSpeed * Time.fixedDeltaTime);
-        
-        if (transform.position.y >= maxPos) 
+
+
+        if (transform.position.y >= maxPos)
             transform.position = new Vector3(transform.position.x, maxPos, transform.position.z);
-        else if (transform.position.y <= minPos) 
+        else if (transform.position.y <= minPos)
             transform.position = new Vector3(transform.position.x, minPos, transform.position.z);
 
     }
