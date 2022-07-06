@@ -184,8 +184,8 @@ public class Flow : MonoBehaviour
 
                 // 텍스트를 여기서 업데이트.
                 DialogManager.instance.dialogText.text = currentTypedText + combinedSuffixes;
-
-                yield return new WaitForSecondsRealtime(0.1f);
+                if (DialogManager.instance.characterEffect != null) Instantiate(DialogManager.instance.characterEffect);
+                yield return new WaitForSecondsRealtime(DialogManager.instance.perCharacterDelay);
             }
             StopCoroutine(checkRoutine);
             yield return new WaitForSecondsRealtime(0.3f);

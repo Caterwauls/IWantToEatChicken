@@ -2,154 +2,82 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Random = System.Random;
 
 public class Flow_IsItFunny : Flow
 {
-    public GameObject playerCloseupCam;
+    public float timeBeforeStart = 10f;
+    public float explodeVelocity = 10f;
+    public float explodeRot = 800f;
+    
+    public PPBreakable leftBar;
+    public PPBreakable rightBar;
+    public PPBreakable box;
+
+    public GameObject resistMessage;
+    public GameObject moveMessage;
+    
     public GameObject otherCamera;
     public GameObject otherPingPong;
-    public GameObject resistMessage;
     public GameObject player;
-    public GameObject EndMessage;
-    public GameObject restartMessage;
-    public SpacePressEffectOn spaceEffect;
-    public GameObject cutSceneDirector;
+
+    public Transform playerJailPos;
+
+    public string nextSceneName;
 
     protected override IEnumerator FlowRoutine()
     {
-        PlayerControl pc = player.GetComponent<PlayerControl>();
-
-        yield return new WaitUntil(() => Input.anyKeyDown);
-        player.GetComponent<PlayerControl>().canPlayerMove = true;
-
-        yield return new WaitForSecondsRealtime(30f);
-
-        playerCloseupCam.SetActive(true);
-
-        yield return StopTimeAnimatedRoutine();
-
-        yield return new WaitForSecondsRealtime(1.5f);
-
-        yield return PrintDialogRoutine("재밌나요");
-        yield return AskChoiceRoutine("재밌나요");
-
-        if (lastChoice == 0)
-        {
-            yield return PrintDialogRoutine("아닌거같은데");
-        }
-
-
-        yield return PrintDialogRoutine("뭐가불만인가요");
-        yield return AskChoiceRoutine("뭐가불만인가요");
-
-        yield return PrintDialogRoutine("그렇게보이진않는데");
-
-        otherCamera.SetActive(true);
-
-        Time.timeScale = 1;
-        otherPingPong.SetActive(true);
-
-        yield return new WaitForSecondsRealtime(4f);
-
-        yield return PrintDialogRoutine("다른사람들도똑같아");
-
-        otherCamera.SetActive(false);
-
-        yield return new WaitForSecondsRealtime(2f);
-
-        yield return StopTimeAnimatedRoutine();
-
-        yield return new WaitForSecondsRealtime(1.5f);
-
-        yield return PrintDialogRoutine("다들하는대로해라");
-        Time.timeScale = 1;
-
-        playerCloseupCam.SetActive(false);
-        yield return new WaitForSecondsRealtime(2f);
-
-        yield return new WaitUntil(() =>
-            Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return));
-
+        PPPlayer pc = player.GetComponent<PPPlayer>();
+        pc.restraintCount = 10;
+        yield return new WaitForSecondsRealtime(timeBeforeStart);
         resistMessage.SetActive(true);
-
-        pc.isCanResist = true;
-        spaceEffect.canPlayEffect = true;
-        yield return new WaitUntil(() => pc.resistNum >= 10);
-
+        pc.canResist = true;
+        yield return new WaitUntil(() => pc.restraintCount == 0);
         resistMessage.SetActive(false);
-        spaceEffect.canPlayEffect = false;
-        playerCloseupCam.SetActive(true);
-
-        yield return StopTimeAnimatedRoutine();
-        yield return new WaitForSecondsRealtime(1.5f);
-
-        pc.isCanResist = false;
-
-        yield return PrintDialogRoutine("방해하지마");
-        yield return AskChoiceRoutine("방해하지마");
-
-        yield return new WaitForSecondsRealtime(2f);
-
-        yield return PrintDialogRoutine("탈출하고싶나요");
-        yield return AskChoiceRoutine("탈출하고싶나요");
-
-        if (lastChoice == 0)
-        {
-            yield return PrintDialogRoutine("탈출하고싶다");
-        }
-        else if (lastChoice == 1)
-        {
-            yield return PrintDialogRoutine("탈출하고싶지않다");
-            yield return AskChoiceRoutine("탈출하고싶지않다");
-
-            if (lastChoice == 0)
-            {
-                yield return PrintDialogRoutine("탈출하고싶지않다1");
-                playerCloseupCam.SetActive(false);
-                pc.isCanResist = false;
-                Time.timeScale = 1;
-                DialogManager.instance.blurEffect.SetActive(true);
-                EndMessage.SetActive(true);
-                yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)));
-
-                restartMessage.SetActive(true);
-                yield break;
-
-            }
-            else if (lastChoice == 1)
-            {
-                yield return PrintDialogRoutine("탈출하고싶지않다2");
-                yield return new WaitForSecondsRealtime(1f);
-            }
-        }
-
+        moveMessage.SetActive(true);
+        yield return new WaitUntil(() => leftBar.curHP == 0);
+        yield return new WaitUntil(() => rightBar.curHP == 0);
+        moveMessage.SetActive(false);
+        yield return new WaitForSeconds(4f);
+        yield return PrintDialogRoutine("뭐해");
+        otherCamera.SetActive(true);
+        otherPingPong.SetActive(true);
+        yield return new WaitForSecondsRealtime(4f);
+        otherCamera.SetActive(false);
+        yield return new WaitForSecondsRealtime(1.75f);
+        leftBar.ReturnToOriginal();
+        rightBar.ReturnToOriginal();
         yield return new WaitForSecondsRealtime(1f);
-
-        yield return PrintDialogRoutine("첫분기점");
-        yield return AskChoiceRoutine("첫분기점");
-
-        if (lastChoice == 0)
+        yield return PrintDialogRoutine("역할");
+        pc.canResist = false;
+        pc.restraintCount = 15;
+        yield return new WaitForSeconds(7f);
+        pc.canResist = true;
+        resistMessage.SetActive(true);
+        yield return new WaitUntil(() => pc.restraintCount == 0);
+        resistMessage.SetActive(false);
+        yield return new WaitUntil(() => leftBar.curHP == 0);
+        yield return new WaitUntil(() => rightBar.curHP == 0);
+        yield return new WaitForSeconds(4f);
+        pc.transform.position = playerJailPos.position;
+        box.gameObject.SetActive(true);
+        pc.canPlayerMove = false;
+        pc.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        pc.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        yield return new WaitForSeconds(1.5f);
+        yield return PrintDialogRoutine("마지막");
+        pc.canPlayerMove = true;
+        yield return new WaitUntil(() => box.curHP == 0);
+        var rbs = FindObjectsOfType<Rigidbody>();
+        foreach (var rb in rbs)
         {
-            yield return PrintDialogRoutine("탈출");
-            Time.timeScale = 1f;
-            playerCloseupCam.SetActive(false);
-            otherPingPong.SetActive(false);
-            player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            player.GetComponent<Rigidbody>().MovePosition(new Vector3(0.06f, 0.84f, 0));
-            cutSceneDirector.SetActive(true);
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.velocity = UnityEngine.Random.onUnitSphere * explodeVelocity;
+            rb.angularVelocity = Vector3.forward * UnityEngine.Random.Range(-explodeRot, explodeRot);
         }
-        else if (lastChoice == 1)
-        {
-            yield return PrintDialogRoutine("현실에안주");
-            playerCloseupCam.SetActive(false);
-            pc.isCanResist = false;
-            Time.timeScale = 1;
-            DialogManager.instance.blurEffect.SetActive(true);
-            EndMessage.SetActive(true);
-            yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space)));
-
-            restartMessage.SetActive(true);
-            yield break;
-        }
+        yield return new WaitForSeconds(5.5f);
+        SceneManager.LoadScene(nextSceneName);
     }
 }

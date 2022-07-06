@@ -124,7 +124,7 @@ Transform:
   m_LocalScale: {x: 0.1490625, y: 8.884688, z: 1}
   m_Children: []
   m_Father: {fileID: 975230427701687858}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &255747243007512352
 MeshFilter:
@@ -385,8 +385,7 @@ MonoBehaviour:
   barSpeed: 1
   dLine: {fileID: 6881274462878262570}
   uLine: {fileID: 7885672710444778846}
-  trakingThing: {fileID: 4793848567214440077}
-  gameManager: {fileID: 7660365116643064294}
+  manualTrack: {fileID: 4793848567214440077}
 --- !u!1 &3360166967730010211
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +420,6 @@ Transform:
   - {fileID: 7885672710444778846}
   - {fileID: 6361204233424165520}
   - {fileID: 3995601480639166319}
-  - {fileID: 3498669547356110261}
   - {fileID: 4070506668262315078}
   - {fileID: 3179191704199350919}
   m_Father: {fileID: 0}
@@ -533,8 +531,9 @@ GameObject:
   - component: {fileID: 4793848567214440079}
   - component: {fileID: 4793848567214440080}
   - component: {fileID: 4793848567214440076}
+  - component: {fileID: 665988836890311290}
   m_Layer: 0
-  m_Name: Other
+  m_Name: Other Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -630,6 +629,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &665988836890311290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793848567214440081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fdfab1503c750744be7139ad488222d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballSpeed: 2.5
+  hDir: 1
+  vDir: 1
 --- !u!1 &5235069296062985572
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +675,7 @@ Transform:
   m_LocalScale: {x: 0.1490625, y: 8.884688, z: 1}
   m_Children: []
   m_Father: {fileID: 975230427701687858}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7811358591598859773
 MeshFilter:
@@ -834,52 +848,4 @@ MonoBehaviour:
   barSpeed: 1
   dLine: {fileID: 6881274462878262570}
   uLine: {fileID: 7885672710444778846}
-  trakingThing: {fileID: 4793848567214440077}
-  gameManager: {fileID: 7660365116643064294}
---- !u!1 &7679911437757737521
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3498669547356110261}
-  - component: {fileID: 7660365116643064294}
-  m_Layer: 0
-  m_Name: OneBlockManager (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3498669547356110261
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7679911437757737521}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.92089325, y: -2.5981135, z: 74.97084}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 975230427701687858}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7660365116643064294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7679911437757737521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a4076559489a7748904c15e702a340b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trakingThing: {fileID: 4793848567214440077}
-  standardX: 0
-  L_Bar: {fileID: 5963488056204939047}
-  R_Bar: {fileID: 1963487391398943289}
+  manualTrack: {fileID: 4793848567214440077}
