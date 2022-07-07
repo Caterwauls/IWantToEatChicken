@@ -18165,7 +18165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7c707cce25494419089736e319e6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBeforeStart: 1
+  timeBeforeStart: 12
   explodeVelocity: 10
   explodeRot: 800
   leftBar: {fileID: 1053712088}
