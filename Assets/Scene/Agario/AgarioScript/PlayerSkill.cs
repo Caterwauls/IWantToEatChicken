@@ -13,7 +13,6 @@ public class PlayerSkill : MonoBehaviour
     public List<Cube> enemys;
     public AudioSource music;
     public AudioSource tiktak;
-    public PostProcessVolume stopEffect;
     public float x = 0;
 
 
@@ -45,7 +44,6 @@ public class PlayerSkill : MonoBehaviour
         }
         shockwave.Stop();
         tiktak.Stop();
-        stopEffect.profile.GetSetting<Bloom>().active = false;
         timeStopStart = false;
         toggle = true;
     }
@@ -63,7 +61,6 @@ public class PlayerSkill : MonoBehaviour
     {
         tiktak.pitch = 0.85f;
         timeStopStart = true;
-        stopEffect.profile.GetSetting<Bloom>().active = true;
         shockwave.Play();
         tiktak.Play();
         StartCoroutine(CoroutineCooldownTimer());
@@ -137,7 +134,6 @@ public class PlayerSkill : MonoBehaviour
             x = 0.75f;
             return;
         }
-        stopEffect.profile.GetSetting<Vignette>().intensity.Override(x);
     }
 
     private void StartEffectAfterStop()
@@ -148,7 +144,6 @@ public class PlayerSkill : MonoBehaviour
             x = 0;
             return;
         }
-        stopEffect.profile.GetSetting<Vignette>().intensity.Override(x);
     }
 
 

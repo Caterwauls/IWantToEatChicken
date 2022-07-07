@@ -26,6 +26,13 @@ public class Flow_IsItFunny : Flow
 
     public string nextSceneName;
 
+    protected override IEnumerator PrintDialogRoutine(string dialogName)
+    {
+        DialogManager.instance.dialogBox.GetComponent<CanvasGroup>().alpha = 1f;
+        yield return base.PrintDialogRoutine(dialogName);
+        DialogManager.instance.dialogBox.GetComponent<CanvasGroup>().alpha = 0f;
+    }
+    
     protected override IEnumerator FlowRoutine()
     {
         PPPlayer pc = player.GetComponent<PPPlayer>();

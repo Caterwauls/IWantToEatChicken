@@ -71,12 +71,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1500, y: 800}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.494
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -321,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounce: 50
   acceleration: 50
+  velocityLostOnNormalJump: 2
   ballSpeed: 14
   wallReflection: 10
   playerMoveOn: 1
@@ -361,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashAbilityDis: 10
   dashAbilityOn: 0
-  dashDuration: 0.3
+  dashSpeed: 40
   dashSweepCount: 15
   dashAbilityEffect: {fileID: 526376503476287152, guid: f06d51983f30b214291c271d1ab0ceeb,
     type: 3}
@@ -370,13 +371,6 @@ MonoBehaviour:
     type: 3}
   flyAbilityStartEffect: {fileID: 358778592527063793, guid: 8e77f837463d3f24bae3c4db836102e3,
     type: 3}
-  guideAbilityOn: 0
-  canUseGuideAbility: 1
-  guideAbilityEffect: {fileID: 3394146598993646372, guid: 7d51e1aaa58b80b46b4fc29c80b18a73,
-    type: 3}
-  guideAbilityText: {fileID: 0}
-  guideAbilityCoolTime: 5
-  remainGuideAbilityTime: 
   doubleJumpOn: 0
   doubleJumpEffect: {fileID: 3011992879810793072, guid: c9a9a98e2dc68b84d8f37970c0d3bebb,
     type: 3}

@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: c73daa242b9f04c43882a997ddc551b0,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -389,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab27e3f3e7e4e3f44afc086933771d77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toY: 2763.9
+  toY: 2659.84
   scrollSpeed: 100
   scrollSpeedFast: 450
   startDelay: 2.5
@@ -7121,7 +7122,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &953781348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7136,9 +7137,9 @@ RectTransform:
   m_Father: {fileID: 964991572}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -58}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 160, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &953781349
@@ -7258,7 +7259,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 1700, y: 800}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.49
   m_PhysicalUnit: 3

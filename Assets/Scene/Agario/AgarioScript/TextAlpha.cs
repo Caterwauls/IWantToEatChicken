@@ -27,7 +27,7 @@ public class TextAlpha : MonoBehaviour
 
         while(text.color.a < 1f)
         {
-            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + Time.deltaTime / 2f);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a + Time.deltaTime);
             yield return null;
         }
 
@@ -40,7 +40,7 @@ public class TextAlpha : MonoBehaviour
     {
         while(text.color.a > 0f)
         {
-            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime / 2f);
+            text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - Time.deltaTime);
             yield return null;
         }
     }

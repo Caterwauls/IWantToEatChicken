@@ -10,15 +10,11 @@ public class PPGameManager : MonoBehaviour
 {
     public Flow flow;
     public GameObject resistMessage;
-    public GameObject endMessage;
-    public GameObject restartMessage;
     public GameObject playerParticle;
 
     private void Awake()
     {
         resistMessage.SetActive(false);
-        endMessage.SetActive(false);
-        restartMessage.SetActive(false);
         playerParticle.SetActive(false);
     }
     private void Start()

@@ -33,9 +33,11 @@ public class Flow_BB_Stg0 : Flow
 
     protected override IEnumerator PrintDialogRoutine(string dialogName)
     {
+        DialogManager.instance.dialogBox.SetActive(true);
         _playerMove.movement.playerMoveOn = false;
         yield return base.PrintDialogRoutine(dialogName);
         _playerMove.movement.playerMoveOn = true;
+        DialogManager.instance.dialogBox.SetActive(false);
     }
     protected override IEnumerator AskChoiceRoutine(string selectionName)
     {

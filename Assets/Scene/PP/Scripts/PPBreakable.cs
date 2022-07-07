@@ -49,6 +49,7 @@ public class PPBreakable : MonoBehaviour
             _rb.isKinematic = false;
             _rb.velocity = Random.onUnitSphere * Random.Range(breakLinearMin, breakLinearMax);
             _rb.angularVelocity = new Vector3(0, 0, Random.Range(breakAngularMin, breakAngularMax));
+            Physics.IgnoreCollision(player.GetComponent<Collider>(), GetComponent<Collider>(), true);
         }
         else
         {
@@ -79,6 +80,8 @@ public class PPBreakable : MonoBehaviour
             transform.position = _originalPos;
             transform.rotation = _originalRot;
             Instantiate(returnEffect, transform.position, Quaternion.identity);
+            
+            Physics.IgnoreCollision(FindObjectOfType<PPPlayer>().GetComponent<Collider>(), GetComponent<Collider>(), false);
         }
     }
 }

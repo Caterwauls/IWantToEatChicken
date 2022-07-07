@@ -17,6 +17,17 @@ public class Flow_AG : Flow
 
     public static int _deadNum;
 
+    protected override IEnumerator PrintDialogRoutine(string dialogName)
+    {
+        var dialog = DialogManager.instance.dialogs[dialogName];
+        for (int i = 0; i < dialog.lines.Count; i++)
+        {
+            dialog.lines[i] = dialog.lines[i].Replace("$PLAYERNAME$", PlayerPrefs.GetString("AgarioPlayerName"));
+        }
+        DialogManager.instance.dialogBox.GetComponent<CanvasGroup>().alpha = 1f;
+        yield return base.PrintDialogRoutine(dialogName);
+        DialogManager.instance.dialogBox.GetComponent<CanvasGroup>().alpha = 0f;
+    }
 
 
     protected override IEnumerator FlowRoutine()
@@ -68,14 +79,12 @@ public class Flow_AG : Flow
 
             yield return new WaitForSecondsRealtime(1f);
             pressEsc.GetComponent<Text>().text = "이번 플레이에서는 가이드를 확인해보세요.";
+            guideText.GetComponent<Text>().text = "F는 플레이어의 숨겨진 스킬입니다. 게임이 너무 어렵다면 유용하게 사용해봐요.";
             Time.timeScale = 1;
             AGGameManager.instance.isCanUseUi = true;
             pressEsc.SetActive(true);
             yield return new WaitForSecondsRealtime(5f);
             pressEsc.SetActive(false);
-            guideText.GetComponent<Text>().text = "F는 플레이어의 숨겨진 스킬입니다. 게임이 너무 어렵다면 유용하게 사용해봐요.";
-
-
         }
         isDialogEnd = true;
         inGameUi.SetActive(true);

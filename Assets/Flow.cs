@@ -43,22 +43,23 @@ public class Flow : MonoBehaviour
 
     protected virtual IEnumerator ShowDialogBoxRoutine(bool isShow)
     {
+        var scalerTransform = DialogManager.instance.dialogBoxScaler.transform;
         if (!DialogManager.instance.enableDialogBoxAnimation)
         {
-            if (isShow && DialogManager.instance.dialogBoxScaler.scaleFactor < 1)
+            if (isShow && scalerTransform.localScale.x < 1)
             {
-                DialogManager.instance.dialogBoxScaler.scaleFactor = 1;
+                scalerTransform.localScale = Vector3.one;
                 yield break;
             }
 
-            else if (!isShow && DialogManager.instance.dialogBoxScaler.scaleFactor > 0.01f)
+            else if (!isShow && scalerTransform.localScale.x > 0.01f)
             {
-                DialogManager.instance.dialogBoxScaler.scaleFactor = 0.01f;
+                scalerTransform.localScale = Vector3.zero;
                 yield break;
             }
 
-            else if (DialogManager.instance.dialogBoxScaler.scaleFactor >= 1 ||
-                     DialogManager.instance.dialogBoxScaler.scaleFactor <= 0.01f)
+            else if (scalerTransform.localScale.x >= 1 ||
+                     scalerTransform.localScale.x <= 0.01f)
             {
                 yield break;
             }
@@ -66,20 +67,20 @@ public class Flow : MonoBehaviour
 
         while (true)
         {
-            if (isShow && DialogManager.instance.dialogBoxScaler.scaleFactor < 1)
+            if (isShow && scalerTransform.localScale.x < 1)
             {
-                DialogManager.instance.dialogBoxScaler.scaleFactor += 0.08f;
+                scalerTransform.localScale = Vector3.one * (scalerTransform.localScale.x + 0.08f);
                 yield return new WaitForSecondsRealtime(0.01f);
             }
 
-            else if (!isShow && DialogManager.instance.dialogBoxScaler.scaleFactor > 0.01f)
+            else if (!isShow && scalerTransform.localScale.x > 0.01f)
             {
-                DialogManager.instance.dialogBoxScaler.scaleFactor -= 0.1f;
+                scalerTransform.localScale = Vector3.one * (scalerTransform.localScale.x - 0.1f);
                 yield return new WaitForSecondsRealtime(0.01f);
             }
 
-            else if (DialogManager.instance.dialogBoxScaler.scaleFactor >= 1 ||
-                     DialogManager.instance.dialogBoxScaler.scaleFactor <= 0.01f)
+            else if (scalerTransform.localScale.x >= 1 ||
+                     scalerTransform.localScale.x <= 0.01f)
             {
                 break;
             }
