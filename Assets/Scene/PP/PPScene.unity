@@ -18381,7 +18381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "[SPACE] \uC800\uD56D\uD558\uAE30"
+  m_Text: '[SPACE] To Resist'
 --- !u!222 &1813163280
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18813,7 +18813,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "[W,A,S,D] \uC774\uB3D9"
+  m_Text: '[W,A,S,D] To Move'
 --- !u!222 &1872158921
 CanvasRenderer:
   m_ObjectHideFlags: 0

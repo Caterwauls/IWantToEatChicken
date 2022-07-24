@@ -2714,7 +2714,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uCD95\uBCF5\uC5D0 \uB2FF\uB294\uB2E4"
+  m_Text: Touch grace
 --- !u!222 &1833169895
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22931,17 +22931,17 @@ PrefabInstance:
     - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1000.0001
+      value: 17.228548
       objectReference: {fileID: 0}
     - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 9141.114
+      value: 90.42304
       objectReference: {fileID: 0}
     - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 56495.5
+      value: 559.99664
       objectReference: {fileID: 0}
     - target: {fileID: 2782788273358092393, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}

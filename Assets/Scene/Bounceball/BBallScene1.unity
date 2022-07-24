@@ -3120,7 +3120,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970094911}
-  m_Text: "R\uD0A4\uB97C \uB20C\uB7EC\n\uC2A4\uD14C\uC774\uC9C0 \uBE60\uB978 \uC7AC\uC2DC\uC791"
+  m_Text: 'Press ''R''
+
+    To Quick Stage Restart'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1.3
@@ -3130,7 +3132,7 @@ TextMesh:
   m_FontSize: 100
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: cb8b9116dcb73794887f5d6b237290f6, type: 3}
+  m_Font: {fileID: 12800000, guid: 3581080147a76674eb258eaadd70397e, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 2298478591
@@ -3152,7 +3154,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cb8b9116dcb73794887f5d6b237290f6, type: 3}
+  - {fileID: 2100000, guid: 3581080147a76674eb258eaadd70397e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3464,17 +3466,17 @@ PrefabInstance:
     - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1000.0001
+      value: 17.228548
       objectReference: {fileID: 0}
     - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 16913.225
+      value: -173.10493
       objectReference: {fileID: 0}
     - target: {fileID: 2782788273131826884, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 56561.973
+      value: 560.6554
       objectReference: {fileID: 0}
     - target: {fileID: 2782788273205212541, guid: 7ca4796b352d67848b08a37e82b2ff62,
         type: 3}

@@ -1054,7 +1054,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC774\uB984\uC744 \uC785\uB825\uD574\uC8FC\uC138\uC694.."
+  m_Text: Please enter your name..
 --- !u!222 &630843330
 CanvasRenderer:
   m_ObjectHideFlags: 0

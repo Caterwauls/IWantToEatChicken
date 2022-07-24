@@ -179,7 +179,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: defa63f8bfb429a4299e1bfa6e5084bd, type: 3}
+    m_Font: {fileID: 12800000, guid: 3581080147a76674eb258eaadd70397e, type: 3}
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1.2
-  m_Text: "\uAC8C\uC784\uC744 \uC885\uB8CC\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+  m_Text: Are you sure you want to quit the game?
 --- !u!222 &21748127
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "ESC \uD0A4\uB97C \uB20C\uB7EC \uBA54\uB274 \uC5F4\uAE30"
+  m_Text: Press 'ESC' To Open Menu
 --- !u!222 &121814612
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5037,7 +5037,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC885\uB8CC"
+  m_Text: Quit
 --- !u!222 &886089722
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5103,7 +5103,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: defa63f8bfb429a4299e1bfa6e5084bd, type: 3}
+    m_Font: {fileID: 12800000, guid: 3581080147a76674eb258eaadd70397e, type: 3}
     m_FontSize: 34
     m_FontStyle: 0
     m_BestFit: 0
@@ -5115,8 +5115,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1.2
-  m_Text: "\uC815\uB9D0\uB85C \uADF8\uB9CC\uB450\uC2DC\uACA0\uC2B5\uB2C8\uAE4C? \n<color=red><size=38>\uC8FC\uC758</size>!</color>
-    \uC9C0\uAE08\uAE4C\uC9C0\uC758 \uC9C4\uD589\uC0AC\uD56D\uC744 \uBAA8\uB450 \uC783\uAC8C\uB429\uB2C8\uB2E4. "
+  m_Text: 'Are you sure you want to give up the game?
+
+    <color=red><size=38>WARNING</size>!</color>
+    All Progress will be lost!'
 --- !u!222 &893855579
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5303,7 +5305,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: defa63f8bfb429a4299e1bfa6e5084bd, type: 3}
+    m_Font: {fileID: 12800000, guid: 3581080147a76674eb258eaadd70397e, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
@@ -5315,7 +5317,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uAC00\uC774\uB4DC"
+  m_Text: Guide
 --- !u!222 &907496652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14772,7 +14774,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB0A8\uC740 \uD050\uBE0C \uC218:"
+  m_Text: 'RemainCubes:'
 --- !u!222 &1669868726
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15680,7 +15682,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: defa63f8bfb429a4299e1bfa6e5084bd, type: 3}
+    m_Font: {fileID: 12800000, guid: 3581080147a76674eb258eaadd70397e, type: 3}
     m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
@@ -15692,7 +15694,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uACC4\uC18D"
+  m_Text: Resume
 --- !u!222 &1912578550
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15770,7 +15772,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uD3EC\uAE30\uD558\uAE30"
+  m_Text: Give Up
 --- !u!222 &1914757956
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15968,7 +15970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.4000244, y: -9.997208}
+  m_AnchoredPosition: {x: -0.4000244, y: -9.997223}
   m_SizeDelta: {x: -42.30243, y: -226.4057}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1994546319
@@ -15991,7 +15993,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 52c80e4a1deb1a340825c0d2dc49b88d, type: 3}
+    m_Font: {fileID: 12800000, guid: 3581080147a76674eb258eaadd70397e, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 1
@@ -16003,12 +16005,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.28
-  m_Text: "<b><color=yellow><size=45>\uAC00\uC774\uB4DC</size></color></b>\n\uC790\uC2E0\uBCF4\uB2E4
-    <color=red>HP</color>\uAC00 \uC801\uC740 \uD050\uBE0C\uC5D0\uAC8C \uB2E4\uAC00\uAC00\uBA74
-    \uD761\uC218\uD569\uB2C8\uB2E4.\n\uB9C8\uC6B0\uC2A4\uB85C \uC870\uC791\uD569\uB2C8\uB2E4.
-    \n\uD761\uC218 \uAC00\uB2A5\uD55C \uD050\uBE0C\uB294 \uBE68\uAC04\uC0C9 \uC678\uACFD\uC120\uC774
-    \uD45C\uC2DC\uB429\uB2C8\uB2E4.\n\uBAA8\uB4E0 \uD050\uBE0C\uB97C \uD761\uC218\uD558\uBA74
-    \uC2B9\uB9AC\uD569\uB2C8\uB2E4.  "
+  m_Text: '<b><color=yellow><size=45>Guide</size></color></b>
+
+    Use your Mouse
+    to Move.
+
+    You can <color=red>absorb</color> smaller Cubes.
+
+    Cubes that
+    you can absorb are highlighted by red outline.
+
+    If you absorb all Cubes You
+    Win.'
 --- !u!222 &1994546320
 CanvasRenderer:
   m_ObjectHideFlags: 0

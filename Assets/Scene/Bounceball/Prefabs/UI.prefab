@@ -259,6 +259,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4405293031838211046}
     m_Modifications:
+    - target: {fileID: 1528559481766520426, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_Text
+      value: Resume
+      objectReference: {fileID: 0}
     - target: {fileID: 1528559481882041105, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -289,6 +294,17 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1528559482950863700, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_Text
+      value: Guide
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559482950863700, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 3581080147a76674eb258eaadd70397e,
+        type: 3}
     - target: {fileID: 1528559483044325919, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
         type: 3}
       propertyPath: m_IsActive
@@ -403,6 +419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UniversalMenus
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528559483181796450, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1528559483221914561, guid: bccb3997dba4e7946ba306a8cf9cdcc8,
         type: 3}
