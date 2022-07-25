@@ -26,7 +26,7 @@ public class Flow_BB_Stg0 : Flow
         tutorial.SetActive(true);
         yield return new WaitUntil(() => BBGameManager.instance.currentSceneNum == 1);
 
-        tutorial.transform.GetChild(0).GetComponent<Text>().text = "    특수능력: F";
+        tutorial.transform.GetChild(0).GetComponent<Text>().text = "    Special Ability: F";
         yield return new WaitUntil(() => BBGameManager.instance.currentSceneNum == 2);
         tutorial.gameObject.SetActive(false);
     }

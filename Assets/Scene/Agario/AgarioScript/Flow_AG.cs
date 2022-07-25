@@ -37,7 +37,7 @@ public class Flow_AG : Flow
         if (_deadNum == 0)
         {
             yield return new WaitForSecondsRealtime(3f);
-            
+
 
             yield return PrintDialogRoutine("무슨");
 
@@ -78,8 +78,8 @@ public class Flow_AG : Flow
             yield return PrintDialogRoutine("3데스");
 
             yield return new WaitForSecondsRealtime(1f);
-            pressEsc.GetComponent<Text>().text = "이번 플레이에서는 가이드를 확인해보세요.";
-            guideText.GetComponent<Text>().text = "F는 플레이어의 숨겨진 스킬입니다. 게임이 너무 어렵다면 유용하게 사용해봐요.";
+            pressEsc.GetComponent<Text>().text = "In this stage, you should check the guide";
+            guideText.GetComponent<Text>().text = "'F' is player's hidden skill. If game is too hard, use this skill!";
             Time.timeScale = 1;
             AGGameManager.instance.isCanUseUi = true;
             pressEsc.SetActive(true);
@@ -90,9 +90,9 @@ public class Flow_AG : Flow
         inGameUi.SetActive(true);
         inGameUi.transform.GetChild(0).gameObject.SetActive(true);
         AGGameManager.instance.isCanUseUi = true;
-        
+
         initWhenDialogEnded.SetActive(true);
-        
+
         AGGameManager.instance.isCanPlayerMove = true;
         Time.timeScale = 1;
 
