@@ -16,7 +16,7 @@ public class EREntranceFog : ERInteractable
 
     public override string GetInteractText()
     {
-        return "안개 속으로 들어간다";
+        return "Enter The Fog";
     }
 
     public override void Interact(ERPlayer player)

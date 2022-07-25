@@ -30,7 +30,7 @@ public class ERSavePoint : ERInteractable
 
     public override string GetInteractText()
     {
-        return didSaveHere ? "여기서 쉰다" : "육면체에 닿는다";
+        return didSaveHere ? "Rest here" : "Touch The Hexahedron";
     }
 
     public override void Interact(ERPlayer player)

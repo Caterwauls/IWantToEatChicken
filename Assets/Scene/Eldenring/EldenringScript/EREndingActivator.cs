@@ -37,7 +37,7 @@ public class EREndingActivator : ERInteractable
 
     public override string GetInteractText()
     {
-        return "육면체에 닿는다";
+        return "Touch The Hexahedron";
     }
 
     public override void Interact(ERPlayer player)
